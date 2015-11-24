@@ -21,54 +21,6 @@ import java.io.IOException;
  */
 public class TemplateSelectorController
 {
-    public MenuItem newFromTemplate;
-    @FXML
-    private MenuItem newButton;
-    @FXML
-    private MenuItem openButton;
-    @FXML
-    private MenuItem closeButton;
-    @FXML
-    private TextField statusField;
-
-    @FXML
-    public void onNewButtonClicked(ActionEvent e){
-
-    }
-
-    @FXML
-    public void onNewFromTemplateButtonClicked(ActionEvent e)
-    {
-        showTemplateSelectorOverview();
-    }
-
-    @FXML
-    public void onOpenButtonClicked(ActionEvent e){
-
-    }
-
-    @FXML
-    public void onCloseButtonClicked(ActionEvent e){
-
-    }
-
-    public void showTemplateSelectorOverview()
-    {
-        try{
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/TemplateSelectorOverview.fxml"));
-            AnchorPane templateOverview = (AnchorPane) loader.load();
-            Scene scene = new Scene(templateOverview);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.showAndWait();
-
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-
-
     private Image template1Image = new Image("master/images/template1_preview.PNG");
     private Image template2Image = new Image("master/images/template2_preview.png");
     private Image template3Image = new Image("master/images/template3_preview.png");
@@ -89,7 +41,6 @@ public class TemplateSelectorController
     private Button template4Button;
 
     public void onTemplate1ButtonClicked(ActionEvent e){
-
         templatePreview.setImage(templateImage[0]);
     }
 
@@ -105,17 +56,9 @@ public class TemplateSelectorController
         templatePreview.setImage(templateImage[3]);
     }
 
-
     public void onNextViewButtonClicked(ActionEvent e){
-        System.out.println("Setting template.");
         Stage stage = (Stage) nextViewButton.getScene().getWindow();
         stage.close();
     }
-
-    @FXML
-    private void initialize(){
-
-    }
-
 
 }

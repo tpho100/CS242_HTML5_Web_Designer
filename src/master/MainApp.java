@@ -3,43 +3,47 @@ package master;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-
+import master.view.EditorViewController;
 import java.io.IOException;
 
 public class MainApp extends Application {
 
-    private Stage primaryStage;
-    private BorderPane rootLayout;
-    private Scene scene;
+    String windowTitle = "HTML5 Website Designer";
+
+    private Stage primaryStage; //Primary window
+    private BorderPane editorLayout; //Main scene component that user will see and interact with
+    private Scene scene; //Global variable so that the program can keep track of multiple scenes
+
+    public Scene getScene(){
+        return scene;
+    }
 
     public static void main(String[] args) {
         launch(args);
+        /*
+            Not needed for this application.
+         */
     }
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("HTML5 Website Designer");
+        this.primaryStage.setTitle(windowTitle);
         initLayout();
     }
 
     public void initLayout(){
 
         try{
-            FXMLLoader rootLoader = new FXMLLoader();
-            rootLoader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
-            BorderPane rootLayout = (BorderPane) rootLoader.load();
+            FXMLLoader editorLoader = new FXMLLoader();
+            editorLoader.setLocation(MainApp.class.getResource("view/EditorView.fxml"));
+            editorLayout = editorLoader.load();
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/EditorView.fxml"));
-            AnchorPane editorView = (AnchorPane) loader.load();
-
-            rootLayout.setCenter(editorView);
-
-            scene = new Scene(rootLayout);
+            scene = new Scene(editorLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
 

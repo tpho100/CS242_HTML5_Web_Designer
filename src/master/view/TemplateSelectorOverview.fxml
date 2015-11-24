@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="master.view.TemplateSelectorController">
-   <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <TilePane hgap="15.0" prefHeight="200.0" prefWidth="200.0" vgap="15.0">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="master.view.TemplateSelectorController">
+   <bottom>
+      <ScrollPane pannable="true" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane prefHeight="150.0" prefWidth="500.0">
                <children>
-                  <Button fx:id="template1Button" mnemonicParsing="false" onAction="#onTemplate1ButtonClicked" prefHeight="150.0" prefWidth="150.0" text="Template 1" />
-                  <Button fx:id="template2Button" mnemonicParsing="false" onAction="#onTemplate2ButtonClicked" prefHeight="150.0" prefWidth="150.0" text="Template 2" />
-                  <Button fx:id="template3Button" mnemonicParsing="false" onAction="#onTemplate3ButtonClicked" prefHeight="150.0" prefWidth="150.0" text="Template 3" />
-                  <Button fx:id="template4Button" mnemonicParsing="false" onAction="#onTemplate4ButtonClicked" prefHeight="150.0" prefWidth="150.0" text="Template 4" />
+                  <HBox alignment="CENTER" minWidth="600.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button fx:id="template1Button" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#onTemplate1ButtonClicked" text="Template 1" />
+                        <Button fx:id="template2Button" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#onTemplate2ButtonClicked" text="Template 2" />
+                        <Button fx:id="template3Button" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#onTemplate3ButtonClicked" text="Template 3" />
+                        <Button fx:id="template4Button" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#onTemplate4ButtonClicked" text="Template 4" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
                </children>
-               <padding>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </TilePane>
-            <ImageView fx:id="templatePreview" fitHeight="500.0" fitWidth="435.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/template1_preview.PNG" />
-               </image>
-            </ImageView>
-            <Button fx:id="nextViewButton" mnemonicParsing="false" onAction="#onNextViewButtonClicked" text="Next" />
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </bottom>
+   <center>
+      <ImageView fx:id="templatePreview" fitHeight="600.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../images/template1_preview.PNG" />
+         </image>
+      </ImageView>
+   </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="nextViewButton" alignment="CENTER" mnemonicParsing="false" onAction="#onNextViewButtonClicked" text="Choose" textAlignment="CENTER" wrapText="true" />
          </children>
       </HBox>
-   </children>
-</AnchorPane>
+   </top>
+</BorderPane>
