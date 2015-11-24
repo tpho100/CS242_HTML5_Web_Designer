@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="master.view.TemplateSelectorController">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TilePane hgap="15.0" prefHeight="200.0" prefWidth="200.0" vgap="15.0">
+               <children>
+                  <Button fx:id="template1Button" mnemonicParsing="false" onAction="#onTemplate1ButtonClicked" prefHeight="150.0" prefWidth="150.0" text="Template 1" />
+                  <Button fx:id="template2Button" mnemonicParsing="false" onAction="#onTemplate2ButtonClicked" prefHeight="150.0" prefWidth="150.0" text="Template 2" />
+                  <Button fx:id="template3Button" mnemonicParsing="false" onAction="#onTemplate3ButtonClicked" prefHeight="150.0" prefWidth="150.0" text="Template 3" />
+                  <Button fx:id="template4Button" mnemonicParsing="false" onAction="#onTemplate4ButtonClicked" prefHeight="150.0" prefWidth="150.0" text="Template 4" />
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TilePane>
+            <ImageView fx:id="templatePreview" fitHeight="500.0" fitWidth="435.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/template1_preview.PNG" />
+               </image>
+            </ImageView>
+            <Button fx:id="nextViewButton" mnemonicParsing="false" onAction="#onNextViewButtonClicked" text="Next" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
