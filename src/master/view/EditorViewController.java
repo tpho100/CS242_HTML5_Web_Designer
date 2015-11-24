@@ -31,7 +31,7 @@ public class EditorViewController
     public void initialize() throws Exception{
         currentWebPage = new WebPage();
 
-        String htmlSample = "example.html";
+        String htmlSample = "default_sample.html";
 
         WebEngine engine = webViewCanvas.getEngine();
         URL urlSample = getClass().getResource(htmlSample);

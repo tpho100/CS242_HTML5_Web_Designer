@@ -1,0 +1,380 @@
+
+
+<head><title>CS456/MA456/CS556 Cryptography</title>
+<meta name="robots" content="noindex, nofollow">
+<style>A:link {text-decoration:none}</style>
+</head>
+<body bgcolor=#FBFBFB>
+<body>
+<font face="Trebuchet MS">
+<H2>CS456/MA456/CS556 Cryptography (Fall 2015)</H2>
+<b>Pre-requisites</b>: MA211 or MA346, good programming skills and/or mathematical curiosity.<br>
+<b>Instructor</b>: Christino Tamon<br>
+<b>Lecture</b>: Science Center 348 TR 1:00-2:15pm<br>
+<b>Office hours</b>: TR 9:15-11am, 2:15-3:30pm, Science Center 373 
+
+<hr>
+
+<b>SYLLABUS</b><br>
+Cryptography is the study of secure communication over insecure channels.
+We will study the basic methods and concepts in cryptography along with their applications. 
+The course will look at well-known modern cryptographic systems such as RSA,
+Diffie-Hellman, and elliptic curve cryptography.
+<p>
+Most of these topics require background in number theory and probability theory.
+The first part of the course will be spent on developing the necessary background 
+in these areas. The second part of the course is spent on the applications of these 
+to building cryptographic tools.
+<p>
+An underlying theme of this course is the rise and "fall" of the RSA system. 
+Theoretical properties and improvements of the RSA system will be discussed in detail. 
+Then a discussion of Shor's quantum algorithm for factoring will be described. 
+Finally, a brief look at quantum cryptography will be given.
+
+
+<hr>
+
+<b>GRADING</b>: Assignments and Quizzes 40%, Tests (2) 40%, Project 20%
+<p>
+<b>TEXT</b><br>
+The following are our main references for quantum related topics:
+<ul>
+<li>R. Lipton and K. Regan, Quantum Algorithms via Linear Algebra: A Primer, MIT Press, 2014.
+<li>D. Mermin, Quantum Computer Science: An Introduction, Cambridge University Press, 2007.
+</ul>
+<b>Reference</b><br>
+<ul>
+<li>A. Menezes, P. van Oorschot, S. Vanstone,
+	<a href="http://cacr.uwaterloo.ca/hac/">Handbook of Applied Cryptography</a>, CRC Press.
+</ul>
+<p>
+
+
+<hr>
+
+<b>OBJECTIVES/OUTCOMES</b>:<br>
+The objective of this course is to learn fundamental issues and important algorithms 
+involved in the field of cryptography.
+<p>
+The specific outcomes are as follows:
+<ul>
+<li>Knowledge of some secret-key cryptographic systems.
+<li>Knowledge of important ideas in public-key cryptographic systems.
+<li>Knowledge of basic ideas in number theory that are relevant to cryptography.
+<li>Knowledge of various cryptographic protocols for implementing different types of 
+	communication that requires secrecy and protection.
+<li>Knowledge of modern programming languages with support for cryptographic applications.
+</ul>
+
+<hr>
+
+<b>REQUIREMENTS/POLICIES</b>:
+<blockquote>
+<i>Although attendance is not mandatory, students are responsible for all course materials
+covered in lectures and any exams given during class periods. Students that need to
+make up missing course work must provide the required Clarkson official exempt form.
+All students must submit their own work; the exchange of ideas are encouraged but
+ultimately the submitted work must be the student's own. Please refer to the Clarkson
+University Regulations for more guidelines on academic integrity and related matters.</i>
+</blockquote>
+
+<hr>
+
+<h3>Schedule (updated regularly)</h3> 
+
+<ul>
+<li>Secret-key systems: One-time pad. Unconditional security. Shannon's perfect secrecy.
+<li>Public-key system: RSA. Modular exponentiation (encryption and decryption).
+	Random prime generation. Pairs of complementary keys.
+	ElGamal (<a href="ElGamal.txt">sample</a>).
+	Elliptic Curve ElGamal
+	(<a href="eceg-sol.pdf">sample</a>, <a href="q3-15-sol.pdf">solution</a>).
+	
+<li>Number theoretic tools:
+	primes, 
+	modular arithmetic, division with remainder,
+	Euclid's theorems (abundance of primes, recursive algorithm for GCD),
+	Aryabhata's Pulverizer, Chinese Remainder Theorem,
+	Fermat's Little Theorem (Euler's generalization).
+</ul>
+
+<b>Notes</b>: from a similar course taught elsewhere.<br>
+<a href="Notes-CS181A/1-shannon.pdf">1: Shannon's Theory</a><br>
+<a href="Notes-CS181A/2-number-theory.pdf">2: Basic Number Theory</a><br>
+<a href="Notes-CS181A/3-rsa.pdf">3: RSA PKCS</a><br>
+<a href="Notes-CS181A/4-elgamal.pdf">4: ElGamal PKCS</a><br>
+<a href="Notes-CS181A/5-elliptic.pdf">5: Elliptic Curves</a><br>
+<a href="Notes-CS181A/6-quadratic.pdf">6: PKCS Based on Quadratic Residues</a><br>
+<a href="Notes-CS181A/7-protocols.pdf">7: Miscellaneous Protocols</a><br>
+<a href="Notes-CS181A/8-des.pdf">8: DES & AES</a><br>
+<a href="Notes-CS181A/9-quantum.pdf">9: Quantum Ideas</a><br>
+
+<hr>
+
+<p>
+
+<b>ASSIGNMENTS</b>
+
+<ul>
+<li><a href="a1.cipher">A1</a>
+<p>
+<hr>
+<p>
+
+<li><a href="a2.cipher">A2</a><br>
+n = 
+<blockquote>
+320530946934014242954335017746725993351815664903097084328
+516854805260231514292120402477525664254100362783341136552
+798173654707986520140765150936979923034848121706533826507
+364438489513316202112678576855692751294549005274070413686
+675526371413870186768502196135713421834280626219324646601
+787258811066842083584408204743133859700490014002701460396
+550173414766148700504235411819232693214815692657464207873
+549572547067350029576231914150970509460223487537624693269
+398176292506666979129763086487366309860259584049084180135
+121796391191562598513674593791390995468797536250847639965
+035945749566173858307528644058193571541474506428547225181
+921258206482207462330766515870643382059941498397672349839
+605009083058319216274295385875782237038415077771031603256
+044014269532858937022476348616503949901746623939545316461
+037368816062719588518498779484162398651986736494488982444
+686660862166676341524563762822027030216466530962961253041
+014730155105794236164964124119336512142515803174841200061
+890277624611072851889850782170043313609340321224846449509
+041398615166242860401868498282517902708608604470071622722
+551585020772620990669716005618390198947914063531608692365
+190112910530751628721906431723625843834986672211006882929
+641830995304350801178460499151901943552272357346858196761
+510076387605214058518253428174720132205363542239398195347
+101626858617825829301206063802943371526224375030599319027
+774345699105619660285391438070055759834421548113600047476
+305390434127335354538355266820150622464920142637094749261
+203791297917738482955298234776606614080404267655745980832
+017471843762179590440653947903668577917235885021583670741
+897610698263305044317613585914070499730429973887844169181
+747886906746514879673194539141631596596217261832291505597
+286586416534488123172529711172770735234333840236427395540
+942767654582505907405600109867020646157119255124290357413
+963947692197885071488432601350377300879593962500154052434
+790862830309211961559753029974667068675176921602560138217
+056128605678325754110126091918247050044933820485269817639
+841841377013546650289631528103640463291607078268081217830
+920490031614153861044524547583951848447095380135583435262
+750837440188140257609535069690667234145452407240970871223
+186749467236996877671062802997239090309856637552947696799
+359822997876568594902275352191011493756446138138314660405
+992292052374298242128467634791275641432786112501079067880
+852640794573580189682037168701495239067535954460804601187
+556611290617797218221876217674663461600836706305387495754
+200677485574641
+</blockquote>
+<br>
+e = 
+<blockquote>
+269652329387207853095058282524852153476967590195922046281
+431407174223826687504800869811699995704220961569517990854
+911591117037835088166540291990362367528609366534114187599
+784940110683779215106969636342993789874039518846973788469
+183837284968615123600491554231406074186695173630697097719
+661487312529579414902882962990858910825722261145757589597
+967310548658256557326253095333620488403049426577222263586
+564480038945429692935431743227079927691634664449824144085
+409736535903406841223485405499575538819827100827318558175
+165416861720911794421425787856667527141677134432164795164
+95643880996589433589534726076169869810733758407
+</blockquote>
+Public keys (in a single file): <a href="pub.keys">pub.keys</a>
+<p>
+<hr>
+<p>
+
+<li><a href="a3.cipher">A3</a>
+<br>(format: [half-mask, cipher])
+<blockquote>
+p = 19042470332318432728008651603172496764482871966912234470903805373117374356151578219581287068314735220298290096045434417381846456457521048991135358521918839
+</blockquote>
+<blockquote>
+g = 10339323646367392962059504438371609835404003535458973512060207933290859300156257530954992191276395156650882585667266999679093976809553364405486541612529242
+</blockquote>
+<blockquote>
+b = 1964286381196281972067517961570042297806613013588351278303608271029649417750562973961097547424318371250720556572964548827920863755897610676680796866840229
+</blockquote>
+Public keys (in a single file): <a href="a3.pub.keys">pub.keys</a>.
+<p>
+<hr>
+<p>
+
+<li><a href="a4.cipher">A4</a><br>
+(format: [cipher-pair, half-mask-pair])<br>
+Prime:
+<blockquote>
+p = 209906856686557297804189542037668914591
+</blockquote>
+Elliptic curve parameters:
+<blockquote>
+A = 275060611907024748799559873496763836649
+</blockquote>
+<blockquote>
+B = 316383891550644327351453900934778618911
+</blockquote>
+Generator:
+<blockquote>
+G = [142575573608468184147610518192339856885,171382264163058547181797964002832042773]
+</blockquote>
+Public point:
+<blockquote>
+P = [121016959417073126968044060009247001163,94164671526931892755413090614070816713]
+</blockquote>
+Secret multiplier:
+<blockquote>
+N = unspecified
+</blockquote>
+
+</ul>
+
+<hr>
+
+<p>
+
+<b>PROJECT</b>
+
+<ol>
+<li>Choose a project topic of interest; you may work in groups of up to three or four. <br>
+	Indicate your topic and group by the end of October. 
+	<p>
+<li>Submit a <b>final report</b> (hardcopy, at least 10 pages) that contains at minimum 
+	the following separate sections:
+	<ul>
+	<li>Abstract (What/Why/How). <br>
+		Provide this on a separate page.
+	<li>Background information and literature: what has been done, what is the state-of-the-art
+		ideas or methods in the area. <br>
+		Include proper and complete bibliography (at the end of the document) for your sources; 
+		see examples of some journal papers listed below.
+	<li>Identify at least two possible ideas that can be done but has not been addressed in
+		the literature. <br>
+		This can be either an improvement on implementation or on a mathematical idea.
+	</ul>
+	<p>
+<li>Prepare a 10 minute <b>talk</b> to be delivered either during Dead Week (in class). <br>
+	Submit by email your talk <b>slides</b> (PDF). <br>
+	<p>
+<li>Submit any other items, if any, related to your project (code, etc) by email.
+</ol>
+
+<hr>
+
+<b>Project Topics</b>
+
+<ul>
+<li><a href="http://eprint.iacr.org/2015/1015.pdf">On bitcoin as a public randomness source</a>.
+
+<li>Secure computation: <a href="http://eprint.iacr.org/2015/1031">Marcedone-Wen-Shi</a>.
+
+<li><a href="https://crypto.stanford.edu/ibe/">Identity-based encryption</a>.
+
+<li>Diffie-Hellman:
+	<a href="https://weakdh.org/">Logjam</a> attack.
+
+<li>Applied-Crypto:
+	<a href="http://www.openssl.org/">SSL</a>, 
+	<a href="http://crypto.stanford.edu/~dabo/pubs/abstracts/ssl-client-bugs.html">[Georgiev et al]</a> (attack);
+	<a href="http://www.openssh.org/">SSH</a>;
+	<a href="http://www.gnupg.org/">GNU PGP</a>,
+	<a href="http://www.pgpi.org/">PGPi</a>, <a href="http://pgp.mit.edu/">MIT site</a>,
+	<a href="http://philzimmermann.com/EN/findpgp/">Zimmerman</a>;
+
+<li>RSA: 
+	<a href="http://www.rsa.com/rsalabs/node.asp?id=2133">PKCS#11</a>;
+	<a href="http://crypto.stanford.edu/~dabo/papers/ssl-timing.pdf">[Brumley-Boneh]</a> (timing attacks);
+	<a href="http://archiv.infsec.ethz.ch/education/fs08/secsem/Bleichenbacher98.pdf">[Bleichenbacher]</a> (attack on PKCS#1).
+
+<li>Secure Hash Algorithm (SHA): <a href="http://www.faqs.org/rfcs/rfc3174.html">RFC</a>,
+		<a href="http://www.schneier.com/blog/archives/2005/02/sha1_broken.html">Schneier</a>;
+		<a href="http://keccak.noekeon.org/">SHA-3 (Keccak)</a>.
+	Hashing:
+	<a href="http://people.csail.mit.edu/shaih/pubs/Cryptographic-Hash-Functions.pdf">[Halevi et al]</a>;
+
+<li>Elliptic curves:
+	<a href="http://research.microsoft.com/en-us/um/people/klauter/ieeefinal.pdf">[Lauter]</a> (wireless);
+	<a href="http://eprint.iacr.org/2008/390">[Koblitz et al]</a> (survey);
+	<a href="http://www.sagemath.org/doc/bordeaux_2008/elliptic_curves.html">Sage</a> support;
+	<a href="http://eprint.iacr.org/2011/712">J2ME</a>;
+
+<li>Homomorphic encryption: 
+	<a href="http://crypto.stanford.edu/craig/">[Gentry]</a> (PhD thesis),
+	<a href="http://eprint.iacr.org/2011/405">[Lauter et al]</a> (practicality),
+	<a href="http://eprint.iacr.org/2010/520">[Gentry-Halevi]</a>.
+
+<li>Byzantine agreement: 
+	<a href="byzantin.pdf">[Arora]</a> (Rabin's algorithm); 
+	<a href="http://www.google.com/url?sa=t&rct=j&q=byzantine%20agreement%20paxos&source=web&cd=2&ved=0CCoQFjAB&url=http%3A%2F%2Fresearch.microsoft.com%2Fen-us%2Fum%2Fpeople%2Flamport%2Fpubs%2Fdisc-leaderless-web.pdf&ei=c8GTUKLUGY-F0QGw9oD4DA&usg=AFQjCNG2MSQZnnkuOOUZLzWwYjjXsKSsKw&cad=rja">[Lamport]</a> (leaderless).
+
+<li>Lattice cryptography:
+	<a href="http://www.di.ens.fr/~pnguyen/pub_NgRe06.htm">[Nguyen-Regev]</a> (attack on signature scheme), 
+	<a href="http://eprint.iacr.org/2006/387.pdf">[Nguyen]</a>;
+	<a href="http://research.microsoft.com/apps/video/dl.aspx?id=166559">talk</a> by Oded Regev.
+	<a href="https://www.quantamagazine.org/20150908-quantum-safe-encryption/">Quanta</a> article.
+
+<li>Zero Knowledge Proofs:
+	<a href="zk-identity.pdf">[Feige-Fiat-Shamir]</a>;
+	<a href="http://www.google.com/url?sa=t&rct=j&q=zero%20knowledge%20wireless%20binder%20bischof&source=web&cd=8&cad=rja&ved=0CEkQFjAH&url=http%3A%2F%2Fwww2.it.lut.fi%2Fkurssit%2F05-06%2FTi5318200%2FMateriaali%2F623-zkp-survey.pdf&ei=nBaUULeNFMqP0QGWioHAAg&usg=AFQjCNEz9edGNkrhw8iwCNsAsAk-ctkx8Q">[Binder-Bischof]</a> (wireless networks).
+
+<li>Quantum Cryptography:
+	<a href="http://www.eecs.ucf.edu/~dcm/Teaching/COT4810-Spring2011/Literature/QuantumCryptography.pdf">ACM Survey (Bruss et al)</a>; 
+	<a href="http://www.google.com/url?url=http://scholar.google.com/scholar_url%3Fhl%3Den%26q%3Dhttp://www.infoamerica.org/documentos_pdf/bennett1.pdf%26sa%3DX%26scisig%3DAAGBfm2VLnnjeYDQQ_p8JTeZJL-n3F4aOQ%26oi%3Dscholarr&rct=j&sa=X&ei=gw-9UNezOdCK0QGPg4GQBw&ved=0CCoQgAMoADAA&q=bennett+92+quantum+key+distribution&usg=AFQjCNH6_ThfgcqFC9hO74CTDTJMHI7Yxw&cad=rja">B92</a>;
+	<a href="http://arxiv.org/abs/quant-ph/0003004">Shor-Preskill</a>;
+	<a href="http://arxiv.org/pdf/quant-ph/0308048.pdf">Tamaki-Lutkenhaus</a>;
+	
+	<br>
+	Bell nonlocality:
+	<a href="http://arxiv.org/abs/0907.3584">[Buhrman-Cleve-Massar-deWolf]</a>;
+	<a href="http://www.google.com/url?sa=t&rct=j&q=quantum%20cryptography%20based%20on%20bell%E2%80%99s%20theorem&source=web&cd=5&ved=0CEQQFjAE&url=http%3A%2F%2Fwww.cs.ox.ac.uk%2Factivities%2Fquantum%2Fcourse%2Fnotes%2FL10%2Fbell100610.pdf&ei=WsaTUJ-9CJTK0AHu8IH4BQ&usg=AFQjCNHFFw38SGVg3Gq6o4AFbXXRZDrkjA&cad=rja">[Williamson]</a> (Bell's theorem for crypto),
+	<a href="http://www.estherhaenggi.com/">[Hanggi</a>-<a href="http://arxiv.org/abs/0911.4171">Renner-Wolf]</a>
+
+<li>Miscellany:
+	McEliece cryptosystem (quantum-resistant).
+	Merkle cryptosystem (precursor to Diffie-Hellman). Authentication protocols.
+
+<!--
+-->
+</ul>
+
+<hr>
+<p>
+
+<b>RESOURCES/LINKS</b>:
+<ul>
+<li> Crypto support:
+	<a href="http://download.oracle.com/javase/1.5.0/docs/api/index.html">Java</a>, 
+	<a href="http://shoup.net/ntl/">NTL</a>,
+	<a href="http://docs.python.org/2/library/crypto.html">Python</a>.
+<li> Crypto <a href="http://eprint.iacr.org/">arXiv</a>.
+<li> D. Coppersmith, <a href="papers/coppersmith.pdf">"Cryptography"</a>,
+	IBM J. Res. Develop., vol. 44, no. 1/2, 2000.
+<li>S. Landau, <a href="http://www.ams.org/notices/200003/fea-landau.pdf">"Standing the test of time: The Data Encryption Standard"</a>,
+	Notices of the AMS, vol. 47, no. 3, pp341-349, 2000.
+<li> D. Angluin, <a href="papers/angluin-yale-tr243.pdf">"Lecture Notes on the Complexity of Some Problems in Number Theory"</a>,
+	TR #243, 1982, Yale.
+<li> C. Pomerance, <a href="http://www.ams.org/notices/199612/pomerance.pdf">"A Tale of Two Sieves,"</a> Notices of the AMS, vol. 12, 1996.
+<li> J. Quisquater et al., <a href="papers/zk-quisquater.pdf">"How to Explain Zero-Knowledge Protocols to Your Children,"</a> Advances in Cryptology, pp. 628-631, 1989.
+<li> <a href="http://crypto.stanford.edu/~dabo/">D. Boneh</a>, <a href="http://crypto.stanford.edu/~dabo/papers/RSA-survey.pdf">"Twenty Years of Attack on the RSA Cryptosystem,"</a> 
+	Notices of the AMS, vol. 46, no. 2, 203-213, 1999.
+<li> Agarwal, Kayal, Saxena, <a href="http://www.cse.iitk.ac.in/users/manindra/algebra/primality_v6.pdf">"PRIMES in P"</a>
+	(appeared in Annals of Mathematics).
+<li> K. Lauter, <a href="http://research.microsoft.com/en-us/um/people/klauter/ieeefinal.pdf">"The advantages of elliptic curve cryptography for wireless security,"</a> IEEE Wireless Communications, vol. 11, no. 1, 62-67, 2004.
+<li> Misc:
+	<a href="http://www.cs.sjsu.edu/faculty/stamp/CS265/GuestLectures/Crypto_Blunders.pdf">blunders</a>;
+	<a href="http://news.sciencemag.org/sciencenow/2011/09/a-different-kind-of-secret-code.html">biology</a>;
+	<a href="http://www.technologyreview.com/news/506976/how-to-steal-data-from-your-neighbor-in-the-cloud/">cloud</a>;
+	<a href="http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html">cartoon guide to AES</a>;
+SSL-RSA <a href="https://tls.mbed.org/rsa-source-code">source</a>.
+
+<li>Google's 1M <a href="http://www.acm.org/press-room/news-releases/2014/turing-prize-announcement">funding</a> for the <a href="http://amturing.acm.org/">ACM Turing award</a>.
+
+</ul>
+
+
+<hr>
+
