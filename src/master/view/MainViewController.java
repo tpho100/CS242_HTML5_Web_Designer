@@ -2,19 +2,23 @@ package master.view;
 
 import java.io.IOException;
 import java.net.URL;
-
+import java.util.Optional;
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import master.MainApp;
 import master.model.WebPage;
 
@@ -24,7 +28,8 @@ import master.model.WebPage;
  */
 public class MainViewController
 {
-    private WebPage currentWebPage;
+    public Label prompt;
+    private WebPage currentWebPage = new WebPage();
 
     @FXML
     private WebView webViewCanvas = new WebView();
@@ -117,16 +122,19 @@ public class MainViewController
     private void onQuitClicked(ActionEvent actionEvent) {
     }
 
-    @FXML
-    private void onHeaderButtonClicked(ActionEvent actionEvent) {
-    }
+    /*
+        Prompt components
+     */
 
-    @FXML
-    private void onListButtonClicked(ActionEvent actionEvent) {
-    }
 
-    @FXML
-    private void onOtherButtonClicked(ActionEvent actionEvent) {
+    private Optional<String> getPromptInput(String title, String header, String prompt){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle(title);
+        dialog.setHeaderText(header);
+        dialog.setContentText(prompt);
+
+        Optional<String> result = dialog.showAndWait();
+        return result;
     }
 
     /*
@@ -150,24 +158,55 @@ public class MainViewController
     @FXML
     private Button otherButton;
 
-    @FXML
-    private void onMediaButtonClicked(ActionEvent e){
 
+    @FXML
+    private void onHeaderButtonClicked(ActionEvent actionEvent) {
+        headerButton = new Button();
+        Optional<String> result = getPromptInput("New Header", "", "Please enter header: ");
+
+        if(result.isPresent()){
+            currentWebPage.setHeader(result.get());
+        }
     }
 
     @FXML
-    private void onHeadingButtonClicked(ActionEvent e){
+    private void onListButtonClicked(ActionEvent actionEvent) {
+    }
 
+    @FXML
+    private void onOtherButtonClicked(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onMediaButtonClicked(ActionEvent e){
+        mediaButton = new Button();
+
+    }
+
+
+    @FXML
+    private void onHeadingButtonClicked(ActionEvent e){
+        headingButton = new Button();
+        Optional<String> result = getPromptInput("New Heading", "", "Please enter heading: ");
+
+        if(result.isPresent()){
+            currentWebPage.getHeadings().add(result.get());
+        }
     }
 
     @FXML
     private void onFooterButtonClicked(ActionEvent e){
+        footerButton = new Button();
+        Optional<String> result = getPromptInput("New Footer", "", "Please enter footer: ");
 
+        if(result.isPresent()){
+            currentWebPage.setFooter(result.get());
+        }
     }
 
     @FXML
     private void onSectionButtonClicked(ActionEvent e){
-
+        sectionButton = new Button();
     }
 
     @FXML
@@ -178,9 +217,8 @@ public class MainViewController
     public void showTemplateSelectorOverview()
     {
         try{
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/TemplateSelectorOverview.fxml"));
-            BorderPane templateOverview = (BorderPane) loader.load();
+            FXMLLoader loader = loadFXMLSafely("view/TemplateSelectorOverview.fxml");
+            BorderPane templateOverview = loader.load();
             Scene scene = new Scene(templateOverview);
             Stage stage = new Stage();
 
@@ -190,6 +228,13 @@ public class MainViewController
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    private FXMLLoader loadFXMLSafely(String fxmlName){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource(fxmlName));
+
+        return loader;
     }
 
 

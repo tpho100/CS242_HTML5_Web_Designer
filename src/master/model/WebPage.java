@@ -9,13 +9,27 @@ import java.util.List;
 public class WebPage extends ArrayList{
 
     private List<String> headings = new ArrayList<String>();
-    private List<String> footers = new ArrayList<String>();
     private List<String> sections = new ArrayList<String>();
     private List<String> paragraphs = new ArrayList<String>();
     private List< List<String> > weblists = new ArrayList< List<String> >(); //Basically a list of lists.
 
-    public List<String> getFooters() {
-        return footers;
+    private String footer;
+    private String header;
+
+    public String getFooter() {
+        return footer;
+    }
+
+    public void setFooter(String footer) {
+        this.footer = footer;
+    }
+
+    public String getHeader(){
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     public List<String> getHeadings() {

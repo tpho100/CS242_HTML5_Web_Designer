@@ -1,5 +1,9 @@
 package master;
 
+/**
+ * Created by Thanh-Phong on 11/14/2015.
+ */
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +13,7 @@ import java.io.IOException;
 
 public class MainApp extends Application {
 
+
     String windowTitle = "HTML5 Website Designer";
 
     private Stage primaryStage; //Primary window
@@ -17,6 +22,10 @@ public class MainApp extends Application {
 
     public Scene getScene(){
         return scene;
+    }
+
+    public Stage getPrimaryStage(){
+        return primaryStage;
     }
 
     public static void main(String[] args) {
