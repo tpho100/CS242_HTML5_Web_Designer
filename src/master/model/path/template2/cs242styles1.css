@@ -1,0 +1,162 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*reset*/
+html, body, h1, h2, h3, h4, h5, h6, p, ol, ul, li, pre, code, address, variable, form, fieldset, blockquote {
+ padding: 0;
+ margin: 0;
+ font-size: 100%;
+ font-weight: normal;
+}
+/* end reset */
+
+html{
+	height:100%;
+	background-color: #eeeeee;
+}
+body{
+	margin:0;
+	padding:0;
+	height:100%;
+}
+#container{
+	position:relative;
+	min-height:100%;
+}
+
+
+/*content----------------------------------------------------------*/
+h1{
+	font-size:32px;
+	color:#4e4e4e;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	padding: 20px 0 0px 40px;
+}
+
+h2{
+	font-size:24px;
+	color:#4e4e4e;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	padding: 20px 0 0px 50px;	
+}
+
+img{
+	display:block;
+	margin:0 auto;
+	padding:20px;
+	padding-bottom: 0;
+} 
+
+p {
+	color:#4e4e4e;
+	padding: 20px 60px 0px 60px;
+}
+
+ul {
+	color:#4e4e4e;
+	padding: 0px 60px 0px 80px;
+}
+
+ol {
+	color:#4e4e4e;
+	padding: 0px 60px 0px 80px;
+}
+
+/*end content------------------------------------------------------*/
+
+/*header--------------------------------------------------------*/
+#header{
+	background-color:#D12711;
+	height:130px;
+}
+#subheader{
+	position:relative;
+	height:130px;
+	width:1024px;
+	margin:0 auto;
+}
+#logo{
+	display: inline-block;
+	position:absolute;
+	left:0px;
+	top:50%;
+	margin-top:-26.5px;
+	padding: 0;
+}
+#headerLinks{
+	position:absolute;
+	right:0px;
+	top:50%;
+	margin-top:-13px;
+	padding:0 5px;
+	font-size:24px;
+	color:#d3d3d3;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#headerLinks a{
+	padding: 0 5px;
+}
+#headerLinks a{
+	text-decoration:none;
+	color:#d3d3d3;
+}
+#headerLinks a:hover{
+	text-decoration:underline;
+}
+
+/* end header*/
+.body{
+	width:900px;
+	margin:0 auto;
+	padding-bottom:85px;
+}
+
+
+/*footer-----------------------------------------------------------*/
+#footer{
+	background-color:#c0c0c0;
+	height:85px;
+	width:100%;
+	position:absolute;
+	bottom:0;
+}
+#subfooter{
+	position:relative;
+	width:1024px;
+	margin:0 auto;
+}
+#box{
+	position:absolute;
+	width:300px;
+	right:50%;
+	top:50%;
+	margin-right:-150px;
+	margin-top:20px;
+	padding:0 3px;
+	font-size:14px;
+	color:black;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#footerLinks a{
+	padding: 0 5px;
+}
+#box p{
+	text-align:center;
+	font-size:14px;
+	color:black;
+	font-family:Arial, Helvetica, sans-serif;
+	padding-top:3px;
+}
+#footerLinks .endlink{
+	border:none;
+}
+#footerLinks a{
+	text-decoration:none;
+	color:black;
+}
+#footerLinks a:hover{
+	text-decoration:underline;
+}
+/*end footer*/
