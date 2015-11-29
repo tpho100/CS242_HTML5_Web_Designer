@@ -14,7 +14,6 @@ body {
 
 #container {
   width: 980px;
-  margin: 0 auto;
 }
 
 header, nav, section, article, footer {
@@ -22,7 +21,7 @@ header, nav, section, article, footer {
 }
 
 #header {
-  height: 100px; 
+  height: 100px;
 }
 
 #logo {
@@ -34,7 +33,8 @@ header, nav, section, article, footer {
 #nav {
   float: left;
   width: 830px;
-  background: #C2DFFF
+  height: 100px;
+  background: #C2DFFF;
 }
 
 nav li {
@@ -42,7 +42,7 @@ nav li {
   display:inline-block;
   padding: 10px 35px;
   vertical-align: middle;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 nav a {
@@ -50,8 +50,11 @@ nav a {
   text-decoration: none;
 }
 
-nav ul a:hover {
-  color: #F0F;
+nav ul li:hover {
+}
+
+#section {
+  background-color: #FFF;
 }
 
 article {
@@ -71,7 +74,7 @@ p {
 #section a:link { 
   font-weight: bold; 
   text-decoration: none; 
-  color: #FFF;
+  color: #FF6347;
 }
 
 #section a:visited { 
@@ -80,7 +83,7 @@ p {
   color: #D4CDDC;
 }
 
-#section a:hover, #section a:active { 
+#section a:hover,#section a:active { 
   text-decoration: underline; 
   color: #9685BA;
 }
