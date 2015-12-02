@@ -15,10 +15,11 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	static String htmlString;
 	static File originalFile;
 	
-	JavaToHTML(){
+	public JavaToHTML(){
 		htmlString = "";
 	}
-	
+
+	/*
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -44,6 +45,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		writeToFile( newFileName + html );
 		
 	}
+	*/
 
 	public static void readFromFile(String fileName){
 		originalFile = new File( path + fileName); // Loads the Template File

@@ -1,20 +1,29 @@
 package master.model;
 
+import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Thanh-Phong on 11/24/2015.
  */
-public class WebPage{
+public class WebPage extends HTMLObject{
 
-    private List<String> headings = new ArrayList<String>();
-    private List<String> sections = new ArrayList<String>();
-    private List<String> paragraphs = new ArrayList<String>();
-    private List< List<String> > weblists = new ArrayList< List<String> >(); //Basically a list of lists.
-
+    private HTMLHeader header;
     private String footer;
-    private String header;
+    private List<HTMLSection> sections;
+
+    public WebPage(){
+        header = null;
+        footer = null;
+        sections = new ArrayList<>();
+    }
+
+    public WebPage(HTMLHeader header, String footer){
+        this.header = header;
+        this.footer = footer;
+        sections = new ArrayList<>();
+    }
 
     public String getFooter() {
         return footer;
@@ -24,28 +33,19 @@ public class WebPage{
         this.footer = footer;
     }
 
-    public String getHeader(){
+    public HTMLHeader getHeader(){
         return header;
     }
 
-    public void setHeader(String header) {
+    public void setHeader(HTMLHeader header) {
         this.header = header;
     }
 
-    public List<String> getHeadings() {
-        return headings;
-    }
-
-    public List<String> getParagraphs() {
-        return paragraphs;
-    }
-
-    public List<String> getSections() {
+    public List<HTMLSection> getSections() {
         return sections;
     }
 
-    public List<List<String>> getWeblists() {
-        return weblists;
+    public void setSections(List<HTMLSection> sections) {
+        this.sections = sections;
     }
-
 }

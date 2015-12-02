@@ -1,5 +1,6 @@
 package master.view;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -8,55 +9,53 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import master.model.*;
-import org.jsoup.*;
-
 import master.MainApp;
-import org.jsoup.nodes.Element;
 
+import javax.imageio.ImageIO;
 
 /**
  * Created by Thanh-Phong on 11/14/2015.
  */
 public class MainViewController
 {
-    private List<HTMLObject> webComponents = new ArrayList<>();
-    private ObservableList<String> currentList = FXCollections.observableArrayList();
-
-
+    private WebPage currentWebPage = new WebPage();
     private String projectName = "";
     private File projectFolder;
     private String projectDirectory = "";
+
+    private JavaToHTML htmlGenerator = new JavaToHTML();
 
     @FXML
     private WebView webViewCanvas = new WebView();
 
     @FXML
-    public void initialize() throws Exception{
+    private void initialize() throws Exception{
         String htmlSample = "../model/path/template/index.html";
         WebEngine engine = webViewCanvas.getEngine();
         URL urlSample = getClass().getResource(htmlSample);
         engine.load(urlSample.toExternalForm());
-        System.out.println("Launching init...");
 
         Optional<String> result = getPromptInput("New Project", "", "Please enter project name: ");
 
@@ -104,7 +103,7 @@ public class MainViewController
         templatePreview.setImage(templateImage[3]);
     }
 
-    public void onNextViewButtonClicked(ActionEvent e){
+    public void onNextViewButtonClicked(ActionEvent e) {
         Stage stage = (Stage) nextViewButton.getScene().getWindow();
         stage.close();
     }
@@ -201,24 +200,78 @@ public class MainViewController
 
     @FXML
     private void onHeaderButtonClicked(ActionEvent actionEvent) {
-        headerButton = new Button();
-        Optional<String> result = getPromptInput("New Header", "", "Please enter header: ");
+        if(currentWebPage.getHeader() == null){
+            Dialog dialog = new Dialog();
+            dialog.setTitle("Header");
+            dialog.setHeaderText("Choose Image or Text or Both");
+            Button choosePicture = new Button("Image");
+            TextField headerText = new TextField();
+            headerText.setPromptText("Header Text");
+            ImageView headerImageView = new ImageView();
 
-        if(result.isPresent()){
-            String line = result.get();
-            currentList.add(line);
-            //webComponentList.setItems(currentList);
+            choosePicture.setOnAction( e->{
+                FileChooser fileChooser = new FileChooser();
+                File file = fileChooser.showOpenDialog(null);
+                Image image;
+                try{
+                    BufferedImage bufferedImage = ImageIO.read(file);
+                    image = SwingFXUtils.toFXImage(bufferedImage,null);
+                    headerImageView.setImage(image);
 
+                }catch(IOException img){
+                    System.err.println("Problem reading image.");
+                }
+            });
+            dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK,ButtonType.CANCEL);
+            dialog.getDialogPane().setContent(choosePicture);
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(10,10,10,10));
+
+            grid.add( new Label("Header Text: "),0,0 );
+            grid.add( headerText, 1, 0 );
+            grid.add(new Label("Header Image: "), 0, 1);
+            grid.add(headerImageView,1,1);
+
+            dialog.getDialogPane().setContent(grid);
+            dialog.showAndWait();
+
+        }
+        else{
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("New Header");
+            //dialog.setHeaderText("Old Header Text: " + currentWebPage.getH());
+            dialog.setContentText("Change footer: ");
+
+            Optional<String> result = dialog.showAndWait();
+            if(result.isPresent()){
+                currentWebPage.setFooter(result.get());
+            }
         }
     }
 
 
     @FXML
     private void onFooterButtonClicked(ActionEvent e){
-        Optional<String> result = getPromptInput("New Footer", "", "Please enter footer: ");
+        if(currentWebPage.getFooter() == null){
+            Optional<String> result = getPromptInput("New Footer", "", "Enter new footer: ");
+            if(result.isPresent()){
+                currentWebPage.setFooter(result.get());
+            }
 
-        if(result.isPresent()){
-            webComponents.add( new HTMLFooter( result.get() ));
+        }
+        else{
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("New Footer");
+            dialog.setHeaderText("Old footer: " + currentWebPage.getFooter());
+            dialog.setContentText("Change footer: ");
+
+            Optional<String> result = dialog.showAndWait();
+            if(result.isPresent()){
+                currentWebPage.setFooter(result.get());
+            }
         }
     }
 
