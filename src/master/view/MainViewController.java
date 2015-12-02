@@ -201,13 +201,28 @@ public class MainViewController
     @FXML
     private void onHeaderButtonClicked(ActionEvent actionEvent) {
         if(currentWebPage.getHeader() == null){
-            Dialog dialog = new Dialog();
-            dialog.setTitle("Header");
-            dialog.setHeaderText("Choose Image or Text or Both");
-            Button choosePicture = new Button("Image");
+
+            GridPane grid = new GridPane();
+            Scene scene = new Scene(grid,400,400);
+            Stage headerEditor = new Stage();
+            headerEditor.setScene(scene);
+
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(10,10,10,10));
+
+            Button choosePicture = new Button("Choose Image");
             TextField headerText = new TextField();
             headerText.setPromptText("Header Text");
             ImageView headerImageView = new ImageView();
+
+            grid.add( new Label("Choose Image or Text or Both "),0,0 );
+            grid.add( new Label("Header Text: "), 0, 1 );
+            grid.add(headerText,1,1);
+            grid.add(new Label("Header Image: "), 0, 2);
+            grid.add(headerImageView,0,3);
+            grid.add(choosePicture,0,2);
+
 
             choosePicture.setOnAction( e->{
                 FileChooser fileChooser = new FileChooser();
@@ -222,33 +237,12 @@ public class MainViewController
                     System.err.println("Problem reading image.");
                 }
             });
-            dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK,ButtonType.CANCEL);
-            dialog.getDialogPane().setContent(choosePicture);
 
-            GridPane grid = new GridPane();
-            grid.setHgap(10);
-            grid.setVgap(10);
-            grid.setPadding(new Insets(10,10,10,10));
-
-            grid.add( new Label("Header Text: "),0,0 );
-            grid.add( headerText, 1, 0 );
-            grid.add(new Label("Header Image: "), 0, 1);
-            grid.add(headerImageView,1,1);
-
-            dialog.getDialogPane().setContent(grid);
-            dialog.showAndWait();
+            headerEditor.show();
 
         }
         else{
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("New Header");
-            //dialog.setHeaderText("Old Header Text: " + currentWebPage.getH());
-            dialog.setContentText("Change footer: ");
 
-            Optional<String> result = dialog.showAndWait();
-            if(result.isPresent()){
-                currentWebPage.setFooter(result.get());
-            }
         }
     }
 
