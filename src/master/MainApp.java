@@ -43,7 +43,6 @@ public class MainApp extends Application {
     }
 
     public void initLayout(){
-
         try{
             FXMLLoader editorLoader = new FXMLLoader();
             editorLoader.setLocation(MainApp.class.getResource("view/EditorView.fxml"));

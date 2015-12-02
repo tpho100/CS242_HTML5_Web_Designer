@@ -1,8 +1,15 @@
 package master.view;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -18,9 +25,11 @@ import javafx.scene.web.WebView;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import master.model.*;
+import org.jsoup.*;
 
 import master.MainApp;
-import master.model.WebPage;
+import org.jsoup.nodes.Element;
 
 
 /**
@@ -28,25 +37,40 @@ import master.model.WebPage;
  */
 public class MainViewController
 {
-    public Label prompt;
-    private WebPage currentWebPage = new WebPage();
+
+    private List<HTMLObject> webComponents = new ArrayList<>();
+
+    private String projectName = "";
+    private File projectFolder;
+    private String projectDirectory = "";
 
     @FXML
     private WebView webViewCanvas = new WebView();
 
     @FXML
     public void initialize() throws Exception{
-        currentWebPage = new WebPage();
         String htmlSample = "default_sample.html";
         WebEngine engine = webViewCanvas.getEngine();
         URL urlSample = getClass().getResource(htmlSample);
         engine.load(urlSample.toExternalForm());
+
+        Optional<String> result = getPromptInput("New Project", "", "Please enter project name: ");
+
+        if(result.isPresent()){
+            projectName = result.get();
+            projectFolder = new File(projectName);
+            projectFolder.mkdir();
+            projectDirectory = projectFolder.getPath();
+            System.out.println(projectDirectory);
+        }
+        else{
+            Platform.exit();
+        }
     }
 
     /*
         TEMPLATE SELECTOR ITEMS
      */
-
     private Image template1Image = new Image("master/images/template1_preview.PNG");
     private Image template2Image = new Image("master/images/template2_preview.png");
     private Image template3Image = new Image("master/images/template3_preview.png");
@@ -65,6 +89,9 @@ public class MainViewController
     private Button template3Button;
     @FXML
     private Button template4Button;
+    @FXML
+    private ListView<String> webComponentList = new ListView<String>();
+
 
     public void onTemplate1ButtonClicked(ActionEvent e){
         templatePreview.setImage(templateImage[0]);
@@ -120,21 +147,19 @@ public class MainViewController
 
     @FXML
     private void onQuitClicked(ActionEvent actionEvent) {
+        Platform.exit();
     }
 
     /*
-        Prompt components
+        Prompt for getting text
+        Accepts custom prompt messages
      */
-
-
     private Optional<String> getPromptInput(String title, String header, String prompt){
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle(title);
         dialog.setHeaderText(header);
         dialog.setContentText(prompt);
-
-        Optional<String> result = dialog.showAndWait();
-        return result;
+        return dialog.showAndWait();
     }
 
     /*
@@ -155,9 +180,6 @@ public class MainViewController
     private Button headerButton;
     @FXML
     private Button listButton;
-    @FXML
-    private Button otherButton;
-
 
     @FXML
     private void onHeaderButtonClicked(ActionEvent actionEvent) {
@@ -165,42 +187,39 @@ public class MainViewController
         Optional<String> result = getPromptInput("New Header", "", "Please enter header: ");
 
         if(result.isPresent()){
-            currentWebPage.setHeader(result.get());
+
         }
     }
 
     @FXML
     private void onListButtonClicked(ActionEvent actionEvent) {
-    }
 
-    @FXML
-    private void onOtherButtonClicked(ActionEvent actionEvent) {
     }
 
     @FXML
     private void onMediaButtonClicked(ActionEvent e){
-        mediaButton = new Button();
 
     }
 
 
     @FXML
     private void onHeadingButtonClicked(ActionEvent e){
-        headingButton = new Button();
         Optional<String> result = getPromptInput("New Heading", "", "Please enter heading: ");
 
         if(result.isPresent()){
-            currentWebPage.getHeadings().add(result.get());
+            webComponents.add( new HTMLHeading(result.get()));
+            ObservableList<HTMLObject> items = FXCollections.observableArrayList(webComponents);
+            items.setAll(webComponents);
+
         }
     }
 
     @FXML
     private void onFooterButtonClicked(ActionEvent e){
-        footerButton = new Button();
         Optional<String> result = getPromptInput("New Footer", "", "Please enter footer: ");
 
         if(result.isPresent()){
-            currentWebPage.setFooter(result.get());
+            webComponents.add( new HTMLFooter( result.get() ));
         }
     }
 
@@ -221,7 +240,7 @@ public class MainViewController
             BorderPane templateOverview = loader.load();
             Scene scene = new Scene(templateOverview);
             Stage stage = new Stage();
-
+            stage.initModality(Modality.APPLICATION_MODAL); //Locks mainstage until user quits the selector
             stage.setScene(scene);
             stage.showAndWait();
 
@@ -233,7 +252,6 @@ public class MainViewController
     private FXMLLoader loadFXMLSafely(String fxmlName){
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource(fxmlName));
-
         return loader;
     }
 
