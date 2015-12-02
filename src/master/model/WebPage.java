@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Thanh-Phong on 11/24/2015.
  */
-public class WebPage extends ArrayList{
+public class WebPage{
 
     private List<String> headings = new ArrayList<String>();
     private List<String> sections = new ArrayList<String>();

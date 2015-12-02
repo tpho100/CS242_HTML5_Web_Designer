@@ -39,6 +39,7 @@
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="nextViewButton" alignment="CENTER" mnemonicParsing="false" onAction="#onNextViewButtonClicked" text="Choose" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="cancelButton" alignment="CENTER" mnemonicParsing="false" onAction="#onNextViewButtonClicked" text="Cancel" textAlignment="CENTER" wrapText="true" />
          </children>
       </HBox>
    </top>

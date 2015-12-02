@@ -6,8 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="768.0" minWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="master.view.MainViewController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="768.0" minWidth="1024.0" stylesheets="@editorViewStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="master.view.MainViewController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -33,9 +32,6 @@
         </menus>
       </MenuBar>
    </top>
-   <bottom>
-      <TextField editable="false" promptText="Ready" BorderPane.alignment="CENTER" />
-   </bottom>
    <center>
       <WebView fx:id="webViewCanvas" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
@@ -49,7 +45,6 @@
             <Button fx:id="paragraphButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onParagraphButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add Paragraph" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="mediaButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onMediaButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add Media" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="listButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onListButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add List" textAlignment="CENTER" wrapText="true" />
-            <Button fx:id="otherButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onOtherButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add Other" textAlignment="CENTER" wrapText="true" />
          </children>
          <BorderPane.margin>
             <Insets />
@@ -59,4 +54,7 @@
          </padding>
       </VBox>
    </right>
+   <left>
+      <ListView fx:id="webComponentList" editable="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
 </BorderPane>
