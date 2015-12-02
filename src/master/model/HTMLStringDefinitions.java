@@ -8,9 +8,11 @@ package master.model; /**
  */
 public interface HTMLStringDefinitions {
 	String path = "path/";
-	String html = ".html";
 	String templateName = "template";
-	String urlAppend = "<a href=";
+	String html = ".html";
+
+	String urlBegin = "<a href=";
+	String urlEnd = "</a>";
 	
 	String titleBeginComment = "<!--$titleBegin-->";
 	String titleEndComment = "<!--$titleEnd-->";
@@ -22,9 +24,10 @@ public interface HTMLStringDefinitions {
 
 	String navBeginComment = "<!--$navBegin-->";
 	String navEndComment = "<!--$navEnd-->";
+
 	String navBegin = navBeginComment + "\n\t" + "<nav>";
 	String navEnd = "</nav>" + "\n\t" + navEndComment;
-	
+
 	// Will be appended to the end of any comment that had more then one
 	String commentEnding = "-->";
 
@@ -39,4 +42,10 @@ public interface HTMLStringDefinitions {
 	
 	String oListBegin = "<!--$olBegin";
 	String oListEnd = "<!--$olEnd";
+
+	String headerBegin = "<!--$headerBegin-->";
+	String headerEnd = "<!--$headerEnd-->";
+
+	String headerImgBegin = "<!--$headerImgBegin-->";
+	String headerImgEnd = "<!--$headerImgEnd-->";
 }

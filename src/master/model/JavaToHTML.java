@@ -45,7 +45,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		
 	}
 
-	private static void readFromFile(String fileName){
+	public static void readFromFile(String fileName){
 		originalFile = new File( path + fileName); // Loads the Template File
 		try {
 			htmlString = FileUtils.readFileToString(originalFile);
@@ -54,8 +54,8 @@ public class JavaToHTML implements HTMLStringDefinitions {
 			e1.printStackTrace();
 		}
 	}
-	
-	private static void writeToFile(String fileName){
+
+	public static void writeToFile(String fileName){
 		File newHtmlFile = new File( path + fileName );
 		try {
 			FileUtils.writeStringToFile(newHtmlFile, htmlString);
@@ -64,8 +64,8 @@ public class JavaToHTML implements HTMLStringDefinitions {
 			e.printStackTrace();
 		}
 	}
-	
-	private static void titleEditor(String title){
+
+	public static void titleEditor(String title){
 		int titleBeginIndex; // Location of "<" in "<!--$titleBegin-->"
 		int titleEndIndex; // Location of ">" in "<!--$titleEnd-->"
 		String titleSubstring;
@@ -79,7 +79,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	}
 	
 	// bodySection[a][b], a: Section Number, b: Section Content
-	private static void bodyEditor(String[] navLinks, String[] navTabs, String[][] bodySection){ 
+	public static void bodyEditor(String[] navLinks, String[] navTabs, String[][] bodySection){
 		int bodyBeginIndex; // Location of "<" in "<!--$bodyBegin-->"
 		int bodyEndIndex; // Location of ">" in "<!--$bodyEnd-->"
 		String bodySubstring;
@@ -90,16 +90,16 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		//int bodyBeginSectionIndex;
 		//int bodyEndSectionIndex;
 		
-		String tempString = "";
+		String tempString;
 		
 		String bodySectionBeginComplete;
 		String bodySectionEndComplete;
 
 		String paragraphBeginComplete;
 		String paragraphEndComplete;
-		String sectionString = "";
+		String sectionString;
 		
-		String contentHeader = "";
+		String contentHeader;
 		String originalString;
 		
 		String listBeginComplete;
@@ -129,7 +129,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 				if ( bodySection[matrixColumnLength][matrixRowLength].contains("ul:") ){
 					listBeginComplete = "\t\t" + uListBegin + matrixColumnLength + "." + matrixRowLength + commentEnding;
 					listEndComplete = "\t\t" + uListEnd + matrixColumnLength + "." + matrixRowLength + commentEnding;
-					
+
 					originalString = bodySection[matrixColumnLength][matrixRowLength];
 					contentHeader = headerCheck(originalString);
 					if ( originalString.contains("}") ){
@@ -144,42 +144,42 @@ public class JavaToHTML implements HTMLStringDefinitions {
 						tempString = originalString.substring(listLocation1, listLocation2);
 						originalString = originalString.replace(tempString, "");
 					}
-					
+
 					sectionString = sectionString + "\n" + listBeginComplete;
-					
-					if (contentHeader != ""){
+
+					if (!contentHeader.equals("")){
 						sectionString = sectionString + "\n\t\t" + "<h2>" + contentHeader + "</h2>";
 					}
-					 
+
 					sectionString = sectionString + "\n\t\t" + "<ul>";
-					
+
 					while ( originalString.contains(";") ){
 						listLocation1 = 0;
 						listLocation2 = originalString.indexOf(";");
 						tempString = originalString.substring(listLocation1, listLocation2);
 						listValues.add(tempString);
-						
+
 						listLocation2++;
 						tempString = originalString.substring(listLocation1, listLocation2);
 						originalString = originalString.replace(tempString, "");
 					}
-					
+
 					listLocation1 = 0;
 					listLocation2 = originalString.length();
 					tempString = originalString.substring(listLocation1, listLocation2);
 					listValues.add(tempString);
-					
+
 					for ( int lengthList = 0; lengthList < listValues.size(); lengthList++ ){
 						sectionString = sectionString + "\n\t\t\t" + "<li>" + listValues.get(lengthList) + "</li>";
 					}
-					
+
 					sectionString = sectionString + "\n\t\t" + "</ul>" + "\n" + listEndComplete;
-					
+
 				}
 				else if ( bodySection[matrixColumnLength][matrixRowLength].contains("ol:") ){
 					listBeginComplete = "\t\t" + oListBegin + matrixColumnLength + "." + matrixRowLength + commentEnding;
 					listEndComplete = "\t\t" + oListEnd + matrixColumnLength + "." + matrixRowLength + commentEnding;
-					
+
 					originalString = bodySection[matrixColumnLength][matrixRowLength];
 					contentHeader = headerCheck(originalString);
 					if ( originalString.contains("}") ){
@@ -194,37 +194,37 @@ public class JavaToHTML implements HTMLStringDefinitions {
 						tempString = originalString.substring(listLocation1, listLocation2);
 						originalString = originalString.replace(tempString, "");
 					}
-					
+
 					sectionString = sectionString + "\n" + listBeginComplete;
-					
-					if (contentHeader != ""){
+
+					if (!contentHeader.equals("")){
 						sectionString = sectionString + "\n\t\t" + "<h2>" + contentHeader + "</h2>";
 					}
-					 
+
 					sectionString = sectionString + "\n\t\t" + "<ol>";
-					
+
 					while ( originalString.contains(";") ){
 						listLocation1 = 0;
 						listLocation2 = originalString.indexOf(";");
 						tempString = originalString.substring(listLocation1, listLocation2);
 						listValues.add(tempString);
-						
+
 						listLocation2++;
 						tempString = originalString.substring(listLocation1, listLocation2);
 						originalString = originalString.replace(tempString, "");
 					}
-					
+
 					listLocation1 = 0;
 					listLocation2 = originalString.length();
 					tempString = originalString.substring(listLocation1, listLocation2);
 					listValues.add(tempString);
-					
+
 					for ( int lengthList = 0; lengthList < listValues.size(); lengthList++ ){
 						sectionString = sectionString + "\n\t\t\t" + "<li>" + listValues.get(lengthList) + "</li>";
 					}
-					
+
 					sectionString = sectionString + "\n\t\t" + "</ol>" + "\n" + listEndComplete;
-					
+
 				}
 				else{
 					originalString = bodySection[matrixColumnLength][matrixRowLength];
@@ -237,15 +237,15 @@ public class JavaToHTML implements HTMLStringDefinitions {
 					}
 					paragraphBeginComplete = "\t\t" + paragraphBegin + matrixColumnLength + "." + matrixRowLength + commentEnding;
 					paragraphEndComplete = "\t\t" + paragraphEnd + matrixColumnLength + "." + matrixRowLength + commentEnding;
-					
+
 					sectionString = sectionString + "\n" + paragraphBeginComplete;
-					if (contentHeader != ""){
+					if (!contentHeader.equals("")){
 						sectionString = sectionString + "\n\t\t" + "<h2>" + contentHeader + "</h2>";
 					}
-					
+
 					sectionString = sectionString + "\n\t\t" + "<p>" + originalString + "</p>" + "\n" + paragraphEndComplete;
 				}
-				
+
 			}
 
 			bodyNewSubstring = bodyNewSubstring + "\n" + bodySectionBeginComplete + "\n\t" + "<section>";
@@ -258,11 +258,11 @@ public class JavaToHTML implements HTMLStringDefinitions {
 
 		htmlString = htmlString.replace(bodySubstring, bodyNewSubstring);
 	}
-	
-	private static String headerCheck(String content){
-		String header = "";
-		int bracket1 = 0;
-		int bracket2 = 0;
+
+	public static String headerCheck(String content){
+		String header;
+		int bracket1;
+		int bracket2;
 		if (content.contains("{")){
 			bracket1 = content.indexOf("{");
 			bracket2 = content.indexOf("}");
@@ -275,19 +275,19 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		return header;
 	}
 
-	private static String navEditor(String[] navLinks, String[] navTabs){
+	public static String navEditor(String[] navLinks, String[] navTabs){
 		String newNavSubstring = "";
 
 		for ( int arrayLength = 0; arrayLength < navLinks.length; arrayLength++ ){
-			newNavSubstring = newNavSubstring + "\n\t\t" + urlAppend + "\"" + navLinks[arrayLength] + ".html\">";
-			newNavSubstring = newNavSubstring + navTabs[arrayLength] + "</a>";
+			newNavSubstring = newNavSubstring + "\n\t\t" + urlBegin + "\"" + navLinks[arrayLength] + ".html\">";
+			newNavSubstring = newNavSubstring + navTabs[arrayLength] + urlEnd;
 		}
 		newNavSubstring = "\n\t" + navBegin + newNavSubstring + "\n\t" + navEnd + "\n";
 		return newNavSubstring;
 	}
 	
 	@SuppressWarnings("unused")
-	private static String headerEditor(String imageName, String headerName){
+	public static String headerEditor(String imageName, String headerName){
 		String newHeaderSubstring = "";
 
 		/*for ( int arrayLength = 0; arrayLength < navLinks.length; arrayLength++ ){
