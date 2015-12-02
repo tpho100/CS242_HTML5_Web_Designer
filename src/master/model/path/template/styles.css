@@ -9,7 +9,7 @@ html{
 
 body{
 	width: 800px;
-	font-family: 'Source Sans Pro', Sans, serif;
+	font-family: 'Source Sans Pro', sans, serif;
 	background-color:#CDCCCC;
 		margin: 0 auto;
 	border: 1px solid #666;
