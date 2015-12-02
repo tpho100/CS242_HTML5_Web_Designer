@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.web.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="768.0" minWidth="1024.0" stylesheets="@editorViewStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="master.view.MainViewController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="768.0" minWidth="1200" stylesheets="@editorViewStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="master.view.MainViewController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -21,12 +23,13 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem fx:id="changeTemplateButton" mnemonicParsing="false" onAction="#onChangeTemplateButtonClicked" text="Change Template" />
+                  <MenuItem fx:id="explorerButton" mnemonicParsing="false" onAction="#onExplorerButtonClicked" text="Open in Explorer" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="aboutButton" mnemonicParsing="false" onAction="#onAboutButtonClicked" text="About" />
             </items>
           </Menu>
         </menus>
@@ -38,13 +41,10 @@
    <right>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="headerButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onHeaderButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add Header" textAlignment="CENTER" wrapText="true" />
-            <Button fx:id="footerButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onFooterButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add Footer" textAlignment="CENTER" wrapText="true" />
-            <Button fx:id="headingButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onHeadingButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add Heading" textAlignment="CENTER" wrapText="true" />
-            <Button fx:id="sectionButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onSectionButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add Section" textAlignment="CENTER" wrapText="true" />
-            <Button fx:id="paragraphButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onParagraphButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add Paragraph" textAlignment="CENTER" wrapText="true" />
-            <Button fx:id="mediaButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onMediaButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add Media" textAlignment="CENTER" wrapText="true" />
-            <Button fx:id="listButton" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#onListButtonClicked" prefHeight="80.0" prefWidth="80.0" text="Add List" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="headerButton" minHeight="80.0" minWidth="100.0" mnemonicParsing="false" onAction="#onHeaderButtonClicked" prefHeight="80.0" prefWidth="100.0" text="HEADER" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="footerButton" minHeight="80.0" minWidth="100.0" mnemonicParsing="false" onAction="#onFooterButtonClicked" prefHeight="80.0" prefWidth="100.0" text="FOOTER" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="navButton" minHeight="80.0" minWidth="100.0" mnemonicParsing="false" onAction="#onNavButtonClicked" prefHeight="80.0" prefWidth="100.0" text="NAV" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="sectionButton" minHeight="80.0" minWidth="100.0" mnemonicParsing="false" onAction="#onSectionButtonClicked" prefHeight="80.0" prefWidth="100.0" text="SECTION" textAlignment="CENTER" wrapText="true" />
          </children>
          <BorderPane.margin>
             <Insets />
@@ -55,6 +55,6 @@
       </VBox>
    </right>
    <left>
-      <ListView fx:id="webComponentList" editable="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="webComponentList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>

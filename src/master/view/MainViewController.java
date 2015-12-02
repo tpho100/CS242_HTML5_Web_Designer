@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,8 +39,9 @@ import org.jsoup.nodes.Element;
  */
 public class MainViewController
 {
-
     private List<HTMLObject> webComponents = new ArrayList<>();
+    private ObservableList<String> currentList = FXCollections.observableArrayList();
+
 
     private String projectName = "";
     private File projectFolder;
@@ -49,10 +52,11 @@ public class MainViewController
 
     @FXML
     public void initialize() throws Exception{
-        String htmlSample = "default_sample.html";
+        String htmlSample = "../model/path/template/index.html";
         WebEngine engine = webViewCanvas.getEngine();
         URL urlSample = getClass().getResource(htmlSample);
         engine.load(urlSample.toExternalForm());
+        System.out.println("Launching init...");
 
         Optional<String> result = getPromptInput("New Project", "", "Please enter project name: ");
 
@@ -82,16 +86,7 @@ public class MainViewController
     @FXML
     private Button nextViewButton;
     @FXML
-    private Button template1Button;
-    @FXML
-    private Button template2Button;
-    @FXML
-    private Button template3Button;
-    @FXML
-    private Button template4Button;
-    @FXML
-    private ListView<String> webComponentList = new ListView<String>();
-
+    private ListView webComponentList;
 
     public void onTemplate1ButtonClicked(ActionEvent e){
         templatePreview.setImage(templateImage[0]);
@@ -127,6 +122,12 @@ public class MainViewController
     private MenuItem closeProject;
     @FXML
     private MenuItem quit;
+    @FXML
+    private MenuItem changeTemplateButton;
+    @FXML
+    private MenuItem explorerButton;
+    @FXML
+    private MenuItem aboutButton;
 
     @FXML
     private void onNewProjectClicked(ActionEvent actionEvent) {
@@ -139,15 +140,35 @@ public class MainViewController
 
     @FXML
     private void onSaveProjectClicked(ActionEvent actionEvent) {
+
     }
 
     @FXML
     private void onCloseProjectClicked(ActionEvent actionEvent) {
+
     }
 
     @FXML
     private void onQuitClicked(ActionEvent actionEvent) {
         Platform.exit();
+    }
+
+    @FXML
+    private void onChangeTemplateButtonClicked(ActionEvent actionEvent) {
+        showTemplateSelectorOverview();
+    }
+
+    @FXML
+    private void onExplorerButtonClicked(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onAboutButtonClicked(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("CS242 HTML5 Website Designer" + "\nBy: David Mosto, \nThanh-Phong Ho, \nOumar Ly, \n& James Dapp.");
+        alert.setHeaderText("About");
+        alert.setTitle("About");
+        alert.showAndWait();
     }
 
     /*
@@ -167,17 +188,14 @@ public class MainViewController
      */
 
     @FXML
-    private Button mediaButton;
-    @FXML
-    private Button headingButton;
+    private Button headerButton;
     @FXML
     private Button footerButton;
     @FXML
+    private Button navButton;
+    @FXML
     private Button sectionButton;
-    @FXML
-    private Button paragraphButton;
-    @FXML
-    private Button headerButton;
+
     @FXML
     private Button listButton;
 
@@ -187,32 +205,13 @@ public class MainViewController
         Optional<String> result = getPromptInput("New Header", "", "Please enter header: ");
 
         if(result.isPresent()){
+            String line = result.get();
+            currentList.add(line);
+            //webComponentList.setItems(currentList);
 
         }
     }
 
-    @FXML
-    private void onListButtonClicked(ActionEvent actionEvent) {
-
-    }
-
-    @FXML
-    private void onMediaButtonClicked(ActionEvent e){
-
-    }
-
-
-    @FXML
-    private void onHeadingButtonClicked(ActionEvent e){
-        Optional<String> result = getPromptInput("New Heading", "", "Please enter heading: ");
-
-        if(result.isPresent()){
-            webComponents.add( new HTMLHeading(result.get()));
-            ObservableList<HTMLObject> items = FXCollections.observableArrayList(webComponents);
-            items.setAll(webComponents);
-
-        }
-    }
 
     @FXML
     private void onFooterButtonClicked(ActionEvent e){
@@ -226,11 +225,6 @@ public class MainViewController
     @FXML
     private void onSectionButtonClicked(ActionEvent e){
         sectionButton = new Button();
-    }
-
-    @FXML
-    private void onParagraphButtonClicked(ActionEvent e){
-
     }
 
     public void showTemplateSelectorOverview()
@@ -255,5 +249,7 @@ public class MainViewController
         return loader;
     }
 
-
+    @FXML
+    private void onNavButtonClicked(ActionEvent actionEvent) {
+    }
 }
