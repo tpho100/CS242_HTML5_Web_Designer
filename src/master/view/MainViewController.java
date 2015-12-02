@@ -75,7 +75,7 @@ public class MainViewController
     /*
         TEMPLATE SELECTOR ITEMS
      */
-    private Image template1Image = new Image("master/images/template1_preview.PNG");
+    private Image template1Image = new Image("master/images/template1_preview.png");
     private Image template2Image = new Image("master/images/template2_preview.png");
     private Image template3Image = new Image("master/images/template3_preview.png");
     private Image template4Image = new Image("master/images/template4_preview.png");

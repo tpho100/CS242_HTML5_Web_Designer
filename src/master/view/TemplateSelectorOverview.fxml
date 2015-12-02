@@ -31,7 +31,7 @@
    <center>
       <ImageView fx:id="templatePreview" fitHeight="600.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@../images/template1_preview.PNG" />
+            <Image url="@../images/template1_preview.png" />
          </image>
       </ImageView>
    </center>
