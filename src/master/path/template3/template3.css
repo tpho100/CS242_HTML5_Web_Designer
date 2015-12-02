@@ -1,0 +1,90 @@
+/*Oumar Ly*/
+
+html {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+}
+body { 
+  font: 75%, Arial, Helvetica, sans-serif;
+  line-height: 2; 
+  background: #fff url(background.jpg);
+  background-repeat: repeat;
+}
+
+#container {
+  width: 980px;
+  margin: 0 auto;
+}
+
+header, nav, section, article, footer {
+  display: block;
+}
+
+#header {
+  height: 100px; 
+}
+
+#logo {
+  height: 100px;
+  width: 150px;
+  float: left;
+}
+
+#nav {
+  float: left;
+  width: 830px;
+  background: #C2DFFF
+}
+
+nav li {
+  border: 1px solid #fff;
+  display:inline-block;
+  padding: 10px 35px;
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+nav a {
+  color: #FFF;
+  text-decoration: none;
+}
+
+nav ul a:hover {
+  color: #F0F;
+}
+
+article {
+  border-top: 2px dotted #000;
+  padding: 5px 0;
+  margin: 15px 0 5px;	
+  overflow: hidden;
+  clear: both;
+}
+
+p { 
+  letter-spacing: 1px;
+  padding: 5px 15px 2px 15px;
+  text-align: left;
+}
+
+#section a:link { 
+  font-weight: bold; 
+  text-decoration: none; 
+  color: #FFF;
+}
+
+#section a:visited { 
+  font-weight: bold; 
+  text-decoration: none; 
+  color: #D4CDDC;
+}
+
+#section a:hover, #section a:active { 
+  text-decoration: underline; 
+  color: #9685BA;
+}
+
+#header, footer {
+  background: #C2DFFF;
+}

@@ -52,7 +52,7 @@ public class MainViewController
 
     @FXML
     private void initialize() throws Exception{
-        String htmlSample = "../model/path/template/index.html";
+        String htmlSample = "../path/template/index.html";
         WebEngine engine = webViewCanvas.getEngine();
         URL urlSample = getClass().getResource(htmlSample);
         engine.load(urlSample.toExternalForm());
