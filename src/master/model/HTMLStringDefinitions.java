@@ -3,7 +3,7 @@ package master.model; /**
  */
 
 /**
- * @author dmost_000
+ * @author DAVIDMOSTO
  *
  */
 public interface HTMLStringDefinitions {
