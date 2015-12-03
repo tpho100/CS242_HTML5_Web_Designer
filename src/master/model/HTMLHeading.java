@@ -6,14 +6,20 @@ package master.model;
 public class HTMLHeading extends HTMLObject{
 
     private String heading;
-    private String objectType = "Heading";
+    private String objectType;
+
+    @Override
+    public String getObjectType() {
+        return objectType;
+    }
 
     public HTMLHeading(){
-        heading = null;
+        objectType = "HEADING";
     }
 
     public HTMLHeading(String heading){
         this.heading = heading;
+        objectType = "HEADING";
     }
 
     public String getHeading() {

@@ -6,16 +6,23 @@ import javafx.scene.image.Image;
  */
 public class HTMLHeader extends HTMLObject {
 
-    private String objectType = "Header";
+    private String objectType;
     private String headerText;
     private Image headerImage;
 
+    @Override
+    public String getObjectType() {
+        return objectType;
+    }
+
     public HTMLHeader(String headerText, Image headerImage){
+        objectType = "HEADER";
         this.headerText = headerText;
         this.headerImage = headerImage;
     }
 
     public HTMLHeader(String headerText){
+        objectType = "HEADER";
         this.headerText = headerText;
     }
 
@@ -31,6 +38,7 @@ public class HTMLHeader extends HTMLObject {
     }
 
     public HTMLHeader(Image headerImage){
+        objectType = "HEADER";
         this.headerImage = headerImage;
     }
 
