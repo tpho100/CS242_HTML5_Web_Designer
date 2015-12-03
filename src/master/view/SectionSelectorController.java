@@ -91,7 +91,6 @@ public class SectionSelectorController {
         list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         lists.add(list);
         sectionObjects.getChildren().add(list);
-        //sectionObjects.getScene().getWindow().sizeToScene();
 
         htmlList.setListElements(list.getItems());
         htmlList.setIndex(section.getSectionComponents().size());
@@ -143,9 +142,6 @@ public class SectionSelectorController {
             lists.remove( index );
             section.removeHTMLObject( section.getListLocations().get( section.getListLocations().size()-1 ) );
         }
-        else{
-            //System.out.println("Nothing to delete.");
-        }
     }
     @FXML private void minusParagraphButtonClicked(ActionEvent actionEvent) {
         if (paragraphs.size() > 0) {
@@ -153,10 +149,7 @@ public class SectionSelectorController {
             sectionObjects.getChildren().remove( paragraphs.get(index) );
             //sectionObjects.getScene().getWindow().sizeToScene();
             paragraphs.remove( index );
-            section.removeHTMLObject( section.getListLocations().get( section.getParagraphLocations().size()-1 ) );
-        }
-        else{
-            //System.out.println("Nothing to delete.");
+            section.removeHTMLObject( section.getParagraphLocations().get( section.getParagraphLocations().size()-1 ) );
         }
 
     }
@@ -168,7 +161,7 @@ public class SectionSelectorController {
             sectionObjects.getChildren().remove( images.get(index) );
             //sectionObjects.getScene().getWindow().sizeToScene();
             images.remove( index );
-            section.removeHTMLObject( section.getListLocations().get( section.getImageLocations().size()-1 ) );
+            section.removeHTMLObject( section.getImageLocations().get( section.getImageLocations().size()-1 ) );
         }
         else{
             //System.out.println("Nothing to delete.");
@@ -177,33 +170,68 @@ public class SectionSelectorController {
 
     @FXML void onOkButtonClicked(ActionEvent event) {
 
-        int count = sectionObjects.getChildren().size();
+        HTMLSection sectionWithContent = new HTMLSection();
+        System.out.println("first point" + section.getSectionComponents().size());
+        for(int i = 0; i < section.getSectionComponents().size(); i++){
+            HTMLObject blankObj = new HTMLObject();
+            sectionWithContent.addHTMLObject(blankObj);
+        }
+
+        System.out.println("sizeof copy"+sectionWithContent.getSectionComponents().size());
+
+        //int count = sectionObjects.getChildren().size();
         if(!headingTextField.getText().isEmpty()){
             //System.out.println("There is a heading...");
-            count++;
+            //count++;
+            sectionWithContent.setSectionHeading(headingTextField.getText());
         }
-        else{
-           // System.out.println("No heading...");
+
+        int paragraphCount = paragraphs.size();
+        if(paragraphCount > 0){
+            List<Integer> paragraphLocations = new ArrayList<>();
+            paragraphLocations = section.getParagraphLocations();
+            for(int i = 0; i < paragraphCount; i++){
+                HTMLParagraph p = new HTMLParagraph( paragraphs.get(i).getText() );
+                sectionWithContent.setHTMLObject(paragraphLocations.get(i),p);
+            }
         }
-        //System.out.println("There are: " + count + " elements in this section.");
-        //System.out.println("There are: " + section.getSectionComponents().size() + " elements in this section html object");
 
-        int paragraphCount = section.getParagraphLocations().size();
-        List<Integer> paragraphLocations = section.getParagraphLocations();
-        //System.out.println("There are " + paragraphCount + "paragraphs in section");
-        //System.out.println("at " + section.getParagraphLocations().toString());
+        int imageCount = images.size();
+        if(imageCount > 0){
+            List<Integer> imageLocations = section.getImageLocations();
+            for(int i = 0; i < imageCount; i++){
+                //System.out.println("Loop images: "+ images.get(i) + " " + imageLocations.get(i));
+                HTMLImage p = new HTMLImage( images.get(i).getImage() );
+                sectionWithContent.setHTMLObject(imageLocations.get(i),p);
+            }
+        }
 
-        int imageCount = section.getImageLocations().size();
-        List<Integer> imageLocations = section.getImageLocations();
-        //System.out.println("There are " + imageCount + "images in section");
-        //System.out.println("at " + section.getImageLocations().toString());
+        int listCount = lists.size();
+        System.out.println("list count" + listCount);
+        if(listCount > 0){
+            List<Integer> listLocations = section.getListLocations();
 
-        int listCount = section.getListLocations().size();
-        List<Integer> listLocations = section.getListLocations();
-        //System.out.println("There are " + listCount + "lists in section");
-        //System.out.println("at " + section.getListLocations().toString());
+            for(Integer i : listLocations){
+                System.out.println("List loc: " + i);
+            }
+
+            for(int i = 0; i < listCount; i++){
+                //System.out.println("Loop lists: "+lists.get(i) + " " + listLocations.get(i));
+                HTMLList p = new HTMLList( lists.get(0).getItems() );
+                sectionWithContent.setHTMLObject(listLocations.get(i),p);
+            }
+        }
+
+        ApplicationManager.getInstance().getCurrentWebPage().addSection(sectionWithContent);
+        HTMLSection sec = ApplicationManager.getInstance().getCurrentWebPage().getSections().get(0);
+        System.out.println(sec.getListLocations().size());
+
+        //int jj = ApplicationManager.getInstance().getCurrentWebPage().getSections().get(0).getImageLocations().size();
+        //int l = ApplicationManager.getInstance().getCurrentWebPage().getSections().get(0).getListLocations().size();
 
 
+        Stage stage = (Stage) okButton.getScene().getWindow();
+        stage.close();
 
     }
     @FXML void onCancelButtonClicked(ActionEvent event) {

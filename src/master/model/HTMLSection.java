@@ -16,9 +16,24 @@ public class HTMLSection extends HTMLObject {
     private String sectionHeading;
     private List<HTMLObject> sectionComponents;
 
+    @Override
+    public String getObjectType() {
+        return objectType;
+    }
+
     public HTMLSection(){
         sectionComponents = new ArrayList<>();
         objectType = "SECTION";
+    }
+
+    public HTMLSection( HTMLSection section ){
+        for( int i = 0; i < section.getSectionComponents().size(); i++ ){
+            sectionComponents.add( section.getSectionObject(i) );
+        }
+    }
+
+    public void setHTMLObject(int index, HTMLObject obj){
+        sectionComponents.set(index, obj);
     }
 
     public HTMLSection(int sectionNumber, String sectionHeading){
@@ -30,6 +45,14 @@ public class HTMLSection extends HTMLObject {
 
     public void addHTMLObject(HTMLObject htmlObject){
         sectionComponents.add(htmlObject);
+    }
+
+    public void addHTMLObject( int index, HTMLObject htmlObject ){
+        sectionComponents.add(index, htmlObject);
+    }
+
+    public HTMLObject getSectionObject(int index){
+        return sectionComponents.get(index);
     }
 
     public void removeHTMLObject(int index){
@@ -63,33 +86,55 @@ public class HTMLSection extends HTMLObject {
     public List<Integer> getParagraphLocations(){
         List<Integer> indexes = new ArrayList<>();
 
-        for( int i = 0; i < sectionComponents.size(); i++){
-            if( sectionComponents.get(i).getObjectType().equals("PARAGRAPH") ){
-                indexes.add(i);
+        //System.out.println("There exists a section component" + sectionComponents.size());
+        if(sectionComponents.size() > 0){
+
+            for( int i = 0; i < sectionComponents.size(); i++){
+                if( sectionComponents.get(i).getObjectType().equals("PARAGRAPH") ){
+                    indexes.add(i);
+                }
             }
         }
+
         return indexes;
     }
 
     public List<Integer> getImageLocations(){
         List<Integer> indexes = new ArrayList<>();
-
-        for( int i = 0; i < sectionComponents.size(); i++){
-            if( sectionComponents.get(i).getObjectType().equals("IMAGE") ){
-                indexes.add(i);
+        if(sectionComponents.size() > 0){
+            for( int i = 0; i < sectionComponents.size(); i++){
+                if( sectionComponents.get(i).getObjectType().equals("IMAGE") ){
+                    indexes.add(i);
+                }
             }
         }
+
+
         return indexes;
     }
 
     public List<Integer> getListLocations(){
         List<Integer> indexes = new ArrayList<>();
-
-        for( int i = 0; i < sectionComponents.size(); i++){
-            if( sectionComponents.get(i).getObjectType().equals("LIST") ){
-                indexes.add(i);
+        int sc = sectionComponents.size();
+        System.out.println("sc size: "+sc);
+        //try{
+            if(sc > 0){
+                for( int i = 0; i < sc; i++){
+                    HTMLObject objt = sectionComponents.get(i);
+                    //System.out.println(objt);
+                    System.out.println("i"+ i);
+                    if( sectionComponents.get(i).getObjectType().equals("LIST")){
+                        indexes.add(i);
+                    }
+                }
             }
-        }
+        //}catch(Exception e){
+            //System.err.println(e.getMessage());
+            //System.err.println(e.getCause());
+            //System.err.println(e.getStackTrace());
+        //}
+
+
         return indexes;
     }
 }

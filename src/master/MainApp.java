@@ -15,6 +15,8 @@ import master.model.ApplicationManager;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainApp extends Application {
 
