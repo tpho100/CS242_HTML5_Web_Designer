@@ -1,4 +1,4 @@
-package master;
+package master.controller;
 
 /**
  * Created by Thanh-Phong on 11/14/2015.
@@ -35,7 +35,7 @@ public class MainApp extends Application {
 
         try{
             FXMLLoader editorLoader = new FXMLLoader();
-            editorLoader.setLocation(MainApp.class.getResource("view/EditorView.fxml"));
+            editorLoader.setLocation(MainApp.class.getResource("../view/MainEditorOverView.fxml"));
             Pane editorLayout = editorLoader.load();
 
             scene = new Scene(editorLayout);

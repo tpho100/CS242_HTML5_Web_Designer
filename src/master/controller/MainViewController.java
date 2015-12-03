@@ -1,17 +1,15 @@
-package master.view;
+package master.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
@@ -20,15 +18,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import master.model.*;
-import master.MainApp;
 
 /**
  * Created by Thanh-Phong on 11/14/2015.
@@ -45,7 +43,7 @@ public class MainViewController implements Initializable{
         URL urlSample = getClass().getResource(htmlSample);
         engine.load(urlSample.toExternalForm());
 
-        webComponentList.setEditable(true);
+        //webComponentList.setEditable(true);
         webComponentList.setCellFactory(TextFieldListCell.forListView());
         webComponentList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
@@ -72,7 +70,7 @@ public class MainViewController implements Initializable{
     @FXML private void onChangeTemplateButtonClicked(ActionEvent actionEvent) {
         try{
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/TemplateSelectorOverview.fxml"));
+            loader.setLocation(MainApp.class.getResource("../view/TemplateSelectorOverview.fxml"));
             Parent root = (Parent) loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -118,7 +116,7 @@ public class MainViewController implements Initializable{
     @FXML private void onHeaderButtonClicked(ActionEvent actionEvent) {
         try{
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/HeaderEditor.fxml"));
+            loader.setLocation(MainApp.class.getResource("../view/HeaderEditor.fxml"));
             Pane headerSelector = loader.load();
             Scene scene = new Scene(headerSelector);
             Stage stage = new Stage();
@@ -155,7 +153,7 @@ public class MainViewController implements Initializable{
     @FXML private void onSectionButtonClicked(ActionEvent e){
         try{
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/SectionEditor.fxml"));
+            loader.setLocation(MainApp.class.getResource("../view/SectionEditor.fxml"));
             Pane sectionSelector = loader.load();
             Scene scene = new Scene(sectionSelector);
             Stage stage = new Stage();
@@ -176,26 +174,32 @@ public class MainViewController implements Initializable{
         List<String> objectTypes = new ArrayList<>();
 
         if(ApplicationManager.getInstance().getCurrentWebPage().getHeader() != null){
-            objectTypes.add(ApplicationManager.getInstance().getCurrentWebPage().getHeader().getObjectType() + " 0");
+            objectTypes.add(ApplicationManager.getInstance().getCurrentWebPage().getHeader().getObjectType() + " 0" );
             i++;
         }
 
         List<HTMLSection> sections = ApplicationManager.getInstance().getCurrentWebPage().getSections();
         for(HTMLSection s : sections){
             String t = s.getObjectType();
-            String f = t + " " + i;
+            String h = "No Heading";
+            if(s.getSectionHeading() != null)
+            {
+                h = s.getSectionHeading();
+            }
+            String f = t + " " + i + " : " +h;
             objectTypes.add( f );
             i++;
         }
 
         if(ApplicationManager.getInstance().getCurrentWebPage().getFooter() != null){
-            objectTypes.add("FOOTER " + i);
+            objectTypes.add("FOOTER " + i + " : " + ApplicationManager.getInstance().getCurrentWebPage().getFooter());
             i++;
         }
 
         myObservableList = FXCollections.observableList(objectTypes);
         webComponentList.setItems(myObservableList);
     }
+
 
     public void onDeleteKeyPressed(KeyEvent event) {
         event.consume();
@@ -242,4 +246,5 @@ public class MainViewController implements Initializable{
         }
 
     }
+
 }

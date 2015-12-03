@@ -1,4 +1,4 @@
-package master.view;
+package master.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
