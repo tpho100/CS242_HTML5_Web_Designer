@@ -18,16 +18,8 @@ import java.util.ResourceBundle;
  */
 public class TemplateSelectorController implements Initializable{
 
-    /*private MainViewController main;
-
-    public void init(MainViewController mainC){
-        main = mainC;
-    }*/
 
     private String templateSelected;
-    public String getTemplateSelected(){
-        return templateSelected;
-    }
 
     /*
        TEMPLATE SELECTOR ITEMS
@@ -35,15 +27,14 @@ public class TemplateSelectorController implements Initializable{
 
     private Image template1Image = new Image("master/images/template1_preview.png");
     private Image template2Image = new Image("master/images/template2_preview.png");
-    private Image template3Image = new Image("master/images/template3_preview.png");
-    private Image template4Image = new Image("master/images/template4_preview.png");
-    private Image[] templateImage = {template1Image, template2Image, template3Image, template4Image};
+    private Image[] templateImage = {template1Image, template2Image};
 
     @FXML
     private ImageView templatePreview;
 
     @FXML
     private Button nextViewButton;
+    @FXML private Button cancelButton;
 
     @FXML
     private void onTemplate1ButtonClicked(ActionEvent e){
@@ -58,19 +49,13 @@ public class TemplateSelectorController implements Initializable{
     }
 
     @FXML
-    private void onTemplate3ButtonClicked(ActionEvent e) {
-        templatePreview.setImage(templateImage[2]);
-        templateSelected = "template3";
-    }
-
-    @FXML
-    private void onTemplate4ButtonClicked(ActionEvent e) {
-        templatePreview.setImage(templateImage[3]);
-        templateSelected = "template4";
-    }
-
-    @FXML
     private void onNextViewButtonClicked(ActionEvent e) {
+        Stage stage = (Stage) nextViewButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void onCancelButtonClicked(ActionEvent e) {
         Stage stage = (Stage) nextViewButton.getScene().getWindow();
         stage.close();
     }

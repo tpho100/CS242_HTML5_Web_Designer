@@ -15,18 +15,10 @@ import master.model.ApplicationManager;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainApp extends Application {
 
     String windowTitle = "HTML5 Website Designer";
-    public static String mainEditorScreen = "mainEditorScreen";
-    public static String mainEditorScreenFile = "EditorView.fxml";
-    public static String templateSelectorScreen = "templateSelectorScreen";
-    public static String templateSelectorScreenFile = "TemplateSelectorOverview.fxml";
-    public static String headerInputScreen = "headerInputScreen";
-    public static String headerInputScreenFile = "HeaderEditor.fxml";
 
     public static void main(String[] args) {
         launch(args);

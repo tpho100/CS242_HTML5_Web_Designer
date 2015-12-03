@@ -1,6 +1,7 @@
 package master.model;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by Thanh-Phong on 12/2/2015.
@@ -29,6 +30,13 @@ public class ApplicationManager {
     public void removeSectionFromWebPage(int index){
         currentWebPage.removeSection(index);
     }
+    public void clearWebPageHeader(){
+        currentWebPage.clearHeader();
+    }
+
+    public void clearWebPageFooter(){
+        currentWebPage.clearFooter();
+    }
     public void setWebPageHeader(HTMLHeader header){
         currentWebPage.setHeader(header);
     }
@@ -52,6 +60,9 @@ public class ApplicationManager {
     }
     public String getProjectName() {
         return projectName;
+    }
+    public List<HTMLSection> getSectionsFromWebPage(){
+        return currentWebPage.getSections();
     }
 
 }

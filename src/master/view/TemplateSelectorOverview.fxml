@@ -16,8 +16,6 @@
                      <children>
                         <Button fx:id="template1Button" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#onTemplate1ButtonClicked" text="Template 1" />
                         <Button fx:id="template2Button" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#onTemplate2ButtonClicked" text="Template 2" />
-                        <Button fx:id="template3Button" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#onTemplate3ButtonClicked" text="Template 3" />
-                        <Button fx:id="template4Button" minHeight="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#onTemplate4ButtonClicked" text="Template 4" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -39,7 +37,7 @@
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="nextViewButton" alignment="CENTER" mnemonicParsing="false" onAction="#onNextViewButtonClicked" text="Choose" textAlignment="CENTER" wrapText="true" />
-            <Button fx:id="cancelButton" alignment="CENTER" mnemonicParsing="false" onAction="#onNextViewButtonClicked" text="Cancel" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="cancelButton" alignment="CENTER" mnemonicParsing="false" onAction="#onCancelButtonClicked" text="Cancel" textAlignment="CENTER" wrapText="true" />
          </children>
       </HBox>
    </top>

@@ -19,6 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -33,6 +35,8 @@ import master.MainApp;
  */
 public class MainViewController implements Initializable{
 
+    ObservableList<String> myObservableList;
+
     @Override
     public void initialize(URL url, ResourceBundle rb){
         //Set default sample html file on start
@@ -40,15 +44,16 @@ public class MainViewController implements Initializable{
         WebEngine engine = webViewCanvas.getEngine();
         URL urlSample = getClass().getResource(htmlSample);
         engine.load(urlSample.toExternalForm());
+
+        webComponentList.setEditable(true);
+        webComponentList.setCellFactory(TextFieldListCell.forListView());
+        webComponentList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
     /*
         MENUBAR ITEMS
      */
-    @FXML private MenuItem newProject;
-    @FXML private MenuItem openProject;
     @FXML private MenuItem saveProject;
-    @FXML private MenuItem closeProject;
     @FXML private MenuItem quit;
     @FXML private MenuItem changeTemplateButton;
     @FXML private MenuItem explorerButton;
@@ -57,14 +62,8 @@ public class MainViewController implements Initializable{
     @FXML private WebView webViewCanvas = new WebView();;
     @FXML private ListView webComponentList;
 
-    @FXML private void onNewProjectClicked(ActionEvent actionEvent) {
-    }
-    @FXML private void onOpenProjectClicked(ActionEvent actionEvent) {
-    }
-    @FXML private void onSaveProjectClicked(ActionEvent actionEvent) {
 
-    }
-    @FXML private void onCloseProjectClicked(ActionEvent actionEvent) {
+    @FXML private void onSaveProjectClicked(ActionEvent actionEvent) {
 
     }
     @FXML private void onQuitClicked(ActionEvent actionEvent) {
@@ -80,7 +79,6 @@ public class MainViewController implements Initializable{
             stage.initModality(Modality.APPLICATION_MODAL); //Locks mainstage until user quits the selector
             stage.setScene(scene);
             stage.showAndWait();
-
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -195,8 +193,53 @@ public class MainViewController implements Initializable{
             i++;
         }
 
-        ObservableList<String> myObservableList = FXCollections.observableList(objectTypes);
+        myObservableList = FXCollections.observableList(objectTypes);
         webComponentList.setItems(myObservableList);
     }
 
+    public void onDeleteKeyPressed(KeyEvent event) {
+        event.consume();
+        if( event.getCode().toString().equals("DELETE") ){
+            try{
+
+                int index = webComponentList.getSelectionModel().getSelectedIndex();
+                int totalSize = myObservableList.size();
+                System.out.println("total size: " + totalSize);
+                System.out.println("selected index: " + index);
+                System.out.println(ApplicationManager.getInstance().getCurrentWebPage().getFooter());
+
+                if(index == 0 && (ApplicationManager.getInstance().getCurrentWebPage().getHeader() != null)){
+                    myObservableList.remove(index);
+                    ApplicationManager.getInstance().getCurrentWebPage().clearHeader();
+                    System.out.println("removed header");
+
+                }else if( (index == (totalSize-1)) && (ApplicationManager.getInstance().getCurrentWebPage().getFooter() != null) ){
+                    myObservableList.remove(webComponentList.getSelectionModel().getSelectedIndex());
+                    ApplicationManager.getInstance().getCurrentWebPage().clearFooter();
+                    System.out.println("removed footer");
+
+                }
+                else if(ApplicationManager.getInstance().getSectionsFromWebPage().size() > 0){
+                    System.out.println("deleting " + index);
+                    myObservableList.remove(index);
+                    ApplicationManager.getInstance().getCurrentWebPage().removeSection(index);
+                }
+                else{
+                    //?
+                }
+                //System.out.println("Section size: " + ApplicationManager.getInstance().getSectionsFromWebPage().size());
+                //System.out.println("Footer " + ApplicationManager.getInstance().getCurrentWebPage().getFooter());
+                //System.out.println("Header " + ApplicationManager.getInstance().getCurrentWebPage().getHeader().getHeaderText());
+
+
+            }catch(Exception ex){
+                System.out.println("Nothing left to delete.");
+                System.err.println(ex.getStackTrace());
+                System.err.println(ex.getCause());
+               System.err.println(ex.getMessage());
+           }
+
+        }
+
+    }
 }

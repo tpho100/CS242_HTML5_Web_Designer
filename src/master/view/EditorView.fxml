@@ -12,10 +12,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem fx:id="newProject" mnemonicParsing="false" onAction="#onNewProjectClicked" text="New Project" />
-                  <MenuItem fx:id="openProject" mnemonicParsing="false" onAction="#onOpenProjectClicked" text="Open Project" />
                   <MenuItem fx:id="saveProject" mnemonicParsing="false" onAction="#onSaveProjectClicked" text="Save Project" />
-              <MenuItem fx:id="closeProject" mnemonicParsing="false" onAction="#onCloseProjectClicked" text="Close Project" />
                   <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#onQuitClicked" text="Quit" />
             </items>
           </Menu>
@@ -53,6 +50,6 @@
       </VBox>
    </right>
    <left>
-      <ListView fx:id="webComponentList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="webComponentList" onKeyPressed="#onDeleteKeyPressed" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>

@@ -26,6 +26,7 @@ public class HTMLSection extends HTMLObject {
         objectType = "SECTION";
     }
 
+
     public HTMLSection( HTMLSection section ){
         for( int i = 0; i < section.getSectionComponents().size(); i++ ){
             sectionComponents.add( section.getSectionObject(i) );
@@ -88,7 +89,6 @@ public class HTMLSection extends HTMLObject {
 
         //System.out.println("There exists a section component" + sectionComponents.size());
         if(sectionComponents.size() > 0){
-
             for( int i = 0; i < sectionComponents.size(); i++){
                 if( sectionComponents.get(i).getObjectType().equals("PARAGRAPH") ){
                     indexes.add(i);
@@ -116,13 +116,13 @@ public class HTMLSection extends HTMLObject {
     public List<Integer> getListLocations(){
         List<Integer> indexes = new ArrayList<>();
         int sc = sectionComponents.size();
-        System.out.println("sc size: "+sc);
+        //System.out.println("sc size: "+sc);
         //try{
             if(sc > 0){
                 for( int i = 0; i < sc; i++){
                     HTMLObject objt = sectionComponents.get(i);
                     //System.out.println(objt);
-                    System.out.println("i"+ i);
+                    //System.out.println("i"+ i);
                     if( sectionComponents.get(i).getObjectType().equals("LIST")){
                         indexes.add(i);
                     }

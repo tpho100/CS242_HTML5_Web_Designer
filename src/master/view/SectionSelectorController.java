@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -88,7 +89,10 @@ public class SectionSelectorController {
         list.setEditable(true);
         list.setItems(items);
         list.setPrefHeight(50*counter);
+        list.setCellFactory(TextFieldListCell.forListView());
+        list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         lists.add(list);
         sectionObjects.getChildren().add(list);
 
@@ -155,6 +159,7 @@ public class SectionSelectorController {
     }
     @FXML private void minusImageButtonOnClicked(ActionEvent actionEvent) {
         if (images.size() > 0) {
+            HTMLObject obj = new HTMLObject();
 
             int index = images.size() - 1;
             //System.out.println("minusing" + index);
@@ -171,13 +176,13 @@ public class SectionSelectorController {
     @FXML void onOkButtonClicked(ActionEvent event) {
 
         HTMLSection sectionWithContent = new HTMLSection();
-        System.out.println("first point" + section.getSectionComponents().size());
+        //System.out.println("first point" + section.getSectionComponents().size());
         for(int i = 0; i < section.getSectionComponents().size(); i++){
             HTMLObject blankObj = new HTMLObject();
             sectionWithContent.addHTMLObject(blankObj);
         }
 
-        System.out.println("sizeof copy"+sectionWithContent.getSectionComponents().size());
+        //System.out.println("sizeof copy"+sectionWithContent.getSectionComponents().size());
 
         //int count = sectionObjects.getChildren().size();
         if(!headingTextField.getText().isEmpty()){
@@ -207,13 +212,9 @@ public class SectionSelectorController {
         }
 
         int listCount = lists.size();
-        System.out.println("list count" + listCount);
+        //System.out.println("list count" + listCount);
         if(listCount > 0){
             List<Integer> listLocations = section.getListLocations();
-
-            for(Integer i : listLocations){
-                System.out.println("List loc: " + i);
-            }
 
             for(int i = 0; i < listCount; i++){
                 //System.out.println("Loop lists: "+lists.get(i) + " " + listLocations.get(i));
@@ -223,8 +224,8 @@ public class SectionSelectorController {
         }
 
         ApplicationManager.getInstance().getCurrentWebPage().addSection(sectionWithContent);
-        HTMLSection sec = ApplicationManager.getInstance().getCurrentWebPage().getSections().get(0);
-        System.out.println(sec.getListLocations().size());
+        //HTMLSection sec = ApplicationManager.getInstance().getCurrentWebPage().getSections().get(0);
+        //System.out.println(sec.getListLocations().size());
 
         //int jj = ApplicationManager.getInstance().getCurrentWebPage().getSections().get(0).getImageLocations().size();
         //int l = ApplicationManager.getInstance().getCurrentWebPage().getSections().get(0).getListLocations().size();
