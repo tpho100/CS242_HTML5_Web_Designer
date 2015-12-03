@@ -5,13 +5,19 @@ package master.model;
  */
 public class HTMLFooter extends HTMLObject {
     private String footer;
-    private String objectType = "Footer";
+    private String objectType;
+
+    @Override
+    public String getObjectType() {
+        return objectType;
+    }
 
     public HTMLFooter(){
-        footer = null;
+        objectType = "FOOTER";
     }
 
     public HTMLFooter(String footer){
+        objectType = "FOOTER";
         this.footer = footer;
     }
 

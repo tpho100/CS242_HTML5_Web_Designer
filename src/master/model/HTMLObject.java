@@ -8,7 +8,6 @@ public class HTMLObject {
     private String objectType;
 
     public HTMLObject(){
-        objectType = null;
     }
 
     public HTMLObject(String objectType){

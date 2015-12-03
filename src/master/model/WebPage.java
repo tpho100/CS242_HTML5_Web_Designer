@@ -25,6 +25,30 @@ public class WebPage extends HTMLObject{
         sections = new ArrayList<>();
     }
 
+    public void addSection(int index, HTMLSection section){
+        sections.add(index, section);
+    }
+
+    public void addSection(HTMLSection section){
+        sections.add(section);
+    }
+
+    public void removeSection(int index){
+        sections.remove(index);
+    }
+
+    public void setSection(int index, HTMLSection section){
+        sections.set(index, section);
+    }
+
+    public void clearHeader(){
+        header = null;
+    }
+
+    public void clearFooter(){
+        footer = null;
+    }
+
     public String getFooter() {
         return footer;
     }
