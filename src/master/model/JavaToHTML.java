@@ -71,6 +71,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 			getHeaderH1String();
 			getNavString();
 			getSectionString();
+			getFooterString();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -318,6 +319,10 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		}*/
 		//newNavSubstring = "\n\t" + navBegin + newNavSubstring + "\n\t" + navEnd + "\n";
 		return newHeaderSubstring;
+	}
+
+	public static void setSectionString(){
+		String sectionString;
 	}
 
 	// Getters from HTML File
@@ -720,5 +725,31 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		} catch(StringIndexOutOfBoundsException ignored){
 
 		}
+	}
+	public static String getFooterString(){
+		int beginIndex;
+		int endIndex;
+		String footerB = "<footer>";
+		String footerE = "</footer>";
+		String footerH4B = "<h4>";
+		String footerH4E = "</h4>";
+
+		try {
+			beginIndex = htmlString.indexOf(footerBegin)+footerBegin.length();
+			endIndex = htmlString.indexOf(footerEnd);
+			footerString = htmlString.substring(beginIndex, endIndex);
+			footerString = footerString.replaceAll(footerB, "");
+			footerString = footerString.replaceAll(footerE, "");
+			footerString = footerString.replaceAll("\\r", "");
+			footerString = footerString.replaceAll("\\n", "");
+			footerString = footerString.replaceAll("\\t", "");
+			footerString = footerString.replaceAll("<h4>", "");
+			footerString = footerString.replaceAll("</h4>", "");
+			footerString = footerString.trim();
+		} catch (StringIndexOutOfBoundsException ignored){
+
+		}
+
+		return footerString;
 	}
 }
