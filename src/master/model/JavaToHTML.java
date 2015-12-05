@@ -501,8 +501,8 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		} catch (StringIndexOutOfBoundsException ignored){
 
 		}
-	}
-	public static void getSectionString(){
+	} // Links stored in navNameString, names stored in navNameString
+	public static void getSectionString(){ // Headers stored in sectionH2String, rest of data stored in sectionStringMatrix
 		int beginIndex;
 		int endIndex;
 		int tempBeginIndex;
@@ -751,5 +751,19 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		}
 
 		return footerString;
+	}
+
+	//Variable Getters
+	public static String getNavNameString(){
+		return navNameString;
+	}
+	public static String getNavLinkString(){
+		return navLinkString;
+	}
+	public static List<String> getSectionH2String(){
+		return sectionH2String;
+	}
+	public static List<List<String>> getSectionStringMatrix() {
+		return sectionStringMatrix;
 	}
 }
