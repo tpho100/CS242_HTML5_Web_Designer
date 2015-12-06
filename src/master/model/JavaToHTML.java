@@ -766,4 +766,23 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	public static List<List<String>> getSectionStringMatrix() {
 		return sectionStringMatrix;
 	}
+
+	public static boolean setTitleFromGUI(String title_String){
+		return true;
+	}
+	public static boolean setStyleSheetFromGUI(String styleSheet_String){
+		return true;
+	}
+	public static boolean setHeaderFromGUI(String headerH1_String, String headerImg_String){
+		return true;
+	}
+	public static boolean setNavFromGUI(String navName_String, String navLink_String){
+		return true;
+	}
+	public static boolean setSectionFromGUI(List<List<String>> section_StringMatrix, List<String> sectionH2_String){
+		return true;
+	}
+	public static boolean setFooterFromGUI(String footer_String){
+		return true;
+	}
 }
