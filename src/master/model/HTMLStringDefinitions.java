@@ -62,4 +62,7 @@ public interface HTMLStringDefinitions {
 
 	String dividerBegin = "<!--$dividerBegin-->";
 	String dividerEnd = "<!--$dividerEnd-->";
+
+	String footerBegin = "<!--$footerBegin-->";
+	String footerEnd = "<!--$footerEnd-->";
 }
