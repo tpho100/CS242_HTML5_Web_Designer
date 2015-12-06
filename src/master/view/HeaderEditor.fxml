@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="master.controller.HeaderSelectorController">
+   <children>
+      <VBox layoutX="100.0" layoutY="100.0" prefHeight="200.0" prefWidth="115.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0">
+               <children>
+                  <Label text="Header Text:">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="headerTextField">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0">
+               <children>
+                  <Button fx:id="chooseButton" mnemonicParsing="false" onAction="#onChooseButtonClicked" prefHeight="30.0" prefWidth="85.0" text="Choose">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <TextField fx:id="picturePath">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0">
+               <children>
+                  <Button fx:id="okButton" mnemonicParsing="false" onAction="#onOkButtonClicked" prefHeight="30.0" prefWidth="85.0" text="OK">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="85.0" text="Cancel" />
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <ImageView fx:id="picturePreview" fitHeight="350.0" fitWidth="300.0" onDragDetected="#onImageDraggedDetected" onDragDone="#onImageDraggedDone" onDragDropped="#onImageDraggedDropped" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

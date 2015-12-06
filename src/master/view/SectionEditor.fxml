@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxWidth="600.0" minHeight="400.0" minWidth="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="master.controller.SectionSelectorController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                  <VBox prefHeight="40.0">
+                     <children>
+                        <Button fx:id="incrListButton" maxHeight="20.0" maxWidth="20.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#incrementListButtonClicked" prefHeight="20.0" prefWidth="20.0" text="+" textAlignment="CENTER">
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="decrListButton" maxHeight="20.0" maxWidth="20.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#decrementListButtonClicked" prefHeight="20.0" prefWidth="20.0" text="-" textAlignment="CENTER">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </VBox>
+                  <TextField fx:id="listCounter" prefHeight="40.0" prefWidth="40.0" text="4" />
+                  <Button fx:id="addListButton" mnemonicParsing="false" onAction="#appendListButtonClicked" text="+List" textAlignment="CENTER" />
+                  <Button fx:id="minusListButton" mnemonicParsing="false" onAction="#minusListButtonOnClicked" text="-List" />
+                  <Button fx:id="addParagraphButton" mnemonicParsing="false" onAction="#appendParagraphButtonClicked" text="+Paragraph" textAlignment="CENTER" />
+                  <Button fx:id="minusParagraphButton" mnemonicParsing="false" onAction="#minusParagraphButtonClicked" text="-Paragraph" textAlignment="CENTER" />
+                  <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#appendImageButtonClicked" text="+IMG" textAlignment="CENTER" />
+                  <Button fx:id="minusImageButton" mnemonicParsing="false" onAction="#minusImageButtonOnClicked" text="-IMG" textAlignment="CENTER" />
+                  <HBox maxHeight="20.0" maxWidth="100.0" minHeight="20.0" minWidth="80.0" prefHeight="20.0" />
+                  <Button fx:id="okButton" minHeight="30.0" minWidth="70.0" mnemonicParsing="false" onAction="#onOkButtonClicked" prefHeight="30.0" prefWidth="70.0" text="OK" />
+                  <Button fx:id="cancelButton" minHeight="30.0" minWidth="70.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="70.0" text="Cancel" />
+              </items>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </ToolBar>
+            <TextField fx:id="headingTextField" promptText="Enter Section Heading Here">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="292.0" prefViewportWidth="800.0" prefWidth="800.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox fx:id="sectionObjects" alignment="TOP_CENTER" prefWidth="600.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
