@@ -37,7 +37,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String originalFileName = "template";
+		String originalFileName = "index";
 		readFromFile( originalFileName + html );
 
 		String title = "This is a Test Title";
