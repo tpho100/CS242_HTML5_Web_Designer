@@ -62,6 +62,7 @@ public class MainViewController implements Initializable{
 
 
     @FXML private void onSaveProjectClicked(ActionEvent actionEvent) {
+        //Write HTML code to template
 
     }
     @FXML private void onQuitClicked(ActionEvent actionEvent) {
@@ -77,11 +78,14 @@ public class MainViewController implements Initializable{
             stage.initModality(Modality.APPLICATION_MODAL); //Locks mainstage until user quits the selector
             stage.setScene(scene);
             stage.showAndWait();
+
         }catch(IOException e){
             e.printStackTrace();
         }
     }
     @FXML private void onExplorerButtonClicked(ActionEvent actionEvent) {
+
+        //Open the project directory
     }
     @FXML private void onAboutButtonClicked(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

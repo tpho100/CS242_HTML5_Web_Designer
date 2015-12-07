@@ -15,25 +15,30 @@ public class ApplicationManager {
     private String projectName;
     private File projectFolder;
     private String projectDirectory;
+    private String template = "template1"; //Default template selected.
 
     public static ApplicationManager getInstance(){
         return instance;
     }
-
     public WebPage getCurrentWebPage(){
         return currentWebPage;
     }
-
+    public void changeTemplate(String template){
+        this.template = template;
+        System.out.println("Changed template to: " + template);
+        //needs more code to copy appropriate CSS file to project directory
+    }
     public void addSectionToWebPage( HTMLSection section ){
         currentWebPage.addSection(section);
+        System.out.println("Added new section to webpage");
     }
     public void removeSectionFromWebPage(int index){
         currentWebPage.removeSection(index);
+        System.out.println("Removed section at: " + index);
     }
     public void clearWebPageHeader(){
         currentWebPage.clearHeader();
     }
-
     public void clearWebPageFooter(){
         currentWebPage.clearFooter();
     }
@@ -45,9 +50,11 @@ public class ApplicationManager {
     }
     public void setProjectName(String projectName){
         this.projectName = projectName;
+        //use this name to name the project directory folder
     }
     public void setProjectDirectory(String projectDirectory){
         this.projectDirectory = projectDirectory;
+        //needs more code to create project directory
     }
     public void setProjectFolder(File folder){
         this.projectFolder = folder;
