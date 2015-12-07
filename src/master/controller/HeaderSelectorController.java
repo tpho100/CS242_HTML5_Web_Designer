@@ -30,7 +30,7 @@ public class HeaderSelectorController {
     @FXML private ImageView picturePreview;
     @FXML private Button chooseButton;
     @FXML private Button okButton = new Button();
-    @FXML private Button cancelButton;
+    @FXML private Button cancelButton = new Button();
 
     @FXML private void onChooseButtonClicked(){
 
@@ -41,21 +41,27 @@ public class HeaderSelectorController {
             BufferedImage bufferedImage = ImageIO.read(file);
             image = SwingFXUtils.toFXImage(bufferedImage,null);
             picturePreview.setImage(image);
-
+            picturePath.setText(file.getAbsolutePath());
         }catch(Exception img){
             System.err.println("Problem reading image.");
         }
 
     }
     @FXML private void onOkButtonClicked(){
-        HTMLHeader header = new HTMLHeader(headerTextField.getText(),picturePreview.getImage());
-        ApplicationManager.getInstance().setWebPageHeader(header);
+
+        if(!headerTextField.getText().isEmpty() && picturePreview.getImage() != null){
+            HTMLHeader header = new HTMLHeader(headerTextField.getText(),picturePreview.getImage());
+            ApplicationManager.getInstance().setWebPageHeader(header);
+        }
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
     }
     @FXML private void onCancelButtonClicked(){
-
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
+
+    //If time allows. Implement drag and drop support for images.
     @FXML private void onImageDraggedDone(DragEvent event) {
         System.out.println("Dragged done: " + event.getEventType());
     }

@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import master.model.ApplicationManager;
 
 import java.io.File;
 import java.net.URL;
@@ -50,6 +51,11 @@ public class TemplateSelectorController implements Initializable{
 
     @FXML
     private void onNextViewButtonClicked(ActionEvent e) {
+
+        //Get template number
+        if(templateSelected != null){
+            ApplicationManager.getInstance().changeTemplate(templateSelected);
+        }
         Stage stage = (Stage) nextViewButton.getScene().getWindow();
         stage.close();
     }
