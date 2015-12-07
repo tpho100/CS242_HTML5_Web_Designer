@@ -13,7 +13,8 @@ import org.apache.commons.io.FileUtils;
  */
 public class JavaToHTML implements HTMLStringDefinitions {
 	static String htmlString;
-	static File originalFile;
+	static String originalFileName;
+	static String newFileName;
 
 	// HTML File Strings
 	static String titleString = "";
@@ -31,14 +32,17 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	static String footerString = "";
 
 	JavaToHTML(){
-		htmlString = "";
+
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		String originalFileName = "index";
-		readFromFile( originalFileName + html );
+		htmlString = "";
+		originalFileName = "index";
+		newFileName = "test";
+
+		readFromFile( originalFileName );
 
 		String title = "This is a Test Title";
 		titleEditor( title );
@@ -54,39 +58,14 @@ public class JavaToHTML implements HTMLStringDefinitions {
 
 		bodyEditor(navLinks, navTabs, bodyContent);
 
-		String newFileName = "test";
-		writeToFile( newFileName + html );
+		setTitleFromGUI("Hello");
+		setStyleSheetFromGUI("stylerTest");
+		setHeaderFromGUI("Hello Header", "test.png");
+		writeToFile( newFileName );
 
 	}
 
-	public static void readFromFile(String fileName){
-		originalFile = new File( path + fileName); // Loads the Template File
-		try {
-			htmlString = FileUtils.readFileToString( originalFile );
-			getTitleFromHTML();
-			getStyleSheetFromHTML();
-			getBodyString();
-			getHeaderString();
-			getHeaderImgString();
-			getHeaderH1String();
-			getNavString();
-			getSectionString();
-			getFooterString();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	}
 
-	public static void writeToFile(String fileName){
-		File newHtmlFile = new File( path + fileName );
-		try {
-			FileUtils.writeStringToFile(newHtmlFile, htmlString);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	public static void titleEditor(String title){
 		int titleBeginIndex; // Location of "<" in "<!--$titleBegin-->"
@@ -323,6 +302,49 @@ public class JavaToHTML implements HTMLStringDefinitions {
 
 	public static void setSectionString(){
 		String sectionString;
+	}
+
+
+	// Main Reader & Writers of File
+	public static void readFromFile(String fileName){
+		String FileName = fileName + html;
+		File originalFile = new File( path + FileName); // Loads the Template File
+		try {
+			htmlString = FileUtils.readFileToString( originalFile );
+			getTitleFromHTML();
+			getStyleSheetFromHTML();
+			getBodyString();
+			getHeaderString();
+			getHeaderImgString();
+			getHeaderH1String();
+			getNavString();
+			getSectionString();
+			getFooterString();
+			writeToFile(fileName);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	public static void writeToFile(String fileName){
+		String FileName = fileName + html;
+		File newFile = new File( path + FileName );
+		try {
+			FileUtils.writeStringToFile(newFile, htmlString);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// Setter for the File Names
+	public static void setOriginalFile(String changeFileName){
+		originalFileName = changeFileName;
+		return;
+	}
+	public static void setNewFile(String changeFileName){
+		newFileName = changeFileName;
+		return;
 	}
 
 	// Getters from HTML File
@@ -767,14 +789,72 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		return sectionStringMatrix;
 	}
 
+	// Setters to HTML File
 	public static boolean setTitleFromGUI(String title_String){
-		return true;
+		int beginIndex; // Location of "<" in "<!--$titleBegin-->"
+		int endIndex; // Location of ">" in "<!--$titleEnd-->"
+		String titleB = "<title>";
+		String titleE = "</title>";
+		String titleString_NEW;
+
+		try {
+			beginIndex = htmlString.indexOf(titleBeginComment);
+			endIndex = htmlString.indexOf(titleEndComment)+titleEndComment.length();
+			titleString = htmlString.substring(beginIndex, endIndex);
+			titleString_NEW = titleBeginComment + "\r\n" + titleB + title_String + titleE + "\r\n" + titleEndComment;
+			htmlString = htmlString.replace(titleString, titleString_NEW);
+			writeToFile(newFileName);
+			//readFromFile(newFileName);
+			return true;
+		} catch (StringIndexOutOfBoundsException ignored){
+			return false;
+		}
+
 	}
 	public static boolean setStyleSheetFromGUI(String styleSheet_String){
-		return true;
+		int beginIndex;
+		int endIndex;
+		String styleSheetB = "<link href=\"";
+		String styleSheetE = "\" rel=\"stylesheet\" type=\"text/css\"/>";
+		String styleSheetString_NEW;
+
+		try {
+			beginIndex = htmlString.indexOf(styleSheetBegin);
+			endIndex = htmlString.indexOf(styleSheetEnd)+styleSheetEnd.length();
+			styleSheetString = htmlString.substring(beginIndex, endIndex);
+			styleSheetString_NEW = styleSheetBegin + "\r\n" + styleSheetB + styleSheet_String + ".css" + styleSheetE + "\r\n" + styleSheetEnd;
+			htmlString = htmlString.replace(styleSheetString, styleSheetString_NEW);
+			writeToFile(newFileName);
+			//readFromFile(newFileName);
+			return true;
+		} catch (StringIndexOutOfBoundsException ignored){
+			return false;
+		}
 	}
 	public static boolean setHeaderFromGUI(String headerH1_String, String headerImg_String){
-		return true;
+		int beginIndex;
+		int endIndex;
+		String headerB = "<header>";
+		String headerE = "</header>";
+		String headerImgB = "<a href=\"index.html\"><img src=\"images/";
+		String headerImgE = "\"/></a>";
+		String headerH1B = "<h1>";
+		String headerH1E = "</h1>";
+
+		String headerString_NEW = "";
+
+		try {
+			beginIndex = htmlString.indexOf(headerBegin);
+			endIndex = htmlString.indexOf(headerEnd)+headerEnd.length();
+			headerString = htmlString.substring(beginIndex, endIndex);
+
+			//htmlString = htmlString.replace(styleSheetString, headerString_NEW);
+			writeToFile(newFileName);
+			//readFromFile(newFileName);
+			return true;
+		} catch (StringIndexOutOfBoundsException ignored){
+			return false;
+		}
 	}
 	public static boolean setNavFromGUI(String navName_String, String navLink_String){
 		return true;
