@@ -12,6 +12,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import master.model.ApplicationManager;
 import master.model.HTMLHeader;
+import master.model.JavaToHTML;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -54,6 +55,8 @@ public class HeaderSelectorController {
             ApplicationManager.getInstance().setWebPageHeader(header);
         }
         Stage stage = (Stage) okButton.getScene().getWindow();
+        JavaToHTML HTML = new JavaToHTML();
+        HTML.setHeaderFromGUI(headerTextField.getText(),picturePath.getText()); // controller tie in
         stage.close();
     }
     @FXML private void onCancelButtonClicked(){

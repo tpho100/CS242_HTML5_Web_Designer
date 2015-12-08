@@ -31,7 +31,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	static List<String> sectionH2String = new ArrayList<>();
 	static String footerString = "";
 
-	JavaToHTML(){
+	public JavaToHTML(){
 
 	}
 

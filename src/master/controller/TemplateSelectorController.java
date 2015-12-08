@@ -8,8 +8,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import master.model.ApplicationManager;
+import master.model.JavaToHTML;
+import master.model.HTMLStringDefinitions;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -57,6 +61,14 @@ public class TemplateSelectorController implements Initializable{
             ApplicationManager.getInstance().changeTemplate(templateSelected);
         }
         Stage stage = (Stage) nextViewButton.getScene().getWindow();
+        File source = new File("..\\Path\\"+templateSelected+"\\styles.css");
+        try {                                                       //controller tie in
+            FileUtils.copyDirectory(source, ApplicationManager.getInstance().getProjectFolder()); //load styles.css into project directory
+        } catch (IOException err) {
+            //e.printStackTrace();
+        }
+        ApplicationManager.getInstance().getHtmlGenerator().readFromFile(HTMLStringDefinitions.path+"/index.html");
+        //MainViewController.writeAndRefresh();
         stage.close();
     }
 

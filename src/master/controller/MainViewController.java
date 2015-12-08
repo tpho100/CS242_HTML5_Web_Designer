@@ -1,5 +1,6 @@
 package master.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -57,7 +58,7 @@ public class MainViewController implements Initializable{
     @FXML private MenuItem explorerButton;
     @FXML private MenuItem aboutButton;
 
-    @FXML private WebView webViewCanvas = new WebView();;
+    @FXML private WebView webViewCanvas = new WebView();
     @FXML private ListView webComponentList;
 
 
@@ -148,6 +149,7 @@ public class MainViewController implements Initializable{
 
             Optional<String> result = dialog.showAndWait();
             if(result.isPresent()){
+                JavaToHTML.setFooterFromGUI(result.get()); //controller tie in
                 ApplicationManager.getInstance().getCurrentWebPage().setFooter(result.get());
             }
         }
@@ -249,6 +251,14 @@ public class MainViewController implements Initializable{
 
         }
 
+    }
+
+    public boolean writeAndRefresh()
+    {
+        ApplicationManager.getInstance().getHtmlGenerator().writeToFile(ApplicationManager.getInstance().getProjectDirectory());//write
+        initialize(null,null);//reload webview
+
+        return true;
     }
 
 }
