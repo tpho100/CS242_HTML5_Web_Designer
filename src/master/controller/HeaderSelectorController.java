@@ -50,11 +50,26 @@ public class HeaderSelectorController {
     }
     @FXML private void onOkButtonClicked(){
 
-        if(!headerTextField.getText().isEmpty() && picturePreview.getImage() != null){
-            HTMLHeader header = new HTMLHeader(headerTextField.getText(),picturePreview.getImage());
+        if(!headerTextField.getText().isEmpty() || picturePreview.getImage() != null){
+            HTMLHeader header;
+            if(!headerTextField.getText().isEmpty() && picturePreview.getImage() == null){
+                header = new HTMLHeader(headerTextField.getText());
+                System.out.println("Header only has text.");
+            }
+            else if( headerTextField.getText().isEmpty()&& picturePreview.getImage() != null ){
+                header = new HTMLHeader(picturePreview.getImage());
+                System.out.println("Header only has image.");
+            }else{
+                header = new HTMLHeader(headerTextField.getText(), picturePreview.getImage());
+                System.out.println("Header has both image and text.");
+            }
+
             ApplicationManager.getInstance().setWebPageHeader(header);
+            System.out.println("Attempting to set header to webpage.");
             //JavaToHTML HTML = new JavaToHTML();
             ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI(headerTextField.getText(),picturePath.getText()); // added by James
+        }else{
+            System.out.println("Header has nothing. Not creating an object.");
         }
         Stage stage = (Stage) okButton.getScene().getWindow();
 

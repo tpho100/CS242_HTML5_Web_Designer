@@ -257,7 +257,6 @@ public class MainViewController implements Initializable{
     {
         ApplicationManager.getInstance().getHtmlGenerator().writeToFile(ApplicationManager.getInstance().getProjectDirectory());//write
         initialize(null,null);//reload webview
-
         return true;
     }
 
