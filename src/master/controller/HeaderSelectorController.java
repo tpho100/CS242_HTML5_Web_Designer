@@ -53,10 +53,11 @@ public class HeaderSelectorController {
         if(!headerTextField.getText().isEmpty() && picturePreview.getImage() != null){
             HTMLHeader header = new HTMLHeader(headerTextField.getText(),picturePreview.getImage());
             ApplicationManager.getInstance().setWebPageHeader(header);
+            //JavaToHTML HTML = new JavaToHTML();
+            ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI(headerTextField.getText(),picturePath.getText()); // added by James
         }
         Stage stage = (Stage) okButton.getScene().getWindow();
-        JavaToHTML HTML = new JavaToHTML();
-        HTML.setHeaderFromGUI(headerTextField.getText(),picturePath.getText()); // controller tie in
+
         stage.close();
     }
     @FXML private void onCancelButtonClicked(){

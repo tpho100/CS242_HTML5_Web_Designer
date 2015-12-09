@@ -57,18 +57,24 @@ public class TemplateSelectorController implements Initializable{
     private void onNextViewButtonClicked(ActionEvent e) {
 
         //Get template number
-        if(templateSelected != null){
+        if(templateSelected != null) {
             ApplicationManager.getInstance().changeTemplate(templateSelected);
+
+            //--------------Added by James---------------------------------------------------------------
+
+            File projectDir = new File(HTMLStringDefinitions.path);
+            ApplicationManager.getInstance().setProjectFolder(projectDir);
+            File source = new File("../path/" + templateSelected + "/styles.css");
+            try {                                                       //controller tie in
+                FileUtils.copyDirectory(source, ApplicationManager.getInstance().getProjectFolder()); //load styles.css into project directory
+            } catch (IOException err) {
+                //e.printStackTrace();
+            }
+            ApplicationManager.getInstance().getHtmlGenerator().readFromFile(/*HTMLStringDefinitions.path + */"index"); //This is weird, may need to be reworked
+            //MainViewController.writeAndRefresh();
+            //---------------end added by James---------------------------------------------------------
         }
         Stage stage = (Stage) nextViewButton.getScene().getWindow();
-        File source = new File("..\\Path\\"+templateSelected+"\\styles.css");
-        try {                                                       //controller tie in
-            FileUtils.copyDirectory(source, ApplicationManager.getInstance().getProjectFolder()); //load styles.css into project directory
-        } catch (IOException err) {
-            //e.printStackTrace();
-        }
-        ApplicationManager.getInstance().getHtmlGenerator().readFromFile(HTMLStringDefinitions.path+"/index.html");
-        //MainViewController.writeAndRefresh();
         stage.close();
     }
 

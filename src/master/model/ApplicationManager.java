@@ -72,7 +72,7 @@ public class ApplicationManager {
         return currentWebPage.getSections();
     }
 
-    public JavaToHTML getHtmlGenerator()
+    public JavaToHTML getHtmlGenerator() //Added by James
     {
         return htmlGenerator;
     }
