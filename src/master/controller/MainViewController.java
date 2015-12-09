@@ -39,6 +39,17 @@ public class MainViewController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb){
         //Set default sample html file on start
+
+        Optional<String> result = getPromptInput("NEW PROJECT", "This project name will be the folder name.", "Enter Project Folder Name: ");
+        if(result.isPresent()){
+            File dir = new File(result.get());
+            dir.mkdir();
+            System.out.println(dir.getAbsolutePath());
+            ApplicationManager.getInstance().setProjectDirectory(dir.getAbsolutePath());
+            System.out.println(ApplicationManager.getInstance().getProjectDirectory());
+            onChangeTemplateButtonClicked(null);
+        }
+
         String htmlSample = "../path/template/index.html";
         WebEngine engine = webViewCanvas.getEngine();
         URL urlSample = getClass().getResource(htmlSample);
@@ -79,6 +90,8 @@ public class MainViewController implements Initializable{
             stage.initModality(Modality.APPLICATION_MODAL); //Locks mainstage until user quits the selector
             stage.setScene(scene);
             stage.showAndWait();
+
+            writeAndRefresh();
 
         }catch(IOException e){
             e.printStackTrace();
@@ -127,6 +140,8 @@ public class MainViewController implements Initializable{
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.showAndWait();
+
+
 
             refreshComponentList();
         }catch(IOException e) {
@@ -206,7 +221,6 @@ public class MainViewController implements Initializable{
         webComponentList.setItems(myObservableList);
     }
 
-
     public void onDeleteKeyPressed(KeyEvent event) {
         event.consume();
         if( event.getCode().toString().equals("DELETE") ){
@@ -256,7 +270,11 @@ public class MainViewController implements Initializable{
     public boolean writeAndRefresh()
     {
         ApplicationManager.getInstance().getHtmlGenerator().writeToFile(ApplicationManager.getInstance().getProjectDirectory());//write
-        initialize(null,null);//reload webview
+       // initialize(null,null);//reload webview
+        String htmlSample = "../path/template1/index.html";
+        WebEngine engine = webViewCanvas.getEngine();
+        URL urlSample = getClass().getResource(htmlSample);
+        engine.load(urlSample.toExternalForm());
         return true;
     }
 

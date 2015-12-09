@@ -225,12 +225,6 @@ public class SectionSelectorController {
         }
 
         ApplicationManager.getInstance().getCurrentWebPage().addSection(sectionWithContent);
-        //HTMLSection sec = ApplicationManager.getInstance().getCurrentWebPage().getSections().get(0);
-        //System.out.println(sec.getListLocations().size());
-
-        //int jj = ApplicationManager.getInstance().getCurrentWebPage().getSections().get(0).getImageLocations().size();
-        //int l = ApplicationManager.getInstance().getCurrentWebPage().getSections().get(0).getListLocations().size();
-
 
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
