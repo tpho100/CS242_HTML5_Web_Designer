@@ -45,7 +45,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		readFromFile( originalFileName );
 
 		String title = "This is a Test Title";
-		titleEditor( title );
+		//titleEditor( title );
 
 		String[][] bodyContent = new String[][]{
 				{"p0.0", "ul:Hello world;Next World;Loren Ipsum", "p0.1", "p0.2", "p0.3"},
@@ -56,7 +56,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		String[] navLinks = new String[]{"nav0", "nav1", "nav2", "nav3"};
 		String[] navTabs = new String[]{"Nav 0", "Nav 1", "Nav 2", "Nav 3"};
 
-		bodyEditor(navLinks, navTabs, bodyContent);
+		//bodyEditor(navLinks, navTabs, bodyContent);
 
 		setTitleFromGUI("Hello");
 		setStyleSheetFromGUI("stylerTest");
@@ -81,6 +81,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	}
 
 	// bodySection[a][b], a: Section Number, b: Section Content
+	////////////////Ignore
 	public static void bodyEditor(String[] navLinks, String[] navTabs, String[][] bodySection){
 		int bodyBeginIndex; // Location of "<" in "<!--$bodyBegin-->"
 		int bodyEndIndex; // Location of ">" in "<!--$bodyEnd-->"
@@ -288,7 +289,6 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		return newNavSubstring;
 	}
 
-	@SuppressWarnings("unused")
 	public static String headerEditor(String imageName, String headerName){
 		String newHeaderSubstring = "";
 
@@ -303,7 +303,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	public static void setSectionString(){
 		String sectionString;
 	}
-
+	///////////////Ignore
 
 	// Main Reader & Writers of File
 	public static void readFromFile(String fileName){
@@ -803,7 +803,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 			titleString = htmlString.substring(beginIndex, endIndex);
 			titleString_NEW = titleBeginComment + "\r\n" + titleB + title_String + titleE + "\r\n" + titleEndComment;
 			htmlString = htmlString.replace(titleString, titleString_NEW);
-			writeToFile(newFileName);
+			//writeToFile(newFileName);
 			//readFromFile(newFileName);
 			return true;
 		} catch (StringIndexOutOfBoundsException ignored){
@@ -824,7 +824,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 			styleSheetString = htmlString.substring(beginIndex, endIndex);
 			styleSheetString_NEW = styleSheetBegin + "\r\n" + styleSheetB + styleSheet_String + ".css" + styleSheetE + "\r\n" + styleSheetEnd;
 			htmlString = htmlString.replace(styleSheetString, styleSheetString_NEW);
-			writeToFile(newFileName);
+			//writeToFile(newFileName);
 			//readFromFile(newFileName);
 			return true;
 		} catch (StringIndexOutOfBoundsException ignored){
@@ -841,15 +841,15 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		String headerH1B = "<h1>";
 		String headerH1E = "</h1>";
 
-		String headerString_NEW = "";
+		String headerString_NEW;
 
 		try {
 			beginIndex = htmlString.indexOf(headerBegin);
 			endIndex = htmlString.indexOf(headerEnd)+headerEnd.length();
 			headerString = htmlString.substring(beginIndex, endIndex);
-
-			//htmlString = htmlString.replace(styleSheetString, headerString_NEW);
-			writeToFile(newFileName);
+			headerString_NEW = headerBegin + "\r\n" + headerB + "\r\n" + headerImgBegin + "\r\n" + headerImgB + headerImg_String + headerImgE + "\r\n" + headerImgEnd + "\r\n" + headerH1Begin + "\r\n" + headerH1B + headerH1_String + headerH1E + "\r\n" + headerH1End + "\r\n" + headerE + "\r\n" + headerEnd;
+			htmlString = htmlString.replace(headerString, headerString_NEW);
+			//writeToFile(newFileName);
 			//readFromFile(newFileName);
 			return true;
 		} catch (StringIndexOutOfBoundsException ignored){
@@ -860,6 +860,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		return true;
 	}
 	public static boolean setSectionFromGUI(List<List<String>> section_StringMatrix, List<String> sectionH2_String){
+
 		return true;
 	}
 	public static boolean setFooterFromGUI(String footer_String){
