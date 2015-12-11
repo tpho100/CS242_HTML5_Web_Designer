@@ -14,13 +14,25 @@ public class HTMLImage extends HTMLObject {
 
     private String objectType;
     private Image image;
+    private String imageName;
+    private static int count = 0;
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 
     public HTMLImage(Image image){
         this.image = image;
+        imageName = "image" + count;
         objectType = "IMAGE";
     }
 
     public HTMLImage(){
+        imageName = "image" + count;
         objectType = "IMAGE";
     }
 
@@ -35,5 +47,11 @@ public class HTMLImage extends HTMLObject {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    @Override
+    public String getHTMLCode() {
+        String code = "<img src=\"" + imageName + "\">";
+        return code;
     }
 }

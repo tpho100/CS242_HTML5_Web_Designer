@@ -15,8 +15,8 @@ public class HTMLObject {
      */
 
     private String objectType;
-    private String openTag;
-    private String closeTag;
+    private String openTag = "";
+    private String closeTag = "";
 
     public HTMLObject(){
     }
@@ -33,7 +33,7 @@ public class HTMLObject {
         this.objectType = objectType;
     }
 
-    public String getHTMLTags(){
+    public String getHTMLCode(){
         return openTag+closeTag;
     }
 }

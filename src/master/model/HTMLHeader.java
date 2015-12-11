@@ -18,9 +18,26 @@ public class HTMLHeader extends HTMLObject {
     private Image headerImage;
     private String openTag = "<header>";
     private String closeTag = "</header>";
-    private String headerTextOpenTag = "<H1>";
-    private String headerTextCloseTag = "</H1>";
-    private String headerImageOpenTag = "<a href=";
+
+    @Override
+    public String getHTMLCode() {
+        String code = "";
+
+        if( !getHeaderType().equals("EMPTY") ){
+
+            if(getHeaderType().equals("TEXT")){
+                return openTag + "<H1>" + headerText + "</H1>" + closeTag;
+            }else if(getHeaderType().equals("IMAGE")){
+                return openTag + "<a href=\"index.html\"><img src=" + "headerImage.png" + "\"/></a>" + closeTag;
+            }else{
+                return openTag + "<a href=\"index.html\"><img src=" + "headerImage.png" + "\"/></a>\n" + "<H1>" + headerText + "</H1>" + closeTag;
+            }
+
+        }else {
+            return code;
+        }
+
+    }
 
     @Override
     public String getObjectType() {

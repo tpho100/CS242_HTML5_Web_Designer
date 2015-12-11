@@ -19,11 +19,32 @@ public class WebPage extends HTMLObject{
     private HTMLHeader header;
     private String footer;
     private List<HTMLSection> sections;
+    private String openTag = "<!DOCTYPE html>\n" + "<html>\n" + "<body>";
+    private String closeTag = "</body>\n" + "</html>";
 
     public WebPage(){
         header = null;
         footer = null;
         sections = new ArrayList<>();
+    }
+
+    @Override
+    public String getHTMLCode() {
+        String code = "";
+
+        if(!header.getHeaderType().equals("EMPTY")){
+            code = code + header.getHTMLCode() + "\n";
+        }
+
+        for(HTMLSection s : sections){
+            code = code + s.getHTMLCode() + "\n";
+        }
+
+        if(!footer.isEmpty()){
+            code = code + "<footer>" + footer + "</footer>\n";
+        }
+
+        return code;
     }
 
     public WebPage(HTMLHeader header, String footer){

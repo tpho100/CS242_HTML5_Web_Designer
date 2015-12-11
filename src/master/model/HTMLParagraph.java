@@ -39,7 +39,7 @@ public class HTMLParagraph extends HTMLObject {
     }
 
     @Override
-    public String getHTMLTags() {
+    public String getHTMLCode() {
         return openTag + paragraph + closeTag;
     }
 }

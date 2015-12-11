@@ -1,5 +1,7 @@
 package master.model;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +27,30 @@ public class HTMLSection extends HTMLObject {
     private String closeTag = "</section>";
 
     @Override
-    public String getHTMLTags() {
-        return super.getHTMLTags();
+    public String getHTMLCode() {
+        String fullTag = "<h6 class=\"divider\"></h6> \n" + openTag + "\n";
+        if(!sectionHeading.isEmpty()){
+            fullTag = fullTag + "<h2>" + sectionHeading + "</h2>\n";
+        }
+
+        for(HTMLObject o : sectionComponents){
+            if(o instanceof HTMLParagraph){
+                HTMLParagraph paragraph = (HTMLParagraph) o;
+                //write paragraph
+                fullTag = fullTag + paragraph.getHTMLCode() + "\n";
+
+            }else if(o instanceof HTMLList){
+                HTMLList list = (HTMLList) o;
+                fullTag = fullTag + list.getHTMLCode() + "\n";
+
+            }else if(o instanceof HTMLImage){
+                HTMLImage image = (HTMLImage) o;
+                Image someImage = image.getImage();
+                //write image
+                fullTag = fullTag + image.getHTMLCode();
+            }
+        }
+        return fullTag+closeTag;
     }
 
     @Override

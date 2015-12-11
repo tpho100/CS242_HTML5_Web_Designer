@@ -22,7 +22,7 @@ public class HTMLList extends HTMLObject {
     private String listItemCloseTag = "</li>";
 
     @Override
-    public String getHTMLTags() {
+    public String getHTMLCode() {
         String listItems = "";
 
         for(String s : listElements){
