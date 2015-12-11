@@ -4,9 +4,16 @@ package master.model;
  * Created by Thanh-Phong on 12/1/2015.
  */
 public class HTMLParagraph extends HTMLObject {
+
+    /**
+     * Object representation of an HTML paragraph
+     * It is basically a String
+     */
+
     private String paragraph;
     private String objectType;
-    private int index;
+    private String openTag = "<p>";
+    private String closeTag = "</p>";
 
     @Override
     public String getObjectType() {
@@ -22,13 +29,6 @@ public class HTMLParagraph extends HTMLObject {
         this.paragraph = paragraph;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
 
     public String getParagraph() {
         return paragraph;
@@ -36,5 +36,10 @@ public class HTMLParagraph extends HTMLObject {
 
     public void setParagraph(String paragraph) {
         this.paragraph = paragraph;
+    }
+
+    @Override
+    public String getHTMLTags() {
+        return super.getHTMLTags();
     }
 }

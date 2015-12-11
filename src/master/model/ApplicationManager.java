@@ -8,6 +8,12 @@ import java.util.List;
  */
 public class ApplicationManager {
 
+    /**
+     * When this object is invoked, a new instance of 1 WebPage will be made
+     * All information being added, removed, or changed must be done through this class
+     * This class keeps the WebPage instance alive until the user quits the program
+     */
+
     private final static ApplicationManager instance = new ApplicationManager();
     private WebPage currentWebPage = new WebPage(); //Used for website data
     private JavaToHTML htmlGenerator = new JavaToHTML(); //Helper class

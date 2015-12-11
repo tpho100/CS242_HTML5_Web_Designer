@@ -8,9 +8,31 @@ import java.util.List;
  */
 public class HTMLList extends HTMLObject {
 
+    /**
+     * Wrapper for HTML lists.
+     * An HTMLList is basically a wrapper around
+     * an ArrayList.
+     */
+
     private List<String> listElements;
     private String objectType;
-    private int index;
+    private String openTag = "<ul>";
+    private String closeTag = "</ul>";
+    private String listItemOpenTag = "<li>";
+    private String listItemCloseTag = "</li>";
+
+    @Override
+    public String getHTMLTags() {
+        String listItems = "";
+
+        for(String s : listElements){
+            listItems = listItemOpenTag + s + listItemCloseTag + "\n";
+            //returns <li>item1</li> each time
+        }
+
+        return openTag + listItems + closeTag;
+        //returns <ul>full list items</ul>
+    }
 
     @Override
     public String getObjectType() {
@@ -34,13 +56,5 @@ public class HTMLList extends HTMLObject {
 
     public void setListElements(List<String> listElements) {
         this.listElements = listElements;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
     }
 }

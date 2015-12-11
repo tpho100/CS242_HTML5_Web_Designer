@@ -23,6 +23,10 @@ import java.util.ResourceBundle;
  */
 public class TemplateSelectorController implements Initializable{
 
+    /**
+     * Controller class for the TemplateSelector UI
+     * Tells the ApplicationManager what template to use.
+     */
 
     private String templateSelected;
 

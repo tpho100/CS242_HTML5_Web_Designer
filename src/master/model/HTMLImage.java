@@ -7,17 +7,13 @@ import javafx.scene.image.Image;
  */
 public class HTMLImage extends HTMLObject {
 
+    /**
+     * Wrapper for standard images. Supports all standard types
+     * such as PNG, JPEG, etc.
+     */
+
     private String objectType;
     private Image image;
-    private int index;
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
 
     public HTMLImage(Image image){
         this.image = image;
@@ -40,14 +36,4 @@ public class HTMLImage extends HTMLObject {
     public void setImage(Image image) {
         this.image = image;
     }
-
-    public String getImageFileName() {
-        return imageFileName;
-    }
-
-    public void setImageFileName(String imageFileName) {
-        this.imageFileName = imageFileName;
-    }
-
-    private String imageFileName;
 }

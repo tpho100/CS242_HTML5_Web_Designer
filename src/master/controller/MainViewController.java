@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +32,8 @@ import master.model.*;
 
 /**
  * Created by Thanh-Phong on 11/14/2015.
+ *
+ *
  */
 public class MainViewController implements Initializable{
 
@@ -48,6 +51,8 @@ public class MainViewController implements Initializable{
             ApplicationManager.getInstance().setProjectDirectory(dir.getAbsolutePath());
             System.out.println(ApplicationManager.getInstance().getProjectDirectory());
             onChangeTemplateButtonClicked(null);
+
+            //Function to Copy appropriate files to project directory
         }
 
         String htmlSample = "../path/template/index.html";
@@ -55,7 +60,6 @@ public class MainViewController implements Initializable{
         URL urlSample = getClass().getResource(htmlSample);
         engine.load(urlSample.toExternalForm());
 
-        //webComponentList.setEditable(true);
         webComponentList.setCellFactory(TextFieldListCell.forListView());
         webComponentList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
@@ -91,7 +95,9 @@ public class MainViewController implements Initializable{
             stage.setScene(scene);
             stage.showAndWait();
 
-            writeAndRefresh();
+
+            //Method to copy new CSS file
+            //writeAndRefresh();
 
         }catch(IOException e){
             e.printStackTrace();
@@ -140,8 +146,6 @@ public class MainViewController implements Initializable{
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.showAndWait();
-
-
 
             refreshComponentList();
         }catch(IOException e) {
@@ -269,11 +273,13 @@ public class MainViewController implements Initializable{
 
     public boolean writeAndRefresh()
     {
-        ApplicationManager.getInstance().getHtmlGenerator().writeToFile(ApplicationManager.getInstance().getProjectDirectory());//write
-       // initialize(null,null);//reload webview
-        String htmlSample = "../path/template1/index.html";
+        //Re-write the index.html to refresh HTML file
+        //ApplicationManager.getInstance().getHtmlGenerator().writeToFile(ApplicationManager.getInstance().getProjectDirectory());//write
+
+        //Reload webview so the user can see the website
+        String projectIndex = ApplicationManager.getInstance().getProjectDirectory()+ "/index.html";
         WebEngine engine = webViewCanvas.getEngine();
-        URL urlSample = getClass().getResource(htmlSample);
+        URL urlSample = getClass().getResource(projectIndex);
         engine.load(urlSample.toExternalForm());
         return true;
     }

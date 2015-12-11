@@ -7,6 +7,12 @@ import java.util.List;
  * Created by Thanh-Phong on 12/2/2015.
  */
 public class HTMLSection extends HTMLObject {
+    /**
+     * Wrapper for HTML sections
+     * an HTML section is basically an object with one heading
+     * and a list of HTMLObjects. The HTML Objects can be
+     * lists, images, paragraphs, or more sections
+     */
 
     //Object IDs
     private String objectType;
@@ -15,6 +21,13 @@ public class HTMLSection extends HTMLObject {
     private int sectionNumber;
     private String sectionHeading;
     private List<HTMLObject> sectionComponents;
+    private String openTag = "<section>";
+    private String closeTag = "</section>";
+
+    @Override
+    public String getHTMLTags() {
+        return super.getHTMLTags();
+    }
 
     @Override
     public String getObjectType() {

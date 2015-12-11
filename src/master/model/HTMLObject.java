@@ -5,7 +5,18 @@ package master.model;
  */
 public class HTMLObject {
 
+    /**
+     * Tagger for HTML objects. All HTML webcomponents
+     * inherit from this object. Every HTML object contains an objectType
+     * such as Header, Image, List, Paragraph, or Section
+     *
+     * HTML tags are partially implemented into their
+     * corresponding objects
+     */
+
     private String objectType;
+    private String openTag;
+    private String closeTag;
 
     public HTMLObject(){
     }
@@ -20,5 +31,9 @@ public class HTMLObject {
 
     public void setObjectType(String objectType) {
         this.objectType = objectType;
+    }
+
+    public String getHTMLTags(){
+        return openTag+closeTag;
     }
 }

@@ -98,7 +98,7 @@ public class SectionSelectorController {
         sectionObjects.getChildren().add(list);
 
         htmlList.setListElements(list.getItems());
-        htmlList.setIndex(section.getSectionComponents().size());
+        //htmlList.setIndex(section.getSectionComponents().size());
         section.addHTMLObject(htmlList);
     }
     @FXML void appendParagraphButtonClicked(ActionEvent event) {
@@ -110,7 +110,7 @@ public class SectionSelectorController {
         paragraphs.add(newArea);
         sectionObjects.getChildren().add(newArea);
         //sectionObjects.getScene().getWindow().sizeToScene();
-        htmlParagraph.setIndex(section.getSectionComponents().size() );
+        //htmlParagraph.setIndex(section.getSectionComponents().size() );
         section.addHTMLObject(htmlParagraph);
     }
     @FXML void appendImageButtonClicked(ActionEvent event) {
@@ -132,7 +132,7 @@ public class SectionSelectorController {
         picturePreview.setPreserveRatio(true);
         images.add(picturePreview);
         sectionObjects.getChildren().add(picturePreview);
-        htmlImage.setIndex(section.getSectionComponents().size());
+        //htmlImage.setIndex(section.getSectionComponents().size());
         section.addHTMLObject(htmlImage);
         //sectionObjects.getScene().getWindow().sizeToScene();
     }

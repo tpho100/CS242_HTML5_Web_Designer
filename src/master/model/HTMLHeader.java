@@ -6,9 +6,21 @@ import javafx.scene.image.Image;
  */
 public class HTMLHeader extends HTMLObject {
 
+    /**
+     * Wrapper for HTML Headers
+     * HTMLHeader can either be a picture, text, or both.
+     * This object manages itself if the header is missing an image
+     * or text.
+     */
+
     private String objectType;
     private String headerText;
     private Image headerImage;
+    private String openTag = "<header>";
+    private String closeTag = "</header>";
+    private String headerTextOpenTag = "<H1>";
+    private String headerTextCloseTag = "</H1>";
+    private String headerImageOpenTag = "<a href=";
 
     @Override
     public String getObjectType() {
@@ -32,8 +44,10 @@ public class HTMLHeader extends HTMLObject {
         }else if( (headerImage == null) && (headerText != null) ){
             return "TEXT";
         }
-        else{
+        else if( (headerImage != null) && (headerText == null) ){
             return "IMAGE";
+        }else{
+            return "IMAGE&TEXT";
         }
     }
 

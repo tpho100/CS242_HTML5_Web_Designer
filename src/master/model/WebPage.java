@@ -9,6 +9,13 @@ import java.util.List;
  */
 public class WebPage extends HTMLObject{
 
+    /**
+     * Object representation of a website
+     * A webpage has 1 header, 1 footer, and multiple sections
+     * The multiple sections are handled using an ArrayList so that
+     * the number of sections can easily be added, deleted, searched, etc.
+     */
+
     private HTMLHeader header;
     private String footer;
     private List<HTMLSection> sections;
