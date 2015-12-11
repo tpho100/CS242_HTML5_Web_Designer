@@ -200,6 +200,8 @@ public class MainViewController implements Initializable{
         }
     }
     @FXML private void onNavButtonClicked(ActionEvent actionEvent) {
+        HTMLObjectWriter objw = new HTMLObjectWriter();
+        objw.getHTMLWebsiteToText(ApplicationManager.getInstance().getCurrentWebPage(),null,null);
     }
 
     private void refreshComponentList(){

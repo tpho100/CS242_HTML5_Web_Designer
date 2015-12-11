@@ -1,5 +1,6 @@
 package master.model;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
@@ -60,7 +61,7 @@ public class HTMLObjectWriter {
 
         for(HTMLSection s : sections){
 
-            if(!s.getSectionHeading().isEmpty()){
+            if(s.getSectionHeading() != null){
                 //Write section heading first
             }
 
@@ -81,11 +82,22 @@ public class HTMLObjectWriter {
                     HTMLImage image = (HTMLImage) o;
                     Image someImage = image.getImage();
                     //write image
+                    File dir = new File(ApplicationManager.getInstance().getProjectDirectory());
+                    File imageFile = new File(dir,image.getImageName());
+                    BufferedImage bImage = SwingFXUtils.fromFXImage(someImage,null);
+                    try{
+                        ImageIO.write(bImage, "png", imageFile);
+                    }catch(Exception e){
+                        System.err.println("Problem writing image file");
+                    }
+
+
+
                 }
             }
         }
 
-        if(!webpage.getFooter().isEmpty()){
+        if(webpage.getFooter() != null){
             ApplicationManager.getInstance().getHtmlGenerator().setFooterFromGUI(webpage.getFooter());
         }
     }
