@@ -105,7 +105,7 @@ public class MainViewController implements Initializable{
 
 
             //Method to copy new CSS file
-            writeAndRefresh(ApplicationManager.getInstance().getProjectDirectory());
+            writeAndRefresh(new File(ApplicationManager.getInstance().getProjectDirectory()));
 
         }catch(IOException e){
             e.printStackTrace();
@@ -155,7 +155,7 @@ public class MainViewController implements Initializable{
             stage.setScene(scene);
             stage.showAndWait();
 
-            writeAndRefresh(ApplicationManager.getInstance().getProjectDirectory());
+            writeAndRefresh(new File(ApplicationManager.getInstance().getProjectDirectory()));
             refreshComponentList();
         }catch(IOException e) {
             e.printStackTrace();
@@ -280,17 +280,29 @@ public class MainViewController implements Initializable{
 
     }
     //---------------------------Added By James--------------------------------
-    public boolean writeAndRefresh(String savePath)
+    public boolean writeAndRefresh(File savePath)
     {
         //Re-write the index.html to refresh HTML file
         ApplicationManager.getInstance().getHtmlGenerator().writeToFile("index", savePath);//write
 
         // TODO Fix urlSample always being null
         //Reload webview so the user can see the website
-        String projectIndex = savePath + "index.html";
+        //String projectIndex = savePath + "index.html";
+        File f = new File( savePath, "index.html" );
         WebEngine engine = webViewCanvas.getEngine();
-        URL urlSample = getClass().getResource(projectIndex);
-        engine.load(urlSample.toExternalForm());
+        //System.out.println(projectIndex);
+
+        try{
+            System.out.println("Attempting to refresh webview at: " +f.toURI().toURL().toString() );
+            webViewCanvas.getEngine().load(f.toURI().toURL().toString());
+        }catch(Exception e){
+            System.err.println("Could not reload proper webview");
+
+        }
+
+        //URL urlSample = getClass().getResource(projectIndex);
+        //System.out.println(urlSample);
+        //engine.load(urlSample.toExternalForm());
         return true;
     }
     //---------------------------End added by James---------------------------

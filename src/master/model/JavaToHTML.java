@@ -61,7 +61,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		setStyleSheetFromGUI("stylerTest");
 		setHeaderFromGUI("Hello Header", "test.png");
 		setNavFromGUI("Test 0;Test 1;Test 2;Test 3","#;#;#;#");
-		writeToFile( newFileName , path);
+		//writeToFile( newFileName , path);
 
 	}
 
@@ -326,9 +326,9 @@ public class JavaToHTML implements HTMLStringDefinitions {
 			e1.printStackTrace();
 		}
 	}
-	public static void writeToFile(String fileName, String savePath){
+	public static void writeToFile(String fileName, File savePath){
 		String FileName = fileName + html;
-		File newFile = new File( savePath + FileName );
+		File newFile = new File( savePath, FileName );
 		try {
 			FileUtils.writeStringToFile(newFile, htmlString);
 		} catch (IOException e) {
