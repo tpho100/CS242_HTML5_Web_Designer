@@ -3,7 +3,7 @@ package master.model; /**
  */
 
 /**
- * @author DAVIDMOSTO
+ * @author DAVID MOSTO
  *
  */
 public interface HTMLStringDefinitions {
@@ -22,11 +22,11 @@ public interface HTMLStringDefinitions {
 	String bodyBeginComment = "<!--$bodyBegin-->";
 	String bodyEndComment = "<!--$bodyEnd-->";
 
-	String navBeginComment = "<!--$navBegin-->";
-	String navEndComment = "<!--$navEnd-->";
+	String navBegin = "<!--$navBegin-->";
+	String navEnd = "<!--$navEnd-->";
 
-	String navBegin = navBeginComment + "\n\t" + "<nav>";
-	String navEnd = "</nav>" + "\n\t" + navEndComment;
+	//String navBegin = navBeginComment + "\n\t" + "<nav>";
+	//String navEnd = "</nav>" + "\n\t" + navEndComment;
 
 	// Will be appended to the end of any comment that had more then one
 	String commentEnding = "-->";
@@ -48,6 +48,9 @@ public interface HTMLStringDefinitions {
 	String oListBegin = "<!--$olBegin";
 	String oListEnd = "<!--$olEnd";
 
+	String imgBegin = "<!--$imgBegin";
+	String imgEnd = "<!--$imgEnd";
+
 	String headerBegin = "<!--$headerBegin-->";
 	String headerEnd = "<!--$headerEnd-->";
 
@@ -62,6 +65,7 @@ public interface HTMLStringDefinitions {
 
 	String dividerBegin = "<!--$dividerBegin-->";
 	String dividerEnd = "<!--$dividerEnd-->";
+	String divider = "<h6 class=\"divider\"></h6>";
 
 	String footerBegin = "<!--$footerBegin-->";
 	String footerEnd = "<!--$footerEnd-->";
