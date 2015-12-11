@@ -33,7 +33,7 @@ public class TemplateSelectorController implements Initializable{
     /*
        TEMPLATE SELECTOR ITEMS
     */
-
+    //TODO update template photos
     private Image template1Image = new Image("master/images/template1_preview.png");
     private Image template2Image = new Image("master/images/template2_preview.png");
     private Image[] templateImage = {template1Image, template2Image};
@@ -65,17 +65,18 @@ public class TemplateSelectorController implements Initializable{
             ApplicationManager.getInstance().changeTemplate(templateSelected);
 
             //--------------Added by James---------------------------------------------------------------
-
-            File projectDir = new File(HTMLStringDefinitions.path);
-            ApplicationManager.getInstance().setProjectFolder(projectDir);
-            File source = new File("../path/" + templateSelected + "/styles.css");
+            //source file is found, but is never loaded into copy statement
+            File projectDir = new File(ApplicationManager.getInstance().getProjectDirectory()+"\\styles.css");
+            //ApplicationManager.getInstance().setProjectFolder(projectDir);
+            File source = new File("./path/" + templateSelected + "/styles.css");
             try {                                                       //controller tie in
-                FileUtils.copyDirectory(source, ApplicationManager.getInstance().getProjectFolder()); //load styles.css into project directory
+                FileUtils.copyFile(source, projectDir); //load styles.css into project directory
             } catch (IOException err) {
+                System.out.println("Css error");
                 //e.printStackTrace();
             }
-            ApplicationManager.getInstance().getHtmlGenerator().readFromFile(/*HTMLStringDefinitions.path + */"index"); //This is weird, may need to be reworked
-            //MainViewController.writeAndRefresh();
+            //ApplicationManager.getInstance().getHtmlGenerator().readFromFile(/*HTMLStringDefinitions.path + */"index"); //This is weird, may need to be reworked
+            //MainViewController.writeAndRefresh(ApplicationManager.getInstance().getProjectDirectory());
             //---------------end added by James---------------------------------------------------------
         }
         Stage stage = (Stage) nextViewButton.getScene().getWindow();

@@ -29,6 +29,8 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import master.model.*;
+import org.apache.commons.io.FileUtils;
+import sun.applet.AppletListener;
 
 /**
  * Created by Thanh-Phong on 11/14/2015.
@@ -43,14 +45,20 @@ public class MainViewController implements Initializable{
     public void initialize(URL url, ResourceBundle rb){
         //Set default sample html file on start
 
-        Optional<String> result = getPromptInput("NEW PROJECT", "This project name will be the folder name.", "Enter Project Folder Name: ");
+        Optional<String> result = getPromptInput("NEW PROJECT", "This project name will be the folder location.", "Enter Project Folder Location: ");
         if(result.isPresent()){
             File dir = new File(result.get());
             dir.mkdir();
             System.out.println(dir.getAbsolutePath());
-            ApplicationManager.getInstance().setProjectDirectory(dir.getAbsolutePath());
+            ApplicationManager.getInstance().setProjectDirectory(dir.getAbsolutePath()+"\\");
+            ApplicationManager.getInstance().setProjectFolder(dir);
             System.out.println(ApplicationManager.getInstance().getProjectDirectory());
+            File projectDir = new File(ApplicationManager.getInstance().getProjectDirectory());
+            //ApplicationManager.getInstance().setProjectFolder(projectDir);
+
+            ApplicationManager.getInstance().getHtmlGenerator().readFromFile("./path/blankindex.html");
             onChangeTemplateButtonClicked(null);
+
 
             //Function to Copy appropriate files to project directory
         }
@@ -97,7 +105,7 @@ public class MainViewController implements Initializable{
 
 
             //Method to copy new CSS file
-            //writeAndRefresh();
+            writeAndRefresh(ApplicationManager.getInstance().getProjectDirectory());
 
         }catch(IOException e){
             e.printStackTrace();
@@ -147,6 +155,7 @@ public class MainViewController implements Initializable{
             stage.setScene(scene);
             stage.showAndWait();
 
+            writeAndRefresh(ApplicationManager.getInstance().getProjectDirectory());
             refreshComponentList();
         }catch(IOException e) {
             e.printStackTrace();
@@ -270,18 +279,20 @@ public class MainViewController implements Initializable{
         }
 
     }
-
-    public boolean writeAndRefresh()
+    //---------------------------Added By James--------------------------------
+    public boolean writeAndRefresh(String savePath)
     {
         //Re-write the index.html to refresh HTML file
-        //ApplicationManager.getInstance().getHtmlGenerator().writeToFile(ApplicationManager.getInstance().getProjectDirectory());//write
+        ApplicationManager.getInstance().getHtmlGenerator().writeToFile("index", savePath);//write
 
+        // TODO Fix urlSample always being null
         //Reload webview so the user can see the website
-        String projectIndex = ApplicationManager.getInstance().getProjectDirectory()+ "/index.html";
+        String projectIndex = savePath + "index.html";
         WebEngine engine = webViewCanvas.getEngine();
         URL urlSample = getClass().getResource(projectIndex);
         engine.load(urlSample.toExternalForm());
         return true;
     }
+    //---------------------------End added by James---------------------------
 
 }

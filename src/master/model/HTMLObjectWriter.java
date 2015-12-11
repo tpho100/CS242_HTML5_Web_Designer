@@ -2,6 +2,10 @@ package master.model;
 
 import javafx.scene.image.Image;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -34,12 +38,21 @@ public class HTMLObjectWriter {
             HTMLHeader header = webpage.getHeader();
             //write header if one exists
 
-            if(header.getHeaderType() == "IMAGE"){
+            if(header.getHeaderType().equals("IMAGE")){
                 //write only header image
-            }else if(header.getHeaderType() == "TEXT"){
+            }else if(header.getHeaderType().equals("TEXT")){
                 //write only header text
-            }else if(header.getHeaderType() == "IMAGE&TEXT") {
-                //write header image and text
+            }else if(header.getHeaderType().equals("IMAGE&TEXT")) {
+                //TODO figure out how to save image to disk, since JavaFX images have no direct save method
+//                try {
+//                    // retrieve image
+//                    BufferedImage image = header.getHeaderImage();
+//                    File outputfile = new File("saved.png");
+//                    ImageIO.write(image, "png", outputfile);
+//                } catch (IOException e) {
+//
+//                }
+//                ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI(header.getHeaderText(),header.getHeaderImage().);
             }else{
 
             }
@@ -54,7 +67,9 @@ public class HTMLObjectWriter {
             for(HTMLObject o : s.getSectionComponents()){
                 if(o instanceof HTMLParagraph){
                     HTMLParagraph paragraph = (HTMLParagraph) o;
-                    //write paragraph
+
+                    //TODO Figure out how to write single lines into list structure
+                    //ApplicationManager.getInstance().getHtmlGenerator().getSectionStringMatrix().add(0,);
 
                 }else if(o instanceof HTMLList){
                     HTMLList list = (HTMLList) o;
@@ -71,7 +86,7 @@ public class HTMLObjectWriter {
         }
 
         if(!webpage.getFooter().isEmpty()){
-            //write footer
+            ApplicationManager.getInstance().getHtmlGenerator().setFooterFromGUI(webpage.getFooter());
         }
     }
 }

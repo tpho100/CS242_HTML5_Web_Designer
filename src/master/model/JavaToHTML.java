@@ -36,10 +36,9 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		htmlString = "";
-		originalFileName = "index";
+		originalFileName = "./path/template/index.html";
 		newFileName = "test";
 
 		readFromFile( originalFileName );
@@ -62,7 +61,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		setStyleSheetFromGUI("stylerTest");
 		setHeaderFromGUI("Hello Header", "test.png");
 		setNavFromGUI("Test 0;Test 1;Test 2;Test 3","#;#;#;#");
-		writeToFile( newFileName );
+		writeToFile( newFileName , path);
 
 	}
 
@@ -308,8 +307,8 @@ public class JavaToHTML implements HTMLStringDefinitions {
 
 	// Main Reader & Writers of File
 	public static void readFromFile(String fileName){
-		String FileName = fileName + html;
-		File originalFile = new File( path + FileName); // Loads the Template File
+		String FileName = fileName;
+		File originalFile = new File(FileName); // Loads the Template File
 		try {
 			htmlString = FileUtils.readFileToString( originalFile );
 			getTitleFromHTML();
@@ -321,15 +320,15 @@ public class JavaToHTML implements HTMLStringDefinitions {
 			getNavString();
 			getSectionString();
 			getFooterString();
-			writeToFile(fileName);
+			//writeToFile(fileName);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
-	public static void writeToFile(String fileName){
+	public static void writeToFile(String fileName, String savePath){
 		String FileName = fileName + html;
-		File newFile = new File( path + FileName );
+		File newFile = new File( savePath + FileName );
 		try {
 			FileUtils.writeStringToFile(newFile, htmlString);
 		} catch (IOException e) {
@@ -833,6 +832,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		}
 	}
 	public static boolean setHeaderFromGUI(String headerH1_String, String headerImg_String){
+		//TODO overload function to process headers with no image and text, or no text and image
 		int beginIndex;
 		int endIndex;
 		String headerB = "<header>";

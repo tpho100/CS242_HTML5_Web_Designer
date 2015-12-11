@@ -66,8 +66,11 @@ public class HeaderSelectorController {
 
             ApplicationManager.getInstance().setWebPageHeader(header);
             System.out.println("Attempting to set header to webpage.");
+            //--------------------Added By James------------------------------------------------
             //JavaToHTML HTML = new JavaToHTML();
-            ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI(headerTextField.getText(),picturePath.getText()); // added by James
+            //ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI(headerTextField.getText(),picturePath.getText());
+            //writeAndRefresh();
+            //--------------------End Added By James------------------------------------------------
         }else{
             System.out.println("Header has nothing. Not creating an object.");
         }
