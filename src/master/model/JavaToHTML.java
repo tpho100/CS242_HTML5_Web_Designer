@@ -61,6 +61,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		setTitleFromGUI("Hello");
 		setStyleSheetFromGUI("stylerTest");
 		setHeaderFromGUI("Hello Header", "test.png");
+		setNavFromGUI("Test 0;Test 1;Test 2;Test 3","#;#;#;#");
 		writeToFile( newFileName );
 
 	}
@@ -857,7 +858,29 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		}
 	}
 	public static boolean setNavFromGUI(String navName_String, String navLink_String){
-		return true;
+		int beginIndex;
+		int endIndex;
+		String navB = "<nav>";
+		String navE = "</nav>";
+		String navLinkB = "<a href=\"";
+		String navLinkE = "\"/>";
+		String navNameB = "";
+		String navNameE = "</a>";
+
+		String navString_NEW;
+
+		try {
+			beginIndex = htmlString.indexOf(navBegin);
+			endIndex = htmlString.indexOf(navEnd)+navEnd.length();
+			navString = htmlString.substring(beginIndex, endIndex);
+			//navString_NEW = headerBegin + "\r\n" + headerB + "\r\n" + headerImgBegin + "\r\n" + headerImgB + headerImg_String + headerImgE + "\r\n" + headerImgEnd + "\r\n" + headerH1Begin + "\r\n" + headerH1B + headerH1_String + headerH1E + "\r\n" + headerH1End + "\r\n" + headerE + "\r\n" + headerEnd;
+			//htmlString = htmlString.replace(headerString, headerString_NEW);
+			//writeToFile(newFileName);
+			//readFromFile(newFileName);
+			return true;
+		} catch (StringIndexOutOfBoundsException ignored){
+			return false;
+		}
 	}
 	public static boolean setSectionFromGUI(List<List<String>> section_StringMatrix, List<String> sectionH2_String){
 
