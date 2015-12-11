@@ -16,23 +16,28 @@ public class HTMLImage extends HTMLObject {
     private Image image;
     private String imageName;
     private static int count = 0;
+    private int counter = 0;
 
     public String getImageName() {
         return imageName;
     }
 
     public void setImageName(String imageName) {
-        this.imageName = imageName;
+        this.imageName = imageName + ".png" ;
     }
 
     public HTMLImage(Image image){
         this.image = image;
-        imageName = "image" + count;
+        count++;
+        counter = count;
+        imageName = "image" + counter + ".png";
         objectType = "IMAGE";
     }
 
     public HTMLImage(){
-        imageName = "image" + count;
+        count++;
+        counter = count;
+        imageName = "image" + counter + ".png";
         objectType = "IMAGE";
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 /**
- * @author DAVID MOSTO
+ * @author DAVIDMOSTO
  *
  */
 public class JavaToHTML implements HTMLStringDefinitions {
@@ -38,10 +38,10 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	public static void main(String[] args) {
 
 		htmlString = "";
-		originalFileName = "index.html";
+		originalFileName = "./path/template/index.html";
 		newFileName = "test";
 
-		readFromFile( path + originalFileName );
+		readFromFile( originalFileName );
 
 		String title = "This is a Test Title";
 		//titleEditor( title );
@@ -52,50 +52,16 @@ public class JavaToHTML implements HTMLStringDefinitions {
 				{"{Test Header 2}p2.0", "p2.1", "ol:{Test List}Hello world;Next World;Loren Ipsum", "p2.3"}
 		};
 
-		List<List<String>> testMatrix = new ArrayList<List<String>>();
-		List<String> testH2List = new ArrayList<>();
-
-		List<String> testList1 = new ArrayList<>();
-
-		testList1.add("text1");
-		testList1.add("ul:List Object 1;List Object 2;List Object 3");
-		testList1.add("ol:List Object 1;List Object 2;List Object 3");
-		testList1.add("img:images/test.png");
-
-		testMatrix.add(testList1);
-
-		List<String> testList2 = new ArrayList<>();
-
-		testList2.add("text1");
-		testList2.add("img:images/test.png");
-
-		testMatrix.add(testList2);
-
-		List<String> testList3 = new ArrayList<>();
-
-		testList3.add("text1");
-		testList3.add("ul:List Object 1;List Object 2;List Object 3");
-		testList3.add("ol:List Object 1;List Object 2;List Object 3");
-
-		testMatrix.add(testList3);
-
-		testH2List.add("Header 1");
-		testH2List.add("");
-		testH2List.add("Header 3");
-
 		String[] navLinks = new String[]{"nav0", "nav1", "nav2", "nav3"};
 		String[] navTabs = new String[]{"Nav 0", "Nav 1", "Nav 2", "Nav 3"};
 
 		//bodyEditor(navLinks, navTabs, bodyContent);
 
 		setTitleFromGUI("Hello");
-		setStyleSheetFromGUI("styles");
+		setStyleSheetFromGUI("stylerTest");
 		setHeaderFromGUI("Hello Header", "test.png");
-		//setHeaderFromGUI("Hello Header");
 		setNavFromGUI("Test 0;Test 1;Test 2;Test 3","#;#;#;#");
-		setSectionFromGUI(testMatrix, testH2List);
-		setFooterFromGUI("Test Footer");
-		writeToFile( newFileName , path);
+		//writeToFile( newFileName , path);
 
 	}
 
@@ -360,9 +326,9 @@ public class JavaToHTML implements HTMLStringDefinitions {
 			e1.printStackTrace();
 		}
 	}
-	public static void writeToFile(String fileName, String savePath){
+	public static void writeToFile(String fileName, File savePath){
 		String FileName = fileName + html;
-		File newFile = new File( savePath + FileName );
+		File newFile = new File( savePath, FileName );
 		try {
 			FileUtils.writeStringToFile(newFile, htmlString);
 		} catch (IOException e) {
@@ -521,8 +487,8 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		int endComma;
 
 		try {
-			beginIndex = htmlString.indexOf(navBegin)+navBegin.length();
-			endIndex = htmlString.indexOf(navEnd);
+			beginIndex = htmlString.indexOf(navBeginComment)+navBeginComment.length();
+			endIndex = htmlString.indexOf(navEndComment);
 			navString = htmlString.substring(beginIndex, endIndex);
 			navString = navString.replaceAll("\\r", "");
 			navString = navString.replaceAll("\\n", "");
@@ -743,23 +709,6 @@ public class JavaToHTML implements HTMLStringDefinitions {
 
 								row.add(tempListComplete);
 							}
-							else if (tempContentString.contains(imgBegin)){
-								tempBeginIndex = tempSectionString.indexOf(imgEnd);
-								tempEndIndex = tempSectionString.indexOf("-->", tempBeginIndex)+("-->").length();
-								tempContentString = tempSectionString.substring(tempBeginIndex, tempEndIndex);
-								removeEndIndex = tempSectionString.indexOf(tempContentString)+tempContentString.length();
-								endIndex = tempSectionString.indexOf(tempContentString);
-
-								tempContentString = tempSectionString.substring(beginIndex, endIndex);
-								tempContentString = tempContentString.trim();
-								tempContentString = tempContentString.replace("<img src=\"", "");
-								tempContentString = tempContentString.replace("\"/>", "");
-								tempContentString = tempContentString.replace("\" />", "");
-								removeString = tempSectionString.substring(removeBeginIndex,removeEndIndex);
-								tempSectionString = tempSectionString.replace(removeString, "");
-								tempSectionString = tempSectionString.trim();
-								row.add("img:" + tempContentString);
-							}
 						}
 						else{
 							contentFlag = false;
@@ -882,7 +831,8 @@ public class JavaToHTML implements HTMLStringDefinitions {
 			return false;
 		}
 	}
-	public static boolean setHeaderFromGUI(String headerH1_String, String headerImg_String){ // Initial for if there is an IMG&Test or Just IMG
+	public static boolean setHeaderFromGUI(String headerH1_String, String headerImg_String){
+		//TODO overload function to process headers with no image and text, or no text and image
 		int beginIndex;
 		int endIndex;
 		String headerB = "<header>";
@@ -907,30 +857,6 @@ public class JavaToHTML implements HTMLStringDefinitions {
 			return false;
 		}
 	}
-	public static boolean setHeaderFromGUI(String headerH1_String){ // Overloaded if there is only Text
-		int beginIndex;
-		int endIndex;
-		String headerB = "<header>";
-		String headerE = "</header>";
-
-		String headerH1B = "<h1>";
-		String headerH1E = "</h1>";
-
-		String headerString_NEW;
-
-		try {
-			beginIndex = htmlString.indexOf(headerBegin);
-			endIndex = htmlString.indexOf(headerEnd)+headerEnd.length();
-			headerString = htmlString.substring(beginIndex, endIndex);
-			headerString_NEW = headerBegin + "\r\n" + headerB + "\r\n" + headerH1Begin + "\r\n" + headerH1B + headerH1_String + headerH1E + "\r\n" + headerH1End + "\r\n" + headerE + "\r\n" + headerEnd;
-			htmlString = htmlString.replace(headerString, headerString_NEW);
-			//writeToFile(newFileName);
-			//readFromFile(newFileName);
-			return true;
-		} catch (StringIndexOutOfBoundsException ignored){
-			return false;
-		}
-	}
 	public static boolean setNavFromGUI(String navName_String, String navLink_String){
 		int beginIndex;
 		int endIndex;
@@ -941,221 +867,26 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		String navNameB = "";
 		String navNameE = "</a>";
 
-		String navName_TempString = navName_String; // Used
-		String navLink_TempString = navLink_String;
-
-		String tempName;
-		String tempLink;
-		int location;
-
-		boolean containsSemicolon = true;
-
-		String navString_NEW = navBegin + "\r\n" + navB + "\r\n";
+		String navString_NEW;
 
 		try {
 			beginIndex = htmlString.indexOf(navBegin);
 			endIndex = htmlString.indexOf(navEnd)+navEnd.length();
 			navString = htmlString.substring(beginIndex, endIndex);
-			while ( containsSemicolon ){
-				if (navName_TempString.contains(";")){
-					location = navName_TempString.indexOf(";");
-					tempName = navName_TempString.substring(0, location);
-					navName_TempString = navName_TempString.replaceFirst(tempName + ";", "");
-
-					location = navLink_TempString.indexOf(";");
-					tempLink = navLink_TempString.substring(0, location);
-					navLink_TempString = navLink_TempString.replaceFirst(tempLink + ";", "");
-
-					navString_NEW = navString_NEW + navLinkB + tempLink + navLinkE + navNameB + tempName + navNameE + "\r\n";
-				}
-				else {
-					tempName = navName_TempString;
-					navName_TempString = navName_TempString.replace(tempName, "");
-
-					tempLink = navLink_TempString;
-					navLink_TempString = navLink_TempString.replace(tempLink, "");
-
-					navString_NEW = navString_NEW + navLinkB + tempLink + navLinkE + navNameB + tempName + navNameE + "\r\n" + navE + "\r\n" + navEnd;
-					containsSemicolon = false;
-				}
-			}
-
-			htmlString = htmlString.replace(navString, navString_NEW);
-
-			return true;
-		} catch (StringIndexOutOfBoundsException ignored){
-			return false;
-		}
-	}
-	public static boolean setSectionFromGUI(List<List<String>> section_StringMatrix, List<String> sectionH2_String){
-		int beginIndex;
-		int endIndex;
-		String sectionB = "<section>";
-		String sectionE = "</section>";
-		String sectionH2B = "<h2>";
-		String sectionH2E = "</h2>";
-		String sectionPB = "<p>";
-		String sectionPE = "</p>";
-		String sectionULB = "<ul>";
-		String sectionULE = "</ul>";
-		String sectionOLB = "<ol>";
-		String sectionOLE = "</ol>";
-		String sectionLIB = "<li>";
-		String sectionLIE = "</li>";
-		String sectionImgB = "<img src=\"";
-		String sectionImgE = "\"/>";
-
-		boolean tempFlag = true;
-		int location;
-
-		List<String> tempSectionList;
-		int sizeMatrix;
-		int sizeMatrixList;
-		int sizeH2List;
-
-		String tempSectionValue;
-		String tempH2Value;
-
-		String tempListValue;
-
-		String replaceDivider;
-		int beginReplaceDivider;
-		int endReplaceDivider;
-
-		String sectionString_NEW = sectionBegin + "\r\n";
-
-		try {
-			beginIndex = htmlString.indexOf(sectionBegin);
-			endIndex = htmlString.indexOf(sectionEnd)+sectionEnd.length();
-			sectionString = htmlString.substring(beginIndex, endIndex);
-
-			if ( !section_StringMatrix.isEmpty() && !sectionH2_String.isEmpty() ){
-				sizeMatrix = section_StringMatrix.size();
-				sizeH2List = sectionH2_String.size();
-				if (sizeH2List == sizeMatrix){
-					for (int i = 0; i < sizeMatrix; i++){
-						tempH2Value = sectionH2_String.get(i);
-						tempSectionList = section_StringMatrix.get(i);
-
-						if (!tempH2Value.equals("")){
-							sectionString_NEW = sectionString_NEW + bodySectionBegin + i + commentEnding + "\r\n" + sectionB + "\r\n" + sectionH2Begin + i + commentEnding + "\r\n" + sectionH2B + tempH2Value + sectionH2E + "\r\n" + sectionH2End + i + commentEnding + "\r\n";
-						}
-						else
-						{
-							sectionString_NEW = sectionString_NEW + bodySectionBegin + i + commentEnding + "\r\n" + sectionB + "\r\n";
-						}
-
-						if (!tempSectionList.isEmpty()){
-							sizeMatrixList = tempSectionList.size();
-							for ( int j = 0; j < sizeMatrixList; j++){
-								tempSectionValue = tempSectionList.get(j);
-								if (tempSectionValue.contains("ul:")){
-									sectionString_NEW = sectionString_NEW + uListBegin + i + "." + j + commentEnding + "\r\n" + sectionULB + "\r\n";
-									tempSectionValue = tempSectionValue.replace("ul:", "");
-									while(tempFlag){
-										if (tempSectionValue.contains(";")){
-											location = tempSectionValue.indexOf(";");
-											tempListValue = tempSectionValue.substring(0, location);
-											tempSectionValue = tempSectionValue.replaceFirst(tempListValue + ";", "");
-											sectionString_NEW = sectionString_NEW + sectionLIB + tempListValue + sectionLIE + "\r\n";
-										}
-										else {
-											tempListValue = tempSectionValue;
-											tempSectionValue = tempSectionValue.replaceFirst(tempListValue, "");
-
-											sectionString_NEW = sectionString_NEW + sectionLIB + tempListValue + sectionLIE + "\r\n" + sectionULE + "\r\n" + uListEnd + i + "." + j + commentEnding + "\r\n";
-
-											tempFlag = false;
-										}
-									}
-									tempFlag = true;
-								}
-								else if (tempSectionValue.contains("ol:")){
-									sectionString_NEW = sectionString_NEW + oListBegin + i + "." + j + commentEnding + "\r\n" + sectionOLB + "\r\n";
-									tempSectionValue = tempSectionValue.replace("ol:", "");
-									while(tempFlag){
-										if (tempSectionValue.contains(";")){
-											location = tempSectionValue.indexOf(";");
-											tempListValue = tempSectionValue.substring(0, location);
-											tempSectionValue = tempSectionValue.replaceFirst(tempListValue + ";", "");
-											sectionString_NEW = sectionString_NEW + sectionLIB + tempListValue + sectionLIE + "\r\n";
-										}
-										else {
-											tempListValue = tempSectionValue;
-											tempSectionValue = tempSectionValue.replaceFirst(tempListValue, "");
-
-											sectionString_NEW = sectionString_NEW + sectionLIB + tempListValue + sectionLIE + "\r\n" + sectionOLE + "\r\n" + oListEnd + i + "." + j + commentEnding + "\r\n";
-
-											tempFlag = false;
-										}
-									}
-									tempFlag = true;
-								}
-								else if (tempSectionValue.contains("img:")){
-									tempSectionValue = tempSectionValue.replace("img:", "");
-									sectionString_NEW = sectionString_NEW + imgBegin + i + "." + j + commentEnding + "\r\n" + sectionImgB + tempSectionValue + sectionImgE + "\r\n" + imgEnd + i + "." + j + commentEnding + "\r\n";
-								}
-								else{
-									sectionString_NEW = sectionString_NEW + paragraphBegin + i + "." + j + commentEnding + "\r\n" + sectionPB + tempSectionValue + sectionPE + "\r\n" + paragraphEnd + i + "." + j + commentEnding + "\r\n";
-								}
-							}
-							if ( i != sizeMatrix-1 ){
-								sectionString_NEW = sectionString_NEW + sectionE + "\r\n" + bodySectionEnd + i + commentEnding + "\r\n\r\n" + dividerBegin + "\r\n" + divider + "\r\n" + dividerEnd + "\r\n\r\n";
-							}
-							else
-							{
-								sectionString_NEW = sectionString_NEW + sectionE + "\r\n" + bodySectionEnd + i + commentEnding + "\r\n";
-							}
-
-						}
-						else{
-							if ( i != sizeMatrix-1 ){
-								sectionString_NEW = sectionString_NEW + sectionE + "\r\n" + bodySectionEnd + i + commentEnding + "\r\n\r\n" + dividerBegin + "\r\n" + divider + "\r\n" + dividerEnd + "\r\n\r\n";
-							}
-							else
-							{
-								sectionString_NEW = sectionString_NEW + sectionE + "\r\n" + bodySectionEnd + i + commentEnding + "\r\n";
-							}
-						}
-
-					}
-					sectionString_NEW = sectionString_NEW + sectionEnd + "\r\n";
-
-				}
-				else{
-					sectionString_NEW = sectionString_NEW + sectionEnd + "\r\n";
-				}
-			}
-			else{
-				sectionString_NEW = sectionString_NEW + sectionEnd + "\r\n";
-			}
-
-			htmlString = htmlString.replace(sectionString, sectionString_NEW);
-
-			return true;
-		} catch (StringIndexOutOfBoundsException ignored){
-			return false;
-		}
-	}
-	public static boolean setFooterFromGUI(String footer_String){
-		int beginIndex;
-		int endIndex;
-		String footerB = "<footer>";
-		String footerE = "</footer>";
-		String footerH4B = "<h4>";
-		String footerH4E = "</h4>";
-
-		try {
-			beginIndex = htmlString.indexOf(footerB);
-			endIndex = htmlString.indexOf(footerE)+footerE.length();
-			footerString = htmlString.substring(beginIndex, endIndex);
-			footer_String = footerBegin + "\r\n" + footerB + "\r\n" + footerH4B + footer_String + footerH4E + "\r\n" + footerE + "\r\n";
-			htmlString = htmlString.replace(footerString, footer_String);
+			//navString_NEW = headerBegin + "\r\n" + headerB + "\r\n" + headerImgBegin + "\r\n" + headerImgB + headerImg_String + headerImgE + "\r\n" + headerImgEnd + "\r\n" + headerH1Begin + "\r\n" + headerH1B + headerH1_String + headerH1E + "\r\n" + headerH1End + "\r\n" + headerE + "\r\n" + headerEnd;
+			//htmlString = htmlString.replace(headerString, headerString_NEW);
 			//writeToFile(newFileName);
 			//readFromFile(newFileName);
 			return true;
 		} catch (StringIndexOutOfBoundsException ignored){
 			return false;
 		}
+	}
+	public static boolean setSectionFromGUI(List<List<String>> section_StringMatrix, List<String> sectionH2_String){
+
+		return true;
+	}
+	public static boolean setFooterFromGUI(String footer_String){
+		return true;
 	}
 }
