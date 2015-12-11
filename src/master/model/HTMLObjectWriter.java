@@ -26,7 +26,8 @@ public class HTMLObjectWriter {
         this.htmlString = htmlString;
     }
 
-    public void getHTMLWebsiteToText(WebPage webpage, String fileName){
+    public void getHTMLWebsiteToText(WebPage webpage, String fileName, String filePath){
+
         List<HTMLSection> sections = webpage.getSections();
 
         if(webpage.getHeader() != null){
