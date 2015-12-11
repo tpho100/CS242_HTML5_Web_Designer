@@ -40,6 +40,6 @@ public class HTMLParagraph extends HTMLObject {
 
     @Override
     public String getHTMLTags() {
-        return super.getHTMLTags();
+        return openTag + paragraph + closeTag;
     }
 }
