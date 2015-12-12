@@ -54,7 +54,7 @@ public class HTMLObjectWriter {
             }else if(header.getHeaderType().equals("IMAGE&TEXT")) {
                 HTMLImage image = new HTMLImage(header.getHeaderImage());
                 writeImage(image);
-                ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI(header.getHeaderText());
+                ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI(header.getHeaderText(),image.getImageName());
             }else{
 
             }
@@ -74,6 +74,7 @@ public class HTMLObjectWriter {
                     HTMLList list = (HTMLList) o;
                     String elements = "ul:";
                     for( String listElement : list.getListElements()){
+                        if(!listElement.equals(""))
                         elements=elements+listElement+";";
                     }
                     content.add(elements);
@@ -91,13 +92,15 @@ public class HTMLObjectWriter {
         if(webpage.getFooter() != null){
             ApplicationManager.getInstance().getHtmlGenerator().setFooterFromGUI(webpage.getFooter());
         }
+        HTMLImage image=new HTMLImage();
+        image.setCount(0);
     }
 
     public void writeImage(HTMLImage image) //Writes JavaFx image to file
     {
         Image someImage = image.getImage();
         //write image
-        File dir = new File(ApplicationManager.getInstance().getProjectDirectory());
+        File dir = new File(ApplicationManager.getInstance().getProjectDirectory()+"\\images");
         File imageFile = new File(dir,image.getImageName());
         BufferedImage bImage = SwingFXUtils.fromFXImage(someImage,null);
         try{

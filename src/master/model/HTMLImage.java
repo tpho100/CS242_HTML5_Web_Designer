@@ -59,4 +59,12 @@ public class HTMLImage extends HTMLObject {
         String code = "<img src=\"" + imageName + "\">";
         return code;
     }
+    public void setCount(int i)
+    {
+        this.count=i;
+    }
+    public int getCount()
+    {
+        return count;
+    }
 }

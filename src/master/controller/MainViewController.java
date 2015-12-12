@@ -104,8 +104,6 @@ public class MainViewController implements Initializable{
             stage.setScene(scene);
             stage.showAndWait();
 
-
-            //Method to copy new CSS file
             writeAndRefresh(new File(ApplicationManager.getInstance().getProjectDirectory()));
 
         }catch(IOException e){
@@ -183,6 +181,7 @@ public class MainViewController implements Initializable{
             }
         }
 
+        writeAndRefresh(new File(ApplicationManager.getInstance().getProjectDirectory()));
         refreshComponentList();
     }
     @FXML private void onSectionButtonClicked(ActionEvent e){
@@ -195,6 +194,7 @@ public class MainViewController implements Initializable{
             stage.setScene(scene);
             stage.showAndWait();
 
+            writeAndRefresh(new File(ApplicationManager.getInstance().getProjectDirectory()));
             refreshComponentList();
         }catch(IOException e_section) {
             e_section.printStackTrace();
@@ -290,7 +290,7 @@ public class MainViewController implements Initializable{
         //Re-write the index.html to refresh HTML file
         ApplicationManager.getInstance().getHtmlGenerator().writeToFile("index", savePath.getPath());//write
 
-        // TODO Fix urlSample always being null
+
         //Reload webview so the user can see the website
         //String projectIndex = savePath + "index.html";
         File f = new File( savePath, "index.html" );
