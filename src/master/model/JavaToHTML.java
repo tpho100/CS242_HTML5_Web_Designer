@@ -912,10 +912,10 @@ public class JavaToHTML implements HTMLStringDefinitions {
 		String footerH4E = "</h4>";
 
 		try {
-			beginIndex = htmlString.indexOf(footerB);
-			endIndex = htmlString.indexOf(footerE)+footerE.length();
+			beginIndex = htmlString.indexOf(footerBegin);
+			endIndex = htmlString.indexOf(footerEnd)+footerEnd.length();
 			footerString = htmlString.substring(beginIndex, endIndex);
-			footer_String = footerBegin + "\r\n" + footerB + "\r\n" + footerH4B + footer_String + footerH4E + "\r\n" + footerE + "\r\n";
+			footer_String = footerBegin + "\r\n" + footerB + "\r\n" + footerH4B + footer_String + footerH4E + "\r\n" + footerE + "\r\n" + footerEnd;
 			htmlString = htmlString.replace(footerString, footer_String);
 			//writeToFile(newFileName);
 			//readFromFile(newFileName);
