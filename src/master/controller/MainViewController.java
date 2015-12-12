@@ -49,12 +49,13 @@ public class MainViewController implements Initializable{
         if(result.isPresent()){
             File dir = new File(result.get());
             dir.mkdir();
+            File imgDir = new File(dir.getAbsolutePath()+"\\images");
+            imgDir.mkdir();
             System.out.println(dir.getAbsolutePath());
             ApplicationManager.getInstance().setProjectDirectory(dir.getAbsolutePath()+"\\");
             ApplicationManager.getInstance().setProjectFolder(dir);
             System.out.println(ApplicationManager.getInstance().getProjectDirectory());
             File projectDir = new File(ApplicationManager.getInstance().getProjectDirectory());
-            //ApplicationManager.getInstance().setProjectFolder(projectDir);
 
             ApplicationManager.getInstance().getHtmlGenerator().readFromFile("./path/blankindex.html");
             onChangeTemplateButtonClicked(null);
@@ -63,10 +64,10 @@ public class MainViewController implements Initializable{
             //Function to Copy appropriate files to project directory
         }
 
-        String htmlSample = "../path/template/index.html";
-        WebEngine engine = webViewCanvas.getEngine();
-        URL urlSample = getClass().getResource(htmlSample);
-        engine.load(urlSample.toExternalForm());
+//        String htmlSample = "../path/template/index.html";
+//        WebEngine engine = webViewCanvas.getEngine();
+//        URL urlSample = getClass().getResource(htmlSample);
+//        engine.load(urlSample.toExternalForm());
 
         webComponentList.setCellFactory(TextFieldListCell.forListView());
         webComponentList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -200,8 +201,7 @@ public class MainViewController implements Initializable{
         }
     }
     @FXML private void onNavButtonClicked(ActionEvent actionEvent) {
-        HTMLObjectWriter objw = new HTMLObjectWriter();
-        objw.getHTMLWebsiteToText(ApplicationManager.getInstance().getCurrentWebPage(),null,null);
+        writeAndRefresh(new File(ApplicationManager.getInstance().getProjectDirectory()));
     }
 
     private void refreshComponentList(){
@@ -284,8 +284,11 @@ public class MainViewController implements Initializable{
     //---------------------------Added By James--------------------------------
     public boolean writeAndRefresh(File savePath)
     {
+        //get content from objects
+        HTMLObjectWriter writer = new HTMLObjectWriter();
+        writer.getHTMLWebsiteToText(ApplicationManager.getInstance().getCurrentWebPage());
         //Re-write the index.html to refresh HTML file
-        ApplicationManager.getInstance().getHtmlGenerator().writeToFile("index", savePath);//write
+        ApplicationManager.getInstance().getHtmlGenerator().writeToFile("index", savePath.getPath());//write
 
         // TODO Fix urlSample always being null
         //Reload webview so the user can see the website

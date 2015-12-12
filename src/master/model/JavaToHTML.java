@@ -362,7 +362,7 @@ public class JavaToHTML implements HTMLStringDefinitions {
 	}
 	public static void writeToFile(String fileName, String savePath){
 		String FileName = fileName + html;
-		File newFile = new File( savePath + FileName );
+		File newFile = new File( savePath +"\\"+ FileName );
 		try {
 			FileUtils.writeStringToFile(newFile, htmlString);
 		} catch (IOException e) {

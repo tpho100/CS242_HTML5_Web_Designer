@@ -82,8 +82,4 @@ public class ApplicationManager {
     {
         return htmlGenerator;
     }
-    public String getTemplate()
-    {
-        return template;
-    }
 }

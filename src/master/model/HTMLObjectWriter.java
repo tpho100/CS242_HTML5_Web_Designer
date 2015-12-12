@@ -4,10 +4,13 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
+import javax.swing.text.html.HTML;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by James Dapp on 12/8/2015.
@@ -22,6 +25,9 @@ public class HTMLObjectWriter {
      */
 
     private String htmlString;
+    private List<List<String>> Matrix = new ArrayList<List<String>>();
+    private List<String> H2List = new ArrayList<>();
+
 
     public String getHtmlString() {
         return htmlString;
@@ -31,7 +37,7 @@ public class HTMLObjectWriter {
         this.htmlString = htmlString;
     }
 
-    public void getHTMLWebsiteToText(WebPage webpage, String fileName, String filePath){
+    public void getHTMLWebsiteToText(WebPage webpage){
 
         List<HTMLSection> sections = webpage.getSections();
 
@@ -40,65 +46,64 @@ public class HTMLObjectWriter {
             //write header if one exists
 
             if(header.getHeaderType().equals("IMAGE")){
-                //write only header image
+                HTMLImage image=new HTMLImage(header.getHeaderImage());
+                ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI("",image.getImageName());
+                writeImage(image);
             }else if(header.getHeaderType().equals("TEXT")){
-                //write only header text
+                ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI(header.getHeaderText());
             }else if(header.getHeaderType().equals("IMAGE&TEXT")) {
-                //TODO figure out how to save image to disk, since JavaFX images have no direct save method
-//                try {
-//                    // retrieve image
-//                    BufferedImage image = header.getHeaderImage();
-//                    File outputfile = new File("saved.png");
-//                    ImageIO.write(image, "png", outputfile);
-//                } catch (IOException e) {
-//
-//                }
-//                ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI(header.getHeaderText(),header.getHeaderImage().);
+                HTMLImage image = new HTMLImage(header.getHeaderImage());
+                writeImage(image);
+                ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI(header.getHeaderText());
             }else{
 
             }
         }
-
+        List<String> content = new ArrayList<>();
         for(HTMLSection s : sections){
-
             if(s.getSectionHeading() != null){
-                //Write section heading first
+                H2List.add(s.getSectionNumber(),s.getSectionHeading());
             }
 
             for(HTMLObject o : s.getSectionComponents()){
                 if(o instanceof HTMLParagraph){
                     HTMLParagraph paragraph = (HTMLParagraph) o;
-
-                    //TODO Figure out how to write single lines into list structure
-                    //ApplicationManager.getInstance().getHtmlGenerator().getSectionStringMatrix().add(0,);
+                    content.add(((HTMLParagraph) o).getParagraph());
 
                 }else if(o instanceof HTMLList){
                     HTMLList list = (HTMLList) o;
+                    String elements = "ul:";
                     for( String listElement : list.getListElements()){
-                        //write list element
+                        elements=elements+listElement+";";
                     }
+                    content.add(elements);
 
                 }else if(o instanceof HTMLImage){
                     HTMLImage image = (HTMLImage) o;
-                    Image someImage = image.getImage();
-                    //write image
-                    File dir = new File(ApplicationManager.getInstance().getProjectDirectory());
-                    File imageFile = new File(dir,image.getImageName());
-                    BufferedImage bImage = SwingFXUtils.fromFXImage(someImage,null);
-                    try{
-                        ImageIO.write(bImage, "png", imageFile);
-                    }catch(Exception e){
-                        System.err.println("Problem writing image file");
-                    }
-
-
-
+                    content.add("img:images/"+image.getImageName());
+                    writeImage(image);
                 }
             }
+            Matrix.add(content);
         }
+        ApplicationManager.getInstance().getHtmlGenerator().setSectionFromGUI(Matrix,H2List);
 
         if(webpage.getFooter() != null){
             ApplicationManager.getInstance().getHtmlGenerator().setFooterFromGUI(webpage.getFooter());
+        }
+    }
+
+    public void writeImage(HTMLImage image) //Writes JavaFx image to file
+    {
+        Image someImage = image.getImage();
+        //write image
+        File dir = new File(ApplicationManager.getInstance().getProjectDirectory());
+        File imageFile = new File(dir,image.getImageName());
+        BufferedImage bImage = SwingFXUtils.fromFXImage(someImage,null);
+        try{
+            ImageIO.write(bImage, "png", imageFile);
+        }catch(Exception e){
+            System.err.println("Problem writing image file");
         }
     }
 }
