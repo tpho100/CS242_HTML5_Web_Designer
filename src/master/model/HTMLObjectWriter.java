@@ -74,9 +74,9 @@ public class HTMLObjectWriter {
                     HTMLList list = (HTMLList) o;
                     String elements = "ul:";
                     for( String listElement : list.getListElements()){
-                        if(!listElement.equals(""))
                         elements=elements+listElement+";";
                     }
+                    elements=elements.substring(0,elements.length()-1);
                     content.add(elements);
 
                 }else if(o instanceof HTMLImage){
