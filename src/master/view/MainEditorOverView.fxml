@@ -38,8 +38,8 @@
          <children>
             <Button fx:id="headerButton" minHeight="80.0" minWidth="100.0" mnemonicParsing="false" onAction="#onHeaderButtonClicked" prefHeight="80.0" prefWidth="100.0" text="HEADER" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="footerButton" minHeight="80.0" minWidth="100.0" mnemonicParsing="false" onAction="#onFooterButtonClicked" prefHeight="80.0" prefWidth="100.0" text="FOOTER" textAlignment="CENTER" wrapText="true" />
-            <Button fx:id="navButton" minHeight="80.0" minWidth="100.0" mnemonicParsing="false" onAction="#onNavButtonClicked" prefHeight="80.0" prefWidth="100.0" text="NAV" textAlignment="CENTER" wrapText="true" />
             <Button fx:id="sectionButton" minHeight="80.0" minWidth="100.0" mnemonicParsing="false" onAction="#onSectionButtonClicked" prefHeight="80.0" prefWidth="100.0" text="SECTION" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="navButton" minHeight="80.0" minWidth="100.0" mnemonicParsing="false" onAction="#onNavButtonClicked" prefHeight="80.0" prefWidth="100.0" text="REFRESH PAGE" textAlignment="CENTER" wrapText="true" />
          </children>
          <BorderPane.margin>
             <Insets />
