@@ -30,7 +30,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import master.model.*;
 import org.apache.commons.io.FileUtils;
-import sun.applet.AppletListener;
 
 /**
  * Created by Thanh-Phong on 11/14/2015.
