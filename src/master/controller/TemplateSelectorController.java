@@ -65,6 +65,7 @@ public class TemplateSelectorController implements Initializable{
             ApplicationManager.getInstance().changeTemplate(templateSelected);
 
             //--------------Added by James---------------------------------------------------------------
+
             //source file is found, but is never loaded into copy statement
             File projectDir = new File(ApplicationManager.getInstance().getProjectDirectory()+"\\styles.css");
             //ApplicationManager.getInstance().setProjectFolder(projectDir);
