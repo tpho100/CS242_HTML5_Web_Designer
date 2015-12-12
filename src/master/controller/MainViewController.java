@@ -279,6 +279,7 @@ public class MainViewController implements Initializable{
            }
 
         }
+        writeAndRefresh(new File(ApplicationManager.getInstance().getProjectDirectory()));
 
     }
     //---------------------------Added By James--------------------------------

@@ -59,6 +59,10 @@ public class HTMLObjectWriter {
 
             }
         }
+        else
+        {
+            ApplicationManager.getInstance().getHtmlGenerator().setHeaderFromGUI("");
+        }
         List<String> content = new ArrayList<>();
         for(HTMLSection s : sections){
             if(s.getSectionHeading() != null){
@@ -91,6 +95,10 @@ public class HTMLObjectWriter {
 
         if(webpage.getFooter() != null){
             ApplicationManager.getInstance().getHtmlGenerator().setFooterFromGUI(webpage.getFooter());
+        }
+        else
+        {
+            ApplicationManager.getInstance().getHtmlGenerator().setFooterFromGUI("");
         }
         HTMLImage image=new HTMLImage();
         image.setCount(0);
