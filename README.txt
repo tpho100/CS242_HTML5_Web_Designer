@@ -11,10 +11,10 @@ Oumar Ly
 James Dapp
 //////////////////////////////////////////////
 
+Designed using IntelliJ & JavaFX
+
 Outside Sources:
 org.apache.commons.io.FileUtils
-
-Designed using IntelliJ
 
 Main Function to Run:
 ./cs242_html5_web_designer/src/master/controller/MainApp/main(String[] args)
