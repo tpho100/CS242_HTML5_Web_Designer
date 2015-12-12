@@ -11,7 +11,7 @@ body{
 	width: 800px;
 	font-family: 'Source Sans Pro', sans, serif;
 	background-color:#CDCCCC;
-	margin: 0 auto;
+		margin: 0 auto;
 	border: 1px solid #666;
 	border-top:none;
 	box-shadow: 10px 10px 5px #888888;
@@ -69,10 +69,12 @@ section p, ul, ol{
 }
 
 section img{
-	width:600px;
+	width:500px;
 	position: relative;
-	left: 60px;
-	right: 60px;
+	left: 110px;
+	right: 1100px;
+	padding-top:20px;
+	padding-bottom:20px;
 }
 
 footer{
