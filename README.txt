@@ -26,4 +26,4 @@ Final Report:
 ./cs242_html5_web_designer/Final Report/CS242 Website Designer Final Report.pdf
 
 UML Diagram:
-./cs242_html5_web_designer/UML Diagrams/
+./cs242_html5_web_designer/UML Diagrams/umlDiagram.png
